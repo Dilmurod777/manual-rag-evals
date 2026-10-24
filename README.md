@@ -171,7 +171,37 @@ equipment-change question on Page 10-1, answered one section later on 10-14.
 
 ---
 
-## The two approaches, and what each is good at
+## When the words change
+
+Twelve of the tuned questions rewritten the way a person asks without the manual in front
+of them ("How do I know if a piece of wood has soaked up too much water?" instead of "How
+can excessive moisture in a wood member be detected?"). Same pages, same evidence.
+
+| pipeline | hit@5 | MRR | answer cites the gold page |
+|---|---|---|---|
+| A · vector only | 11/12 | 0.812 | 8/12 |
+| B · hybrid | 9/12 | 0.569 | 8/12 |
+| C · hybrid + rerank | 11/12 | 0.833 | 10/12 |
+
+Hybrid loses the most, which is the predictable cost of keyword scoring: BM25 rewards the
+manual's own vocabulary, and a paraphrase has none of it. C recovers what B drops. Twelve
+questions is a pilot, not a result — the intervals are enormous — but the direction is
+consistent with why C exists.
+
+## Refusing
+
+Twelve questions the manual cannot answer: type-specific torque values, avionics tests,
+another aircraft's service ceiling. Before the gate, the prompt's "say so if the passages do
+not answer" instruction was obeyed 12 of 12 times; the model did not invent a page. After:
+a cosine gate at 0.58 refuses 6 of the 12 before the model is called (0 ms of generation),
+and the other 6 still come back refused by the model. False refusals: 0 of the 60 tuned and
+0 of the 40 blind questions, whose lowest score is 0.584.
+
+The gate is not a better reader than the model. It is a guarantee that does not depend on
+prompt compliance, and it skips a three-second generation on questions the manual cannot
+answer. `python -m eval.refusal --model` prints both counts.
+
+## The three approaches, and what each is good at
 
 **A — vector only.** Embeds the question and compares it to paragraph embeddings.
 

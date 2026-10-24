@@ -1,0 +1,433 @@
+{
+  "questions": 12,
+  "vector": {
+    "hit_at_5": 0.9167,
+    "hit_at_5_ci": [
+      0.646,
+      0.985
+    ],
+    "mrr": 0.8125,
+    "citation": 0.6667,
+    "citation_ci": [
+      0.391,
+      0.862
+    ],
+    "misses": [
+      {
+        "q": "Before I fix a bent tube in the airframe, what do I check around it?",
+        "page": "4-62",
+        "got": [
+          "12-21",
+          "4-73",
+          "9-18",
+          "9-18",
+          "4-73"
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "q": "How do I tell a harmless mark on wood from rot?",
+        "gold": "1-3",
+        "rank": 1,
+        "cited": "1-3",
+        "right": true,
+        "retrieval_ms": 210,
+        "answer_ms": 3542
+      },
+      {
+        "q": "Is there any way to fix a broken wood spar, or must it be swapped out?",
+        "gold": "1-16",
+        "rank": 1,
+        "cited": "1-18",
+        "right": false,
+        "retrieval_ms": 187,
+        "answer_ms": 3933
+      },
+      {
+        "q": "Do those punch testers actually have FAA blessing?",
+        "gold": "2-35",
+        "rank": 1,
+        "cited": "2-35",
+        "right": true,
+        "retrieval_ms": 189,
+        "answer_ms": 2636
+      },
+      {
+        "q": "Why put that paint on the fabric before the dope?",
+        "gold": "6-12",
+        "rank": 4,
+        "cited": null,
+        "right": false,
+        "retrieval_ms": 198,
+        "answer_ms": 1933
+      },
+      {
+        "q": "On a big fabric patch, who decides where the seams go?",
+        "gold": "2-37",
+        "rank": 1,
+        "cited": null,
+        "right": false,
+        "retrieval_ms": 429,
+        "answer_ms": 2081
+      },
+      {
+        "q": "How do I know if a piece of wood has soaked up too much water?",
+        "gold": "1-14",
+        "rank": 1,
+        "cited": "1-14",
+        "right": true,
+        "retrieval_ms": 304,
+        "answer_ms": 3570
+      },
+      {
+        "q": "What makes a glued wood joint stick properly?",
+        "gold": "1-5",
+        "rank": 1,
+        "cited": "1-5",
+        "right": true,
+        "retrieval_ms": 213,
+        "answer_ms": 3083
+      },
+      {
+        "q": "Before I fix a bent tube in the airframe, what do I check around it?",
+        "gold": "4-62",
+        "rank": 0,
+        "cited": "9-18",
+        "right": false,
+        "retrieval_ms": 228,
+        "answer_ms": 2895
+      },
+      {
+        "q": "Brazing and soldering: what temperature separates them?",
+        "gold": "4-53",
+        "rank": 2,
+        "cited": "4-53",
+        "right": true,
+        "retrieval_ms": 222,
+        "answer_ms": 3067
+      },
+      {
+        "q": "Where do I find the bend limits for plywood?",
+        "gold": "1-25",
+        "rank": 1,
+        "cited": "1-25",
+        "right": true,
+        "retrieval_ms": 187,
+        "answer_ms": 2593
+      },
+      {
+        "q": "How careful do I need to be with hydraulic fluid?",
+        "gold": "9-14",
+        "rank": 1,
+        "cited": "9-14",
+        "right": true,
+        "retrieval_ms": 193,
+        "answer_ms": 3682
+      },
+      {
+        "q": "What makes a hydraulic system bang and chatter?",
+        "gold": "9-17",
+        "rank": 1,
+        "cited": "9-17",
+        "right": true,
+        "retrieval_ms": 188,
+        "answer_ms": 3307
+      }
+    ]
+  },
+  "hybrid": {
+    "hit_at_5": 0.75,
+    "hit_at_5_ci": [
+      0.468,
+      0.911
+    ],
+    "mrr": 0.5694,
+    "citation": 0.6667,
+    "citation_ci": [
+      0.391,
+      0.862
+    ],
+    "misses": [
+      {
+        "q": "On a big fabric patch, who decides where the seams go?",
+        "page": "2-37",
+        "got": [
+          "2-29",
+          "2-9",
+          "2-5",
+          "9-34",
+          "2-10"
+        ]
+      },
+      {
+        "q": "How do I know if a piece of wood has soaked up too much water?",
+        "page": "1-14",
+        "got": [
+          "1-3",
+          "1-13",
+          "1-11",
+          "pdf-641",
+          "9-6"
+        ]
+      },
+      {
+        "q": "Before I fix a bent tube in the airframe, what do I check around it?",
+        "page": "4-62",
+        "got": [
+          "12-20",
+          "9-18",
+          "4-67",
+          "12-21",
+          "9-11"
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "q": "How do I tell a harmless mark on wood from rot?",
+        "gold": "1-3",
+        "rank": 1,
+        "cited": "1-3",
+        "right": true,
+        "retrieval_ms": 194,
+        "answer_ms": 3571
+      },
+      {
+        "q": "Is there any way to fix a broken wood spar, or must it be swapped out?",
+        "gold": "1-16",
+        "rank": 2,
+        "cited": "1-18",
+        "right": false,
+        "retrieval_ms": 200,
+        "answer_ms": 4212
+      },
+      {
+        "q": "Do those punch testers actually have FAA blessing?",
+        "gold": "2-35",
+        "rank": 1,
+        "cited": "2-35",
+        "right": true,
+        "retrieval_ms": 241,
+        "answer_ms": 2620
+      },
+      {
+        "q": "Why put that paint on the fabric before the dope?",
+        "gold": "6-12",
+        "rank": 3,
+        "cited": "6-12",
+        "right": true,
+        "retrieval_ms": 235,
+        "answer_ms": 3790
+      },
+      {
+        "q": "On a big fabric patch, who decides where the seams go?",
+        "gold": "2-37",
+        "rank": 0,
+        "cited": null,
+        "right": false,
+        "retrieval_ms": 204,
+        "answer_ms": 2393
+      },
+      {
+        "q": "How do I know if a piece of wood has soaked up too much water?",
+        "gold": "1-14",
+        "rank": 0,
+        "cited": null,
+        "right": false,
+        "retrieval_ms": 170,
+        "answer_ms": 2248
+      },
+      {
+        "q": "What makes a glued wood joint stick properly?",
+        "gold": "1-5",
+        "rank": 1,
+        "cited": "1-5",
+        "right": true,
+        "retrieval_ms": 278,
+        "answer_ms": 3406
+      },
+      {
+        "q": "Before I fix a bent tube in the airframe, what do I check around it?",
+        "gold": "4-62",
+        "rank": 0,
+        "cited": "9-18",
+        "right": false,
+        "retrieval_ms": 234,
+        "answer_ms": 3615
+      },
+      {
+        "q": "Brazing and soldering: what temperature separates them?",
+        "gold": "4-53",
+        "rank": 2,
+        "cited": "4-53",
+        "right": true,
+        "retrieval_ms": 237,
+        "answer_ms": 2768
+      },
+      {
+        "q": "Where do I find the bend limits for plywood?",
+        "gold": "1-25",
+        "rank": 1,
+        "cited": "1-25",
+        "right": true,
+        "retrieval_ms": 243,
+        "answer_ms": 3259
+      },
+      {
+        "q": "How careful do I need to be with hydraulic fluid?",
+        "gold": "9-14",
+        "rank": 1,
+        "cited": "9-14",
+        "right": true,
+        "retrieval_ms": 239,
+        "answer_ms": 3835
+      },
+      {
+        "q": "What makes a hydraulic system bang and chatter?",
+        "gold": "9-17",
+        "rank": 2,
+        "cited": "9-17",
+        "right": true,
+        "retrieval_ms": 234,
+        "answer_ms": 3025
+      }
+    ]
+  },
+  "rerank": {
+    "hit_at_5": 0.9167,
+    "hit_at_5_ci": [
+      0.646,
+      0.985
+    ],
+    "mrr": 0.8333,
+    "citation": 0.8333,
+    "citation_ci": [
+      0.552,
+      0.953
+    ],
+    "misses": [
+      {
+        "q": "Before I fix a bent tube in the airframe, what do I check around it?",
+        "page": "4-62",
+        "got": [
+          "9-18",
+          "12-21",
+          "12-20",
+          "4-73",
+          "4-67"
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "q": "How do I tell a harmless mark on wood from rot?",
+        "gold": "1-3",
+        "rank": 1,
+        "cited": "1-12",
+        "right": false,
+        "retrieval_ms": 3269,
+        "answer_ms": 3726
+      },
+      {
+        "q": "Is there any way to fix a broken wood spar, or must it be swapped out?",
+        "gold": "1-16",
+        "rank": 1,
+        "cited": "1-16",
+        "right": true,
+        "retrieval_ms": 3190,
+        "answer_ms": 4558
+      },
+      {
+        "q": "Do those punch testers actually have FAA blessing?",
+        "gold": "2-35",
+        "rank": 1,
+        "cited": "2-35",
+        "right": true,
+        "retrieval_ms": 3376,
+        "answer_ms": 2552
+      },
+      {
+        "q": "Why put that paint on the fabric before the dope?",
+        "gold": "6-12",
+        "rank": 1,
+        "cited": "6-12",
+        "right": true,
+        "retrieval_ms": 3422,
+        "answer_ms": 2084
+      },
+      {
+        "q": "On a big fabric patch, who decides where the seams go?",
+        "gold": "2-37",
+        "rank": 2,
+        "cited": "2-37",
+        "right": true,
+        "retrieval_ms": 2863,
+        "answer_ms": 2113
+      },
+      {
+        "q": "How do I know if a piece of wood has soaked up too much water?",
+        "gold": "1-14",
+        "rank": 1,
+        "cited": "1-14",
+        "right": true,
+        "retrieval_ms": 2747,
+        "answer_ms": 3913
+      },
+      {
+        "q": "What makes a glued wood joint stick properly?",
+        "gold": "1-5",
+        "rank": 2,
+        "cited": "1-5",
+        "right": true,
+        "retrieval_ms": 2939,
+        "answer_ms": 2688
+      },
+      {
+        "q": "Before I fix a bent tube in the airframe, what do I check around it?",
+        "gold": "4-62",
+        "rank": 0,
+        "cited": "9-18",
+        "right": false,
+        "retrieval_ms": 2756,
+        "answer_ms": 2685
+      },
+      {
+        "q": "Brazing and soldering: what temperature separates them?",
+        "gold": "4-53",
+        "rank": 1,
+        "cited": "4-53",
+        "right": true,
+        "retrieval_ms": 2751,
+        "answer_ms": 2203
+      },
+      {
+        "q": "Where do I find the bend limits for plywood?",
+        "gold": "1-25",
+        "rank": 1,
+        "cited": "1-25",
+        "right": true,
+        "retrieval_ms": 2917,
+        "answer_ms": 2135
+      },
+      {
+        "q": "How careful do I need to be with hydraulic fluid?",
+        "gold": "9-14",
+        "rank": 1,
+        "cited": "9-14",
+        "right": true,
+        "retrieval_ms": 2628,
+        "answer_ms": 2904
+      },
+      {
+        "q": "What makes a hydraulic system bang and chatter?",
+        "gold": "9-17",
+        "rank": 1,
+        "cited": "9-17",
+        "right": true,
+        "retrieval_ms": 2607,
+        "answer_ms": 2525
+      }
+    ]
+  }
+}

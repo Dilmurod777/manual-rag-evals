@@ -119,7 +119,27 @@ def evidence(question, ranked):
     }
 
 
-def column(question, ranked, retrieval_ms):
+REFUSE_BELOW = 0.58
+REFUSAL = "The manual does not cover this question: nothing in AC 43.13-1B answers it."
+
+
+def confidence(question):
+    """Cosine of the closest paragraph. The manual's own vocabulary scores higher."""
+    hit = vector.search(question, 1)
+    return hit[0][0] if hit else 0.0
+
+
+def column(question, ranked, retrieval_ms, top=1.0):
+    if top < REFUSE_BELOW:
+        return {
+            "answer": REFUSAL,
+            "pages": list(dict.fromkeys(c["page"] for _, c in ranked[:3])),
+            "evidence": evidence(question, ranked[:3]),
+            "retrieval_ms": retrieval_ms,
+            "answer_ms": 0,
+            "fallback": False,
+            "refused": True,
+        }
     started = time.perf_counter()
     text, fallback = answer(question, ranked)
     return {
@@ -129,6 +149,7 @@ def column(question, ranked, retrieval_ms):
         "retrieval_ms": retrieval_ms,
         "answer_ms": round((time.perf_counter() - started) * 1000),
         "fallback": fallback,
+        "refused": False,
     }
 
 
@@ -189,11 +210,12 @@ async def ask_stream(body: Ask):
     """One event stream for all three arms: meta, then tokens, then done."""
     loop = asyncio.get_running_loop()
     events: asyncio.Queue = asyncio.Queue()
+    top = confidence(body.q)
 
     def emit(payload):
         loop.call_soon_threadsafe(events.put_nowait, payload)
 
-    def arm(name, ranked, retrieval_ms):
+    def arm(name, ranked, retrieval_ms, top):
         emit(
             {
                 "arm": name,
@@ -201,8 +223,21 @@ async def ask_stream(body: Ask):
                 "retrieval_ms": retrieval_ms,
                 "pages": list(dict.fromkeys(c["page"] for _, c in ranked)),
                 "evidence": evidence(body.q, ranked),
+                "refused": top < REFUSE_BELOW,
             }
         )
+        if top < REFUSE_BELOW:
+            emit(
+                {
+                    "arm": name,
+                    "kind": "done",
+                    "answer": REFUSAL,
+                    "answer_ms": 0,
+                    "fallback": False,
+                    "refused": True,
+                }
+            )
+            return
         started = time.perf_counter()
         text, fallback = stream_answer(
             body.q, ranked, lambda payload: emit({"arm": name, **payload})
@@ -220,7 +255,7 @@ async def ask_stream(body: Ask):
     def run(name, search, *args):
         try:
             ranked, ms = search_timed(search, *args)
-            arm(name, ranked, ms)
+            arm(name, ranked, ms, top)
         except Exception as error:  # never leave a column spinning
             emit(
                 {
@@ -262,13 +297,16 @@ def ask(body: Ask):
         raise HTTPException(429, "two answers at a time; try again in a few seconds")
     try:
         started = time.perf_counter()
+        top = confidence(body.q)
 
         with ThreadPoolExecutor(2) as pool:
             left = pool.submit(
-                lambda: column(body.q, *search_timed(vector.search, body.q))
+                lambda: column(body.q, *search_timed(vector.search, body.q), top=top)
             )
             right = pool.submit(
-                lambda: column(body.q, *search_timed(hybrid, bm25, vector, body.q))
+                lambda: column(
+                    body.q, *search_timed(hybrid, bm25, vector, body.q), top=top
+                )
             )
             third = pool.submit(lambda: search_timed(reranked, body.q))
             first, second = left.result(), right.result()
@@ -278,7 +316,7 @@ def ask(body: Ask):
             "question": body.q,
             "vector": first,
             "hybrid": second,
-            "rerank": column(body.q, ranked_c, rerank_ms),
+            "rerank": column(body.q, ranked_c, rerank_ms, top=top),
             "total_ms": round((time.perf_counter() - started) * 1000),
         }
     finally:
