@@ -10,6 +10,8 @@ the page shows what each arm answered, which page it used, and the sentence that
 The first asks about a circuit breaker (both cite Page 11-16), the second is the one A
 misses, the third is a flutter question whose citation lands on the wrong page.
 
+[Play it with controls](docs/demo.mp4) (26 s, 365 KB).
+
 FAA AC 43.13-1B, *Acceptable Methods, Techniques, and Practices — Aircraft Inspection
 and Repair*: 646 pages, public domain, 1,758 paragraphs. Ask "why should a circuit breaker
 not be used as a switch?" and both pipelines answer from the same passage on **Page
