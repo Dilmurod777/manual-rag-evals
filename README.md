@@ -3,13 +3,13 @@
 Ask an aircraft-maintenance manual a question; two retrievers answer, and every answer
 names the page it came from.
 
-[![three questions answered, both arms, with their pages — click to play](docs/demo.png)](docs/demo.mp4)
+https://github.com/user-attachments/assets/5ff5d7a7-17af-43a3-ba74-d0448d3109bf
 
-Three questions, unanswered at the start ([26 s, 365 KB](docs/demo.mp4)). Each one sends five
-paragraphs to both pipelines; the page shows what each arm answered, which page it used, and
-the sentence that matched. The first asks about a circuit breaker (both cite Page 11-16), the
-second is the one A misses, the third is a flutter question whose citation lands on the wrong
-page.
+Three questions, unanswered at the start ([26 s, 365 KB](docs/demo.mp4), same file in the
+repo). Each one sends five paragraphs to both pipelines; the page shows what each arm
+answered, which page it used, and the sentence that matched. The first asks about a circuit
+breaker (both cite Page 11-16), the second is the one A misses, the third is a flutter
+question whose citation lands on the wrong page.
 
 FAA AC 43.13-1B, *Acceptable Methods, Techniques, and Practices — Aircraft Inspection
 and Repair*: 646 pages, public domain, 1,758 paragraphs. Ask "why should a circuit breaker
