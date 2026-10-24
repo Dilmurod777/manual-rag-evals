@@ -57,7 +57,10 @@ its page instead of inventing an answer, and says so in italics.
 One question is worth 1.7 points at this size. The 95% intervals are wide enough to swallow
 every gap in that table except the miss itself â€” hit@5 is 0.91â€“1.00 for A and 0.94â€“1.00 for
 B and C; citation is 0.82â€“0.96 for A and B, 0.80â€“0.95 for C. That is why the counts are
-written as counts.
+written as counts. These are single runs: re-running the same questions moves one or two
+between ranks, which is what those intervals are telling you. C is also not a better writer.
+All three arms use the same model and the same prompt; C only changes the order of the five
+pages it reads, so its edge is in retrieval, not in prose.
 
 A misses exactly one page: "how is pressure applied over a laminated plastic repair while
 it cures" (Page 3-4) returns Pages 1-25, 3-6, 3-1 and 3-7 instead. B and C find it.
