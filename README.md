@@ -5,7 +5,7 @@
 Ask an aircraft-maintenance manual a question; three retrievers answer, and every answer
 names the page it came from.
 
-https://github.com/user-attachments/assets/a8d5e000-2201-4b9d-a07b-612d6bc51817
+https://github.com/user-attachments/assets/a7b4bf6b-5936-42d6-9246-29643fd6a5da
 
 The clip runs three questions end to end. Each one sends five paragraphs to every pipeline;
 the page shows what each arm answered, which page it used, and the sentence that matched. The
