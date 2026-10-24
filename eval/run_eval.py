@@ -15,12 +15,8 @@ from app.main import answer
 from app.rerank import rerank
 from app.search import BM25, Vector, hybrid
 
-GOLD = (
-    Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).with_name("gold.jsonl")
-)
-OUT = (
-    Path(sys.argv[2]) if len(sys.argv) > 2 else Path(__file__).with_name("results.json")
-)
+GOLD = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).with_name("gold.jsonl")
+OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(__file__).with_name("results.json")
 CITED = re.compile(r"\(Page (\d+-\d+)\)")
 
 
@@ -36,9 +32,7 @@ def wilson(k, n, z=1.96):
 
 def main():
     gold = [
-        json.loads(line)
-        for line in GOLD.read_text(encoding="utf-8").splitlines()
-        if line.strip()
+        json.loads(line) for line in GOLD.read_text(encoding="utf-8").splitlines() if line.strip()
     ]
     chunks = list(paragraphs())
     bm25 = BM25(chunks)
@@ -102,7 +96,7 @@ def main():
 
     OUT.write_text(json.dumps(results, indent=2), encoding="utf-8")
     for mode, data in results.items():
-        if mode == "questions":
+        if not isinstance(data, dict):
             continue
         for miss in data["misses"]:
             print(
