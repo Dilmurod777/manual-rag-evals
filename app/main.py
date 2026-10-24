@@ -28,7 +28,9 @@ MODEL = cfg.MODEL
 RESULTS = ROOT / "eval" / "results.json"
 # The model runs on one GPU; two generations at a time is all it can hold.
 GENERATIONS = threading.Semaphore(2)
-STREAMS = threading.Semaphore(2)
+STREAMS = threading.Semaphore(
+    1
+)  # one stream at a time: it already holds two generations
 CACHE = {}
 
 app = FastAPI(title="manual-rag-evals")
@@ -315,6 +317,29 @@ async def ask_stream(body: Ask):
             )
 
     def run_rerank():
+        if top < REFUSE_BELOW:
+            emit(
+                {
+                    "arm": "C",
+                    "kind": "meta",
+                    "retrieval_ms": 0,
+                    "pages": [],
+                    "evidence": [],
+                    "refused": True,
+                }
+            )
+            emit(
+                {
+                    "arm": "C",
+                    "kind": "done",
+                    "answer": REFUSAL,
+                    "answer_ms": 0,
+                    "fallback": False,
+                    "refused": True,
+                    "grounded": False,
+                }
+            )
+            return
         emit({"arm": "C", "kind": "status", "text": "reading the top 30"})
         run("C", reranked, body.q)
 

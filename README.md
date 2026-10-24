@@ -336,8 +336,10 @@ trade: a two-slot attempt still serialised.
 - CI (`.github/workflows/tests.yml`) runs the unit tests, downloads the manual, and re-proves
   all 60 gold and 40 blind pages against it on every push.
 
-The page is usable without a mouse and without motion: answers are `aria-live` regions, focus
-is visible, and `prefers-reduced-motion` turns off the transitions.
+The page is usable without a mouse and without motion: arm A's answer is an `aria-live`
+region and B and C stay silent, so a screen reader hears one answer instead of three
+overlapping token streams; focus is visible, and `prefers-reduced-motion` turns off the
+transitions.
 
 ## Run it
 

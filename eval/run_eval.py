@@ -3,12 +3,14 @@ answer cite it?"""
 
 import json
 import math
+import os
 import re
 import sys
 import time
 from pathlib import Path
 
 from app.corpus import paragraphs
+from app.embed import fingerprint
 from app.main import answer
 from app.rerank import rerank
 from app.search import BM25, Vector, hybrid
@@ -42,7 +44,12 @@ def main():
     bm25 = BM25(chunks)
     vector = Vector(chunks)
 
-    results = {"questions": len(gold)}
+    results = {
+        "questions": len(gold),
+        "model": os.environ.get("RAG_MODEL", "qwen3.8-27b"),
+        "measured": time.strftime("%Y-%m-%d"),
+        "corpus": fingerprint(chunks)[:16],
+    }
     for mode in ("vector", "hybrid", "rerank"):
         hits, rr, cited, misses, rows = 0, 0.0, 0, [], []
         for row in gold:
