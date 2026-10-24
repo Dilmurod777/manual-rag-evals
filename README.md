@@ -3,7 +3,7 @@
 Ask an aircraft-maintenance manual a question; two retrievers answer, and every answer
 names the page it came from.
 
-https://github.com/user-attachments/assets/5ff5d7a7-17af-43a3-ba74-d0448d3109bf
+https://github.com/user-attachments/assets/a8d5e000-2201-4b9d-a07b-612d6bc51817
 
 Three questions, unanswered at the start ([26 s, 365 KB](docs/demo.mp4), same file in the
 repo). Each one sends five paragraphs to both pipelines; the page shows what each arm
