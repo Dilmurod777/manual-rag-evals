@@ -2,19 +2,19 @@
 
 [![tests](https://github.com/Dilmurod777/manual-rag-evals/actions/workflows/tests.yml/badge.svg)](https://github.com/Dilmurod777/manual-rag-evals/actions/workflows/tests.yml)
 
-Ask an aircraft-maintenance manual a question; two retrievers answer, and every answer
+Ask an aircraft-maintenance manual a question; three retrievers answer, and every answer
 names the page it came from.
 
 https://github.com/user-attachments/assets/a8d5e000-2201-4b9d-a07b-612d6bc51817
 
-The clip runs three questions end to end. Each one sends five paragraphs to both pipelines;
+The clip runs three questions end to end. Each one sends five paragraphs to every pipeline;
 the page shows what each arm answered, which page it used, and the sentence that matched. The
-first asks about a circuit breaker (both cite Page 11-16); the second is the one A misses; the
-third is a flutter question whose citation lands on the wrong page.
+first asks about a circuit breaker (all three cite Page 11-16); the second is the one A misses;
+the third is a flutter question whose citation lands on the wrong page.
 
 FAA AC 43.13-1B, *Acceptable Methods, Techniques, and Practices — Aircraft Inspection
 and Repair*: 646 pages, public domain, 1,758 paragraphs. Ask "why should a circuit breaker
-not be used as a switch?" and both pipelines answer from the same passage on **Page
+not be used as a switch?" and every pipeline answers from the same passage on **Page
 11-16**.
 
 The point is not that a model can quote a manual. The point is that the quote is checkable:
@@ -25,10 +25,13 @@ answer.
 
 ## What it does
 
-One question goes to two retrieval pipelines at once. Each returns five paragraphs, at most
+One question goes to three retrieval pipelines at once. Each returns five paragraphs, at most
 one per page. A local 27B model writes a two-sentence answer from those paragraphs and is
 told to end with the page it used. The page shows the three answers side by side with their
 timings, the passage behind each one, and the highlighted sentence that matched.
+
+When the closest paragraph is too far from the question, the app refuses before the model
+is called: three retriever answers would be three guesses.
 
 | | retrieval | embedding |
 |---|---|---|
@@ -57,14 +60,16 @@ its page instead of inventing an answer, and says so in italics.
    footers, and cuts anything past ~1,100 characters at a sentence end. Each chunk keeps
    `page`, `pdf_page`, `par` and `text`.
 4. **Embed once, cache with a fingerprint.** `app/embed.py` writes `data/embeddings.npz`
-   with a SHA-256 of the joined chunk text. Startup compares fingerprints and refuses to
-   run on a mismatch, because chunk ids are positional: edit the text, forget to re-embed,
-   and every later id points at a different paragraph. That failure is silent, so it is
-   checked.
+   with a SHA-256 of the joined chunk text. The first search compares fingerprints and raises
+   on a mismatch, because chunk ids are positional: edit the text, forget to re-embed, and
+   every later id points at a different paragraph. That failure is silent, so it is checked.
+   Loading is lazy so the package can be imported without the cache.
 5. **Write the questions before the scores.** 60 questions, each with the page that answers
    it and the sentence that proves it (`eval/gold.jsonl`). `eval/check_gold.py` re-reads every
    cited page and fails if the evidence sentence is not there. Questions were written after
-   reading the page, never from memory.
+   reading the page, never from memory. Three more sets keep that one honest: 40 blind
+   questions written from the table of contents, 12 paraphrases that avoid the manual's words,
+   and 12 questions the manual cannot answer.
 6. **Score retrieval and generation separately.** `eval/run_eval.py` reports hit@5, MRR, and
    whether the generated answer cites the gold page. The third number is the one a reader
    cares about and the one most demos skip.
@@ -80,17 +85,26 @@ question
    |
    +--> B: BM25 top 30 + cosine top 30 -> reciprocal rank fusion -> top 5
    |
-   +--> both prompts to qwen3.8-27b, in parallel
+   +--> C: B's top 30 -> the model reads all 30 -> top 5
    |
-   +--> {answer, page, highlighted sentence, retrieval ms, answer ms}
+   +--> gate: is the closest paragraph within 0.58? if not, refuse before any model call
+   |
+   +--> three prompts to qwen3.8-27b, streamed token by token into three columns
+   |
+   +--> {answer, page, grounded, highlighted sentence, retrieval ms, answer ms}
 ```
 
-- `POST /api/ask {"q": "..."}` returns both arms. `q` is 3–400 characters; anything else is
-  a 422 before a model is touched.
+- `POST /api/ask {"q": "..."}` returns all three arms at once. `q` is 3–400 characters;
+  anything else is a 422 before a model is touched.
+- `POST /api/ask/stream` is the same question as server-sent events, which is what the page
+  uses: `status`, then `meta` (timing, pages, passage), `delta` per token, `done` with the
+  answer and the `refused` / `grounded` flags.
 - `GET /api/results` returns `eval/results.json` for the bars at the bottom of the page.
+- `GET /health` is described under "Running it like a service".
 - `GET /` serves `public/index.html`, one file, no build step.
-- Two generations run at a time (`threading.Semaphore(2)`); a third request gets a 429
-  instead of a queue. This is a 17 GB local model, so the demo is local by design.
+- Two requests are served at a time (`threading.Semaphore(2)`); a third gets a 429 instead of
+  a queue. Inside one request, A and B answer together and C answers after them, because the
+  27B is already holding the GPU. This is a local demo by design.
 - Context is capped at 8k and `think: false` is set. Without those, Qwen3 spends its whole
   token budget on hidden reasoning and returns an empty answer — the bug that made the
   first demo seem broken.
@@ -105,20 +119,23 @@ question
 |---|---|---|---|
 | A · vector only | 59/60 | 0.894 | 55/60 |
 | B · hybrid | **60/60** | **0.939** | **55/60** |
+| C · hybrid + rerank | **60/60** | **0.944** | 54/60 |
 
 One question is worth 1.7 points at this size. The 95% intervals are wide enough to swallow
 every gap in that table except the miss itself — hit@5 is 0.91–1.00 for A and 0.94–1.00 for
-B; citation is 0.82–0.96 for both. That is why the counts are written as counts.
+B and C; citation is 0.82–0.96 for A and B, 0.80–0.95 for C. That is why the counts are
+written as counts.
 
 A misses exactly one page: "how is pressure applied over a laminated plastic repair while
-it cures" (Page 3-4) returns Pages 1-25, 3-6, 3-1 and 3-7 instead. B finds it.
+it cures" (Page 3-4) returns Pages 1-25, 3-6, 3-1 and 3-7 instead. B and C find it.
 
 ### Question by question
 
 ![which rank the gold page got](docs/rank.svg)
 
 Half the story is in the ranking: B puts the gold page first 53 times out of 60, A 49. A's
-single miss is the only question where the right page never appears.
+single miss is the only question where the right page never appears. The chart shows A and B;
+C's ranks are in `eval/results.json`.
 
 ![hit@5 by chapter](docs/by_chapter.svg)
 
@@ -147,7 +164,7 @@ one. That is the cost of generation, and it is why the page marks the sentence i
 asking for trust.
 
 The caveat, stated plainly: the questions were written after reading passages that
-retrieval had already returned, so both pipelines are flattered and hit@5 sits near its
+retrieval had already returned, so every pipeline is flattered and hit@5 sits near its
 ceiling. That is why there is a second set.
 
 ## A blind set
@@ -160,16 +177,17 @@ Nothing was tuned against them. `eval/blind.jsonl`, checked by the same reader.
 |---|---|---|---|
 | A · vector only | 39/40 | 0.852 | 38/40 |
 | B · hybrid | 38/40 | 0.921 | 34/40 |
+| C · hybrid + rerank | 39/40 | **0.975** | 38/40 |
 
 This is the more interesting table. With 40 questions the 95% interval is about ±9 points,
-so the two pipelines are not distinguishable on hit@5, and the citation gap sits inside its
-own interval as well. What survives is MRR: on questions nobody tuned for, B still puts the
-right page first more often (0.921 against 0.852), while its written answers named the gold
-page less often (34 against 38). Hybrid retrieves better, vector answers more reliably, and
-forty questions cannot settle which matters more. Both misses are honest: "what is the first
-step before repairing a metal structure" (Page 4-1, the chapter's opening instruction) is
-not a paragraph a retriever can match to a question, and hybrid's other miss is the
-equipment-change question on Page 10-1, answered one section later on 10-14.
+so the pipelines are not distinguishable on hit@5, and the citation gap sits inside its
+own interval as well. What survives is MRR: on questions nobody tuned for, C puts the
+right page first most often (0.975), then B (0.921), then A (0.852). C also restores the
+citations B loses (38 against B's 34), so the extra model call earns its 1.7 s here. Both
+of B's misses are honest: "what is the first step before repairing a metal structure"
+(Page 4-1, the chapter's opening instruction) is not a paragraph a retriever can match to a
+question, and B's other miss is the equipment-change question on Page 10-1, answered one
+section later on 10-14.
 
 ---
 
@@ -183,6 +201,7 @@ can excessive moisture in a wood member be detected?"). Same pages, same evidenc
 |---|---|---|---|
 | A · vector only | 11/12 | 0.812 | 8/12 |
 | B · hybrid | 9/12 | 0.569 | 8/12 |
+| C · hybrid + rerank | 11/12 | **0.833** | 10/12 |
 | C · hybrid + rerank | 11/12 | 0.833 | 10/12 |
 
 Hybrid loses the most, which is the predictable cost of keyword scoring: BM25 rewards the
@@ -330,11 +349,12 @@ with `python -m eval.check_gold`; run the tests with `pytest -q`.
 
 ## Make it yours
 
-- **Another manual.** Change `URL` in `app/setup.py`. If the pages do not print `Page X-Y`
-  and `Par X-Y` footers, change `PAGE_LABEL` and `PAR_START` in `app/corpus.py`; the rest of
-  the pipeline does not care where the label comes from.
-- **After any text change**: `python -m app.corpus`, then `python -m app.embed`, or the app
-  will refuse to start — on purpose. Then `python -m eval.run_eval`.
+- **Another manual.** Set `RAG_CORPUS_URL` (or edit `CORPUS_URL` in `app/config.py`). If the
+  pages do not print `Page X-Y` and `Par X-Y` footers, change `PAGE_LABEL` and `PAR_START` in
+  `app/corpus.py`; the rest of the pipeline does not care where the label comes from.
+- **After any text change**: `python -m app.corpus`, then `python -m app.embed`. The first
+  search then refuses with a fingerprint error until the vectors match the text — on purpose.
+  Finish with `python -m eval.run_eval`.
 - **Another model.** `RAG_MODEL=qwen3.6-27b python -m uvicorn app.main:app`. Anything that
   Ollama serves over `/api/chat` works.
 - **Your own questions.** Add lines to `eval/gold.jsonl` (`{"q", "page", "evidence"}`) and
@@ -345,22 +365,33 @@ with `python -m eval.check_gold`; run the tests with `pytest -q`.
 ## Layout
 
 ```
-app/corpus.py   646 pages -> citable paragraphs
-app/embed.py    embeddings, cached in data/embeddings.npz with a fingerprint
-app/search.py   BM25, vector search, fusion
-app/main.py     FastAPI: /api/ask, /api/results, the page
-eval/gold.jsonl 60 questions with page + the sentence that proves it
-eval/run_eval.py hit@5, MRR and citation accuracy for both pipelines
-public/index.html  the page (no build step)
-tests/          three asserts on the parts that would break silently
+app/corpus.py    646 pages -> citable paragraphs
+app/embed.py     embeddings, cached in data/embeddings.npz with a fingerprint
+app/search.py    BM25, vector search, fusion
+app/rerank.py    listwise rerank: twelve candidates in, five out
+app/config.py    every knob, read from the environment
+app/main.py      FastAPI: /api/ask, /api/ask/stream, /health, the page
+eval/gold.jsonl  60 questions with page + the sentence that proves it
+eval/blind.jsonl 40 questions written from the table of contents
+eval/paraphrase.jsonl 12 questions that avoid the manual's wording
+eval/unanswerable.jsonl 12 questions the manual does not cover
+eval/run_eval.py hit@5, MRR and citation accuracy for the three pipelines
+eval/refusal.py  score distributions and the gate's decisions
+eval/charts.py   the two SVG charts
+public/index.html the page (no build step)
+tests/           three asserts on the parts that would break silently
+Dockerfile       build, corpus on first start, uvicorn on 8000
+.github/workflows/tests.yml  tests + both gold sets re-proved
 ```
 
 ---
 
 ## Limits
 
-- One manual, 60 questions, one machine. The numbers describe this corpus.
+- One manual, one machine. The numbers describe this corpus.
+- Four question sets, not one: 60 tuned, 40 blind, 12 paraphrases, 12 unanswerable. The last
+  two are pilots — wide intervals, useful direction, not enough to rank the pipelines.
 - The blind set is 40 questions: enough to keep the tuned set honest, not enough to rank the
-  two pipelines.
+  pipelines.
 - Local only. A public deploy would need a queue, a quota and a GPU that is not a laptop.
 - No fine-tuning, no OCR, no answer without a citation.
