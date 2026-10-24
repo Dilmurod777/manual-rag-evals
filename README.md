@@ -246,6 +246,23 @@ that starts in half a second feels like a different product.
 
 ---
 
+## Before and after: streaming and parallel arms
+
+| | before | after |
+|---|---|---|
+| first words on screen | 5.9 s, when all three had answered | **1.5 s** |
+| first complete answer | 5.9 s | **2.5 s** |
+| all three complete | 5.9 s | 5.2 s |
+| how the columns fill | all at once | A, then B, then C, each as it finishes |
+
+The three answers still do not decode at the same instant. Ollama runs one generation per
+model at a time on this GPU, so B's request is in flight after 0.23 s but starts decoding
+when A releases the model. What changed is that nothing waits for the slowest arm: the
+request leaves immediately, the text appears as it is produced, and the first answer is
+readable at 1.5 s instead of 5.9 s. Real overlap needs the server restarted with
+`OLLAMA_NUM_PARALLEL=2`, which halves each arm's tokens per second and was not worth the
+trade: a two-slot attempt still serialised.
+
 ## Run it
 
 Needs `pdftotext` (Poppler) and Ollama with `qwen3-embedding:0.6b` and `qwen3.8-27b`.
