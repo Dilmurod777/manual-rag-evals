@@ -1,0 +1,9 @@
+# The model behind every number in this repo. `qwen3.8-27b` is a local name: it
+# was imported from a GGUF blob on the machine that measured it, so `ollama pull`
+# finds nothing. Build it from the published tag first:
+#
+#   ollama create qwen3.8-27b -f Modelfile
+#
+# 8k context is what keeps the 27B on a 24 GB card; the default 262k spills to CPU.
+FROM hf.co/unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL
+PARAMETER num_ctx 8192

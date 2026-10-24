@@ -343,7 +343,14 @@ transitions.
 
 ## Run it
 
-Needs `pdftotext` (Poppler) and Ollama with `qwen3-embedding:0.6b` and `qwen3.8-27b`.
+Needs `pdftotext` (Poppler) and Ollama with `qwen3-embedding:0.6b`. The generator is a
+local name, so build it once from the published tag (`make` is optional, every target is
+one command):
+
+```bash
+ollama pull qwen3-embedding:0.6b
+ollama create qwen3.8-27b -f Modelfile   # FROM the unsloth Q4_K_XL 27B, 8k context
+```
 
 ```bash
 uv venv && uv pip install -r requirements.txt

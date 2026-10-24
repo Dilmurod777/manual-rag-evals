@@ -1,0 +1,9 @@
+[project]
+name = "manual-rag-evals"
+version = "0.1.0"
+description = "Ask FAA AC 43.13-1B a question; three retrievers answer, each citing the page."
+requires-python = ">=3.12"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
