@@ -16,12 +16,1096 @@
           "3-7"
         ]
       }
+    ],
+    "rows": [
+      {
+        "q": "When inspecting wood, how do you decide whether a stain is harmless or decay?",
+        "gold": "1-3",
+        "rank": 1,
+        "cited": "1-3",
+        "right": true,
+        "retrieval_ms": 3570,
+        "answer_ms": 13051
+      },
+      {
+        "q": "Can a cracked wooden spar be repaired instead of replaced?",
+        "gold": "1-16",
+        "rank": 1,
+        "cited": "1-17",
+        "right": false,
+        "retrieval_ms": 2594,
+        "answer_ms": 2874
+      },
+      {
+        "q": "Are punch-type fabric testers FAA approved?",
+        "gold": "2-35",
+        "rank": 1,
+        "cited": "2-35",
+        "right": true,
+        "retrieval_ms": 257,
+        "answer_ms": 2613
+      },
+      {
+        "q": "Why is dope-proof paint applied over an organic coating before fabric is doped?",
+        "gold": "6-12",
+        "rank": 1,
+        "cited": "6-12",
+        "right": true,
+        "retrieval_ms": 149,
+        "answer_ms": 2754
+      },
+      {
+        "q": "What governs the seams when a large section of fabric is installed on a wing?",
+        "gold": "2-37",
+        "rank": 1,
+        "cited": "2-37",
+        "right": true,
+        "retrieval_ms": 132,
+        "answer_ms": 2988
+      },
+      {
+        "q": "How can excessive moisture in a wood member be detected?",
+        "gold": "1-14",
+        "rank": 1,
+        "cited": "1-14",
+        "right": true,
+        "retrieval_ms": 147,
+        "answer_ms": 3509
+      },
+      {
+        "q": "What does a satisfactory bonded wood joint require of the adhesive film?",
+        "gold": "1-5",
+        "rank": 1,
+        "cited": "1-5",
+        "right": true,
+        "retrieval_ms": 152,
+        "answer_ms": 2912
+      },
+      {
+        "q": "Before repairing a damaged tubular member, what else must be inspected?",
+        "gold": "4-62",
+        "rank": 1,
+        "cited": "4-62",
+        "right": true,
+        "retrieval_ms": 142,
+        "answer_ms": 3335
+      },
+      {
+        "q": "At what temperature do brazing and soldering differ?",
+        "gold": "4-53",
+        "rank": 2,
+        "cited": "4-53",
+        "right": true,
+        "retrieval_ms": 144,
+        "answer_ms": 3046
+      },
+      {
+        "q": "Where are the minimum bend radii for aircraft plywood tabulated?",
+        "gold": "1-25",
+        "rank": 1,
+        "cited": "1-25",
+        "right": true,
+        "retrieval_ms": 230,
+        "answer_ms": 3111
+      },
+      {
+        "q": "What precautions apply when handling hydraulic fluid?",
+        "gold": "9-14",
+        "rank": 1,
+        "cited": "9-14",
+        "right": true,
+        "retrieval_ms": 183,
+        "answer_ms": 3581
+      },
+      {
+        "q": "What can cause banging and chattering noises in a hydraulic system?",
+        "gold": "9-17",
+        "rank": 1,
+        "cited": "9-17",
+        "right": true,
+        "retrieval_ms": 209,
+        "answer_ms": 3066
+      },
+      {
+        "q": "What defects should a tire inspection look for?",
+        "gold": "9-10",
+        "rank": 1,
+        "cited": "9-10",
+        "right": true,
+        "retrieval_ms": 226,
+        "answer_ms": 2909
+      },
+      {
+        "q": "Why must welding on an engine mount be of the highest quality?",
+        "gold": "4-71",
+        "rank": 1,
+        "cited": "4-71",
+        "right": true,
+        "retrieval_ms": 229,
+        "answer_ms": 2501
+      },
+      {
+        "q": "How should control cable tension be set?",
+        "gold": "7-39",
+        "rank": 1,
+        "cited": "7-39",
+        "right": true,
+        "retrieval_ms": 280,
+        "answer_ms": 3421
+      },
+      {
+        "q": "Which aluminum fuel tanks may be repaired by welding?",
+        "gold": "8-19",
+        "rank": 1,
+        "cited": "8-19",
+        "right": true,
+        "retrieval_ms": 300,
+        "answer_ms": 3328
+      },
+      {
+        "q": "What should a periodic wheel inspection look for?",
+        "gold": "9-5",
+        "rank": 3,
+        "cited": "9-5",
+        "right": true,
+        "retrieval_ms": 316,
+        "answer_ms": 2314
+      },
+      {
+        "q": "Can intergranular corrosion on a propeller blade be repaired in the field?",
+        "gold": "8-39",
+        "rank": 1,
+        "cited": "8-39",
+        "right": true,
+        "retrieval_ms": 227,
+        "answer_ms": 2835
+      },
+      {
+        "q": "Why are acrylic windshields called lifetime windshields?",
+        "gold": "3-24",
+        "rank": 1,
+        "cited": "3-24",
+        "right": true,
+        "retrieval_ms": 192,
+        "answer_ms": 2807
+      },
+      {
+        "q": "Why should rivet heads not be removed with a cold chisel?",
+        "gold": "4-12",
+        "rank": 1,
+        "cited": "4-12",
+        "right": true,
+        "retrieval_ms": 239,
+        "answer_ms": 3106
+      },
+      {
+        "q": "A fatigue crack is suspected at the surface of an accessible part. Which inspection finds it with little part preparation?",
+        "gold": "5-16",
+        "rank": 1,
+        "cited": "5-16",
+        "right": true,
+        "retrieval_ms": 205,
+        "answer_ms": 3143
+      },
+      {
+        "q": "Why is magnetic particle inspection unsuitable for an aluminum fitting?",
+        "gold": "5-19",
+        "rank": 1,
+        "cited": "5-19",
+        "right": true,
+        "retrieval_ms": 326,
+        "answer_ms": 3436
+      },
+      {
+        "q": "Which method detects surface defects in nonmagnetic metals and in nonmetallic materials?",
+        "gold": "5-29",
+        "rank": 1,
+        "cited": "5-29",
+        "right": true,
+        "retrieval_ms": 206,
+        "answer_ms": 2724
+      },
+      {
+        "q": "Which instruments can test bonded structure for disbonds from one side?",
+        "gold": "5-46",
+        "rank": 2,
+        "cited": "5-48",
+        "right": false,
+        "retrieval_ms": 193,
+        "answer_ms": 4582
+      },
+      {
+        "q": "What must the equipment list show for a special equipment item when its arm is unknown?",
+        "gold": "10-14",
+        "rank": 1,
+        "cited": "10-14",
+        "right": true,
+        "retrieval_ms": 233,
+        "answer_ms": 2853
+      },
+      {
+        "q": "What should be checked where electrical arcing has left marks on conducting surfaces?",
+        "gold": "11-73",
+        "rank": 2,
+        "cited": "11-73",
+        "right": true,
+        "retrieval_ms": 199,
+        "answer_ms": 2616
+      },
+      {
+        "q": "What do the battery compartment venting tubes and attachments prevent?",
+        "gold": "11-6",
+        "rank": 1,
+        "cited": "11-6",
+        "right": true,
+        "retrieval_ms": 267,
+        "answer_ms": 2797
+      },
+      {
+        "q": "When must a pitot-static leak test be performed?",
+        "gold": "12-20",
+        "rank": 1,
+        "cited": "12-20",
+        "right": true,
+        "retrieval_ms": 246,
+        "answer_ms": 2567
+      },
+      {
+        "q": "What must a repair or refinish of a control surface avoid doing aft of the hinge line?",
+        "gold": "1-15",
+        "rank": 1,
+        "cited": "1-15",
+        "right": true,
+        "retrieval_ms": 337,
+        "answer_ms": 2861
+      },
+      {
+        "q": "How are aluminum plate and sheet usually marked to show their grade?",
+        "gold": "4-2",
+        "rank": 1,
+        "cited": "4-2",
+        "right": true,
+        "retrieval_ms": 235,
+        "answer_ms": 3301
+      },
+      {
+        "q": "When repairing sheet metal, how should the rivet spacing and edge distance be chosen?",
+        "gold": "4-19",
+        "rank": 1,
+        "cited": "4-19",
+        "right": true,
+        "retrieval_ms": 236,
+        "answer_ms": 4173
+      },
+      {
+        "q": "If the original rib lace spacing is not known, what maximum spacing may be used on the wings?",
+        "gold": "2-21",
+        "rank": 2,
+        "cited": "2-19",
+        "right": false,
+        "retrieval_ms": 278,
+        "answer_ms": 2865
+      },
+      {
+        "q": "What should be inspected in a battery compartment and around its vent?",
+        "gold": "6-15",
+        "rank": 1,
+        "cited": "6-15",
+        "right": true,
+        "retrieval_ms": 455,
+        "answer_ms": 2778
+      },
+      {
+        "q": "Which rivets are used to join corrosion-resistant steel parts such as firewalls and exhaust stack brackets?",
+        "gold": "7-1",
+        "rank": 1,
+        "cited": "7-1",
+        "right": true,
+        "retrieval_ms": 242,
+        "answer_ms": 2919
+      },
+      {
+        "q": "After a turnbuckle is adjusted, how must it be secured, and may the safety wire be reused?",
+        "gold": "7-43",
+        "rank": 1,
+        "cited": "7-43",
+        "right": true,
+        "retrieval_ms": 317,
+        "answer_ms": 3055
+      },
+      {
+        "q": "What must be done to the wheel bearings before a wheel is installed on the axle?",
+        "gold": "9-12",
+        "rank": 1,
+        "cited": "9-12",
+        "right": true,
+        "retrieval_ms": 269,
+        "answer_ms": 2272
+      },
+      {
+        "q": "How often must the static system and each altimeter be inspected and tested for IFR operations?",
+        "gold": "12-7",
+        "rank": 1,
+        "cited": "12-7",
+        "right": true,
+        "retrieval_ms": 289,
+        "answer_ms": 3211
+      },
+      {
+        "q": "How is a pitot heater checked for proper operation?",
+        "gold": "12-19",
+        "rank": 2,
+        "cited": "12-19",
+        "right": true,
+        "retrieval_ms": 317,
+        "answer_ms": 2919
+      },
+      {
+        "q": "When may 2017 or 2024 rivets be replaced with 2117 rivets?",
+        "gold": "4-16",
+        "rank": 1,
+        "cited": "4-16",
+        "right": true,
+        "retrieval_ms": 250,
+        "answer_ms": 4833
+      },
+      {
+        "q": "What must be done before an air-oil shock strut is removed or disassembled?",
+        "gold": "9-2",
+        "rank": 1,
+        "cited": "9-2",
+        "right": true,
+        "retrieval_ms": 258,
+        "answer_ms": 2384
+      },
+      {
+        "q": "What defects should a general inspection of a fabric covering look for?",
+        "gold": "2-33",
+        "rank": 1,
+        "cited": "2-33",
+        "right": true,
+        "retrieval_ms": 364,
+        "answer_ms": 4375
+      },
+      {
+        "q": "How should rivets be arranged in a splice so the member does not fail at its outermost holes?",
+        "gold": "4-27",
+        "rank": 1,
+        "cited": "4-27",
+        "right": true,
+        "retrieval_ms": 279,
+        "answer_ms": 3027
+      },
+      {
+        "q": "What is the first step in removing corrosion from an aluminum part?",
+        "gold": "6-26",
+        "rank": 1,
+        "cited": "6-26",
+        "right": true,
+        "retrieval_ms": 262,
+        "answer_ms": 2499
+      },
+      {
+        "q": "Can a copper-sleeve splice replace a five-tuck splice in a control cable?",
+        "gold": "7-32",
+        "rank": 2,
+        "cited": "7-33",
+        "right": false,
+        "retrieval_ms": 267,
+        "answer_ms": 3041
+      },
+      {
+        "q": "How is a tin-plated copper wire size checked for voltage drop over a run?",
+        "gold": "11-22",
+        "rank": 1,
+        "cited": "11-22",
+        "right": true,
+        "retrieval_ms": 238,
+        "answer_ms": 4097
+      },
+      {
+        "q": "Why should a circuit breaker not be used as a switch?",
+        "gold": "11-16",
+        "rank": 1,
+        "cited": "11-16",
+        "right": true,
+        "retrieval_ms": 269,
+        "answer_ms": 2497
+      },
+      {
+        "q": "What should an antenna inspection check at its mounting base?",
+        "gold": "12-4",
+        "rank": 1,
+        "cited": "12-4",
+        "right": true,
+        "retrieval_ms": 254,
+        "answer_ms": 2913
+      },
+      {
+        "q": "When a wood spar splice is made where the routing is feathered, what plates go on first?",
+        "gold": "1-18",
+        "rank": 1,
+        "cited": "1-18",
+        "right": true,
+        "retrieval_ms": 278,
+        "answer_ms": 2668
+      },
+      {
+        "q": "When is empty weight center of gravity computed with oil included?",
+        "gold": "10-12",
+        "rank": 2,
+        "cited": "10-12",
+        "right": true,
+        "retrieval_ms": 306,
+        "answer_ms": 2601
+      },
+      {
+        "q": "Which engine case defects call for disassembling the gear train?",
+        "gold": "8-3",
+        "rank": 2,
+        "cited": "8-3",
+        "right": true,
+        "retrieval_ms": 287,
+        "answer_ms": 3106
+      },
+      {
+        "q": "Are rasped surfaces acceptable at the corners of a scarf patch?",
+        "gold": "1-26",
+        "rank": 3,
+        "cited": "1-26",
+        "right": true,
+        "retrieval_ms": 243,
+        "answer_ms": 2219
+      },
+      {
+        "q": "How should the viscosity of dope be set for coating fabric?",
+        "gold": "2-27",
+        "rank": 1,
+        "cited": "2-27",
+        "right": true,
+        "retrieval_ms": 242,
+        "answer_ms": 3180
+      },
+      {
+        "q": "How is pressure applied over a laminated plastic repair while it cures?",
+        "gold": "3-4",
+        "rank": 0,
+        "cited": "3-6",
+        "right": false,
+        "retrieval_ms": 260,
+        "answer_ms": 3242
+      },
+      {
+        "q": "Should propeller bolt threads be lubricated before torquing?",
+        "gold": "8-40",
+        "rank": 1,
+        "cited": "8-40",
+        "right": true,
+        "retrieval_ms": 246,
+        "answer_ms": 2823
+      },
+      {
+        "q": "Why does hydraulic system troubleshooting depend on the system's complexity?",
+        "gold": "9-16",
+        "rank": 1,
+        "cited": "9-16",
+        "right": true,
+        "retrieval_ms": 314,
+        "answer_ms": 2452
+      },
+      {
+        "q": "What does minimum fuel mean in weight and balance?",
+        "gold": "10-8",
+        "rank": 1,
+        "cited": "10-8",
+        "right": true,
+        "retrieval_ms": 287,
+        "answer_ms": 3082
+      },
+      {
+        "q": "Where are the detailed magneto-to-engine timing procedures found?",
+        "gold": "8-17",
+        "rank": 1,
+        "cited": "8-17",
+        "right": true,
+        "retrieval_ms": 233,
+        "answer_ms": 2445
+      },
+      {
+        "q": "What should an electrical connector inspection look for?",
+        "gold": "6-16",
+        "rank": 1,
+        "cited": "6-16",
+        "right": true,
+        "retrieval_ms": 321,
+        "answer_ms": 3473
+      },
+      {
+        "q": "What load may a swage-type terminal carry?",
+        "gold": "7-30",
+        "rank": 1,
+        "cited": "7-30",
+        "right": true,
+        "retrieval_ms": 256,
+        "answer_ms": 3180
+      },
+      {
+        "q": "What precaution keeps a repaired flight control surface from fluttering?",
+        "gold": "4-9",
+        "rank": 1,
+        "cited": "4-9",
+        "right": true,
+        "retrieval_ms": 245,
+        "answer_ms": 2668
+      }
     ]
   },
   "hybrid": {
     "hit_at_5": 1.0,
     "mrr": 0.9389,
     "citation": 0.9167,
-    "misses": []
+    "misses": [],
+    "rows": [
+      {
+        "q": "When inspecting wood, how do you decide whether a stain is harmless or decay?",
+        "gold": "1-3",
+        "rank": 1,
+        "cited": "1-3",
+        "right": true,
+        "retrieval_ms": 246,
+        "answer_ms": 3880
+      },
+      {
+        "q": "Can a cracked wooden spar be repaired instead of replaced?",
+        "gold": "1-16",
+        "rank": 1,
+        "cited": "1-16",
+        "right": true,
+        "retrieval_ms": 234,
+        "answer_ms": 3648
+      },
+      {
+        "q": "Are punch-type fabric testers FAA approved?",
+        "gold": "2-35",
+        "rank": 1,
+        "cited": "2-35",
+        "right": true,
+        "retrieval_ms": 282,
+        "answer_ms": 2691
+      },
+      {
+        "q": "Why is dope-proof paint applied over an organic coating before fabric is doped?",
+        "gold": "6-12",
+        "rank": 1,
+        "cited": "6-12",
+        "right": true,
+        "retrieval_ms": 249,
+        "answer_ms": 2778
+      },
+      {
+        "q": "What governs the seams when a large section of fabric is installed on a wing?",
+        "gold": "2-37",
+        "rank": 1,
+        "cited": "2-37",
+        "right": true,
+        "retrieval_ms": 351,
+        "answer_ms": 3185
+      },
+      {
+        "q": "How can excessive moisture in a wood member be detected?",
+        "gold": "1-14",
+        "rank": 1,
+        "cited": "1-14",
+        "right": true,
+        "retrieval_ms": 232,
+        "answer_ms": 3499
+      },
+      {
+        "q": "What does a satisfactory bonded wood joint require of the adhesive film?",
+        "gold": "1-5",
+        "rank": 1,
+        "cited": "1-5",
+        "right": true,
+        "retrieval_ms": 256,
+        "answer_ms": 3253
+      },
+      {
+        "q": "Before repairing a damaged tubular member, what else must be inspected?",
+        "gold": "4-62",
+        "rank": 2,
+        "cited": "4-62",
+        "right": true,
+        "retrieval_ms": 298,
+        "answer_ms": 3762
+      },
+      {
+        "q": "At what temperature do brazing and soldering differ?",
+        "gold": "4-53",
+        "rank": 2,
+        "cited": "4-53",
+        "right": true,
+        "retrieval_ms": 268,
+        "answer_ms": 3011
+      },
+      {
+        "q": "Where are the minimum bend radii for aircraft plywood tabulated?",
+        "gold": "1-25",
+        "rank": 1,
+        "cited": "1-25",
+        "right": true,
+        "retrieval_ms": 220,
+        "answer_ms": 2514
+      },
+      {
+        "q": "What precautions apply when handling hydraulic fluid?",
+        "gold": "9-14",
+        "rank": 1,
+        "cited": "9-14",
+        "right": true,
+        "retrieval_ms": 271,
+        "answer_ms": 3091
+      },
+      {
+        "q": "What can cause banging and chattering noises in a hydraulic system?",
+        "gold": "9-17",
+        "rank": 1,
+        "cited": "9-17",
+        "right": true,
+        "retrieval_ms": 210,
+        "answer_ms": 3151
+      },
+      {
+        "q": "What defects should a tire inspection look for?",
+        "gold": "9-10",
+        "rank": 1,
+        "cited": "9-10",
+        "right": true,
+        "retrieval_ms": 196,
+        "answer_ms": 3132
+      },
+      {
+        "q": "Why must welding on an engine mount be of the highest quality?",
+        "gold": "4-71",
+        "rank": 1,
+        "cited": "4-71",
+        "right": true,
+        "retrieval_ms": 238,
+        "answer_ms": 2341
+      },
+      {
+        "q": "How should control cable tension be set?",
+        "gold": "7-39",
+        "rank": 1,
+        "cited": "7-39",
+        "right": true,
+        "retrieval_ms": 280,
+        "answer_ms": 3302
+      },
+      {
+        "q": "Which aluminum fuel tanks may be repaired by welding?",
+        "gold": "8-19",
+        "rank": 1,
+        "cited": "8-19",
+        "right": true,
+        "retrieval_ms": 216,
+        "answer_ms": 3225
+      },
+      {
+        "q": "What should a periodic wheel inspection look for?",
+        "gold": "9-5",
+        "rank": 2,
+        "cited": "9-5",
+        "right": true,
+        "retrieval_ms": 214,
+        "answer_ms": 2679
+      },
+      {
+        "q": "Can intergranular corrosion on a propeller blade be repaired in the field?",
+        "gold": "8-39",
+        "rank": 1,
+        "cited": "8-39",
+        "right": true,
+        "retrieval_ms": 218,
+        "answer_ms": 2685
+      },
+      {
+        "q": "Why are acrylic windshields called lifetime windshields?",
+        "gold": "3-24",
+        "rank": 1,
+        "cited": "3-24",
+        "right": true,
+        "retrieval_ms": 210,
+        "answer_ms": 2662
+      },
+      {
+        "q": "Why should rivet heads not be removed with a cold chisel?",
+        "gold": "4-12",
+        "rank": 1,
+        "cited": "4-12",
+        "right": true,
+        "retrieval_ms": 219,
+        "answer_ms": 2852
+      },
+      {
+        "q": "A fatigue crack is suspected at the surface of an accessible part. Which inspection finds it with little part preparation?",
+        "gold": "5-16",
+        "rank": 1,
+        "cited": "5-16",
+        "right": true,
+        "retrieval_ms": 250,
+        "answer_ms": 2774
+      },
+      {
+        "q": "Why is magnetic particle inspection unsuitable for an aluminum fitting?",
+        "gold": "5-19",
+        "rank": 1,
+        "cited": "5-19",
+        "right": true,
+        "retrieval_ms": 208,
+        "answer_ms": 3150
+      },
+      {
+        "q": "Which method detects surface defects in nonmagnetic metals and in nonmetallic materials?",
+        "gold": "5-29",
+        "rank": 1,
+        "cited": "5-29",
+        "right": true,
+        "retrieval_ms": 221,
+        "answer_ms": 2696
+      },
+      {
+        "q": "Which instruments can test bonded structure for disbonds from one side?",
+        "gold": "5-46",
+        "rank": 1,
+        "cited": "5-48",
+        "right": false,
+        "retrieval_ms": 217,
+        "answer_ms": 3467
+      },
+      {
+        "q": "What must the equipment list show for a special equipment item when its arm is unknown?",
+        "gold": "10-14",
+        "rank": 1,
+        "cited": "10-14",
+        "right": true,
+        "retrieval_ms": 211,
+        "answer_ms": 2792
+      },
+      {
+        "q": "What should be checked where electrical arcing has left marks on conducting surfaces?",
+        "gold": "11-73",
+        "rank": 1,
+        "cited": "11-73",
+        "right": true,
+        "retrieval_ms": 192,
+        "answer_ms": 2533
+      },
+      {
+        "q": "What do the battery compartment venting tubes and attachments prevent?",
+        "gold": "11-6",
+        "rank": 1,
+        "cited": "11-6",
+        "right": true,
+        "retrieval_ms": 187,
+        "answer_ms": 2530
+      },
+      {
+        "q": "When must a pitot-static leak test be performed?",
+        "gold": "12-20",
+        "rank": 1,
+        "cited": "12-20",
+        "right": true,
+        "retrieval_ms": 171,
+        "answer_ms": 2418
+      },
+      {
+        "q": "What must a repair or refinish of a control surface avoid doing aft of the hinge line?",
+        "gold": "1-15",
+        "rank": 1,
+        "cited": "1-15",
+        "right": true,
+        "retrieval_ms": 196,
+        "answer_ms": 2388
+      },
+      {
+        "q": "How are aluminum plate and sheet usually marked to show their grade?",
+        "gold": "4-2",
+        "rank": 1,
+        "cited": "4-2",
+        "right": true,
+        "retrieval_ms": 189,
+        "answer_ms": 2792
+      },
+      {
+        "q": "When repairing sheet metal, how should the rivet spacing and edge distance be chosen?",
+        "gold": "4-19",
+        "rank": 1,
+        "cited": "4-19",
+        "right": true,
+        "retrieval_ms": 238,
+        "answer_ms": 4108
+      },
+      {
+        "q": "If the original rib lace spacing is not known, what maximum spacing may be used on the wings?",
+        "gold": "2-21",
+        "rank": 2,
+        "cited": "2-19",
+        "right": false,
+        "retrieval_ms": 173,
+        "answer_ms": 2743
+      },
+      {
+        "q": "What should be inspected in a battery compartment and around its vent?",
+        "gold": "6-15",
+        "rank": 1,
+        "cited": "6-15",
+        "right": true,
+        "retrieval_ms": 171,
+        "answer_ms": 2638
+      },
+      {
+        "q": "Which rivets are used to join corrosion-resistant steel parts such as firewalls and exhaust stack brackets?",
+        "gold": "7-1",
+        "rank": 1,
+        "cited": "7-1",
+        "right": true,
+        "retrieval_ms": 179,
+        "answer_ms": 2831
+      },
+      {
+        "q": "After a turnbuckle is adjusted, how must it be secured, and may the safety wire be reused?",
+        "gold": "7-43",
+        "rank": 2,
+        "cited": "7-43",
+        "right": true,
+        "retrieval_ms": 179,
+        "answer_ms": 2911
+      },
+      {
+        "q": "What must be done to the wheel bearings before a wheel is installed on the axle?",
+        "gold": "9-12",
+        "rank": 1,
+        "cited": "9-12",
+        "right": true,
+        "retrieval_ms": 184,
+        "answer_ms": 2261
+      },
+      {
+        "q": "How often must the static system and each altimeter be inspected and tested for IFR operations?",
+        "gold": "12-7",
+        "rank": 1,
+        "cited": "12-7",
+        "right": true,
+        "retrieval_ms": 268,
+        "answer_ms": 3248
+      },
+      {
+        "q": "How is a pitot heater checked for proper operation?",
+        "gold": "12-19",
+        "rank": 1,
+        "cited": "12-19",
+        "right": true,
+        "retrieval_ms": 196,
+        "answer_ms": 2643
+      },
+      {
+        "q": "When may 2017 or 2024 rivets be replaced with 2117 rivets?",
+        "gold": "4-16",
+        "rank": 1,
+        "cited": "4-16",
+        "right": true,
+        "retrieval_ms": 191,
+        "answer_ms": 4716
+      },
+      {
+        "q": "What must be done before an air-oil shock strut is removed or disassembled?",
+        "gold": "9-2",
+        "rank": 1,
+        "cited": "9-2",
+        "right": true,
+        "retrieval_ms": 186,
+        "answer_ms": 2353
+      },
+      {
+        "q": "What defects should a general inspection of a fabric covering look for?",
+        "gold": "2-33",
+        "rank": 1,
+        "cited": "2-33",
+        "right": true,
+        "retrieval_ms": 200,
+        "answer_ms": 4198
+      },
+      {
+        "q": "How should rivets be arranged in a splice so the member does not fail at its outermost holes?",
+        "gold": "4-27",
+        "rank": 1,
+        "cited": "4-27",
+        "right": true,
+        "retrieval_ms": 193,
+        "answer_ms": 2726
+      },
+      {
+        "q": "What is the first step in removing corrosion from an aluminum part?",
+        "gold": "6-26",
+        "rank": 1,
+        "cited": "6-26",
+        "right": true,
+        "retrieval_ms": 261,
+        "answer_ms": 2522
+      },
+      {
+        "q": "Can a copper-sleeve splice replace a five-tuck splice in a control cable?",
+        "gold": "7-32",
+        "rank": 1,
+        "cited": "7-33",
+        "right": false,
+        "retrieval_ms": 223,
+        "answer_ms": 2877
+      },
+      {
+        "q": "How is a tin-plated copper wire size checked for voltage drop over a run?",
+        "gold": "11-22",
+        "rank": 1,
+        "cited": "11-22",
+        "right": true,
+        "retrieval_ms": 172,
+        "answer_ms": 3921
+      },
+      {
+        "q": "Why should a circuit breaker not be used as a switch?",
+        "gold": "11-16",
+        "rank": 1,
+        "cited": "11-16",
+        "right": true,
+        "retrieval_ms": 216,
+        "answer_ms": 2298
+      },
+      {
+        "q": "What should an antenna inspection check at its mounting base?",
+        "gold": "12-4",
+        "rank": 1,
+        "cited": "12-4",
+        "right": true,
+        "retrieval_ms": 219,
+        "answer_ms": 2739
+      },
+      {
+        "q": "When a wood spar splice is made where the routing is feathered, what plates go on first?",
+        "gold": "1-18",
+        "rank": 1,
+        "cited": "1-18",
+        "right": true,
+        "retrieval_ms": 191,
+        "answer_ms": 2909
+      },
+      {
+        "q": "When is empty weight center of gravity computed with oil included?",
+        "gold": "10-12",
+        "rank": 1,
+        "cited": "10-12",
+        "right": true,
+        "retrieval_ms": 217,
+        "answer_ms": 3229
+      },
+      {
+        "q": "Which engine case defects call for disassembling the gear train?",
+        "gold": "8-3",
+        "rank": 2,
+        "cited": "8-3",
+        "right": true,
+        "retrieval_ms": 173,
+        "answer_ms": 2766
+      },
+      {
+        "q": "Are rasped surfaces acceptable at the corners of a scarf patch?",
+        "gold": "1-26",
+        "rank": 1,
+        "cited": "1-26",
+        "right": true,
+        "retrieval_ms": 180,
+        "answer_ms": 2148
+      },
+      {
+        "q": "How should the viscosity of dope be set for coating fabric?",
+        "gold": "2-27",
+        "rank": 1,
+        "cited": "2-27",
+        "right": true,
+        "retrieval_ms": 191,
+        "answer_ms": 3285
+      },
+      {
+        "q": "How is pressure applied over a laminated plastic repair while it cures?",
+        "gold": "3-4",
+        "rank": 3,
+        "cited": "3-6",
+        "right": false,
+        "retrieval_ms": 192,
+        "answer_ms": 3722
+      },
+      {
+        "q": "Should propeller bolt threads be lubricated before torquing?",
+        "gold": "8-40",
+        "rank": 1,
+        "cited": "8-40",
+        "right": true,
+        "retrieval_ms": 182,
+        "answer_ms": 3164
+      },
+      {
+        "q": "Why does hydraulic system troubleshooting depend on the system's complexity?",
+        "gold": "9-16",
+        "rank": 1,
+        "cited": "9-16",
+        "right": true,
+        "retrieval_ms": 186,
+        "answer_ms": 2471
+      },
+      {
+        "q": "What does minimum fuel mean in weight and balance?",
+        "gold": "10-8",
+        "rank": 1,
+        "cited": "10-8",
+        "right": true,
+        "retrieval_ms": 185,
+        "answer_ms": 2983
+      },
+      {
+        "q": "Where are the detailed magneto-to-engine timing procedures found?",
+        "gold": "8-17",
+        "rank": 1,
+        "cited": "8-17",
+        "right": true,
+        "retrieval_ms": 197,
+        "answer_ms": 2646
+      },
+      {
+        "q": "What should an electrical connector inspection look for?",
+        "gold": "6-16",
+        "rank": 1,
+        "cited": "6-16",
+        "right": true,
+        "retrieval_ms": 191,
+        "answer_ms": 2945
+      },
+      {
+        "q": "What load may a swage-type terminal carry?",
+        "gold": "7-30",
+        "rank": 1,
+        "cited": "7-30",
+        "right": true,
+        "retrieval_ms": 172,
+        "answer_ms": 2905
+      },
+      {
+        "q": "What precaution keeps a repaired flight control surface from fluttering?",
+        "gold": "4-9",
+        "rank": 1,
+        "cited": "1-15",
+        "right": false,
+        "retrieval_ms": 183,
+        "answer_ms": 2614
+      }
+    ]
   }
 }

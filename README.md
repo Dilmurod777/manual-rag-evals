@@ -101,6 +101,34 @@ question
 A misses exactly one page: "how is pressure applied over a laminated plastic repair while
 it cures" (Page 3-4) returns Pages 1-25, 3-6, 3-1 and 3-7 instead. B finds it.
 
+### Question by question
+
+![which rank the gold page got](docs/rank.svg)
+
+Half the story is in the ranking: B puts the gold page first 53 times out of 60, A 49. A's
+single miss is the only question where the right page never appears.
+
+![hit@5 by chapter](docs/by_chapter.svg)
+
+Every chapter is perfect except chapter 3, where the question about curing pressure is the
+one A loses. The chapters with two questions are thin evidence; the spread is there to show
+that the misses are not hiding in one section.
+
+The five answers that cited the wrong page are worth reading, because four of them are one
+page off — the answer is on the neighbouring page of a two-page spread:
+
+| question | gold page | page the answer cited |
+|---|---|---|
+| Which instruments can test bonded structure for disbonds from one side? | 5-46 | 5-48 |
+| If the original rib lace spacing is not known, what maximum spacing may be used on the wings? | 2-21 | 2-19 |
+| Can a copper-sleeve splice replace a five-tuck splice in a control cable? | 7-32 | 7-33 |
+| How is pressure applied over a laminated plastic repair while it cures? | 3-4 | 3-6 |
+| What precaution keeps a repaired flight control surface from fluttering? | 4-9 | 1-15 |
+
+The last one is the only real confusion: both pages discuss flutter, and the model picked
+the chapter 1 discussion over the chapter 4 rule. A reader would notice; that is why the
+page shows the sentence, not just the citation.
+
 Both pipelines answered all 60 questions and named the correct page in 55. Retrieval is not
 the limit: five pages were in front of the model and in five cases it quoted a different
 one. That is the cost of generation, and it is why the page marks the sentence instead of
@@ -153,13 +181,18 @@ none of which this has. Adding one would move 2% of the wait and add a service t
 
 | step | time |
 |---|---|
-| retrieval, both pipelines | 45 ms |
-| one answer | 1.9 s |
+| retrieval, one pipeline (including the query embedding) | 210–250 ms |
+| the cosine or BM25 comparison alone | 20–45 ms |
+| one answer | 2.9 s |
 | the two arms, side by side | 2.5–3.6 s |
 
-The time is the model. The levers that mattered were an 8k context (keeps the 27B on the
-GPU instead of spilling to the CPU), `think: false`, and running the two arms in parallel
-instead of one after the other.
+Medians over the 60 gold questions: 252 ms for A, 209 ms for B, 2.9 s per answer. Retrieval
+is about 8% of the wait, and most of that is the HTTP call to the embedding model, not the
+comparison. The 1,758 paragraphs and their 1,024-dimension vectors fit in memory, and a
+cosine sweep is 20 ms. A vector database earns its place at millions of chunks, metadata
+filters, or writes during queries — none of which this corpus has. The levers that mattered
+were an 8k context (keeps the 27B on the GPU instead of spilling to the CPU), `think:
+false`, and running the two arms in parallel instead of one after the other.
 
 ---
 
