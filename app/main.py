@@ -2,6 +2,7 @@
 
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import httpx
@@ -37,7 +38,14 @@ class Ask(BaseModel):
 
 
 def passages(ranked):
-    return "\n\n".join(f"[Page {c['page']}] {c['text']}" for _, c in ranked)
+    """One passage per page: two chunks of the same page crowd out the rest."""
+    seen, rows = set(), []
+    for _, c in ranked:
+        if c["page"] in seen:
+            continue
+        seen.add(c["page"])
+        rows.append(f"[Page {c['page']}] {c['text']}")
+    return "\n\n".join(rows)
 
 
 def answer(question, ranked):
@@ -78,11 +86,12 @@ def column(question, ranked):
 
 @app.post("/api/ask")
 def ask(body: Ask):
-    return {
-        "question": body.q,
-        "vector": column(body.q, vector.search(body.q, 5)),
-        "hybrid": column(body.q, hybrid(bm25, vector, body.q, 5)),
-    }
+    # The two arms share nothing after retrieval, so they run side by side:
+    # 2 s instead of 4.
+    with ThreadPoolExecutor(2) as pool:
+        left = pool.submit(column, body.q, vector.search(body.q, 5))
+        right = pool.submit(column, body.q, hybrid(bm25, vector, body.q, 5))
+        return {"question": body.q, "vector": left.result(), "hybrid": right.result()}
 
 
 @app.get("/api/results")

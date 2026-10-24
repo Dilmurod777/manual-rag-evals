@@ -19,8 +19,8 @@ Two pipelines over the same paragraphs:
 | **A** | vector only, cosine | `qwen3-embedding:0.6b`, 1024-d, local |
 | **B** | BM25 + vectors, reciprocal rank fusion | same |
 
-Answers are written by a local model (`qwen3.8-27b` through Ollama) from the five
-retrieved paragraphs, and it is told to end with the page it used. If Ollama is not
+Answers are written by a local model (`qwen3.8-27b` through Ollama) from the retrieved
+paragraphs, one per page, and it is told to end with the page it used. If Ollama is not
 running, the app shows the passage and its page instead of inventing an answer.
 
 ## The measurement
@@ -41,6 +41,24 @@ retrieval had already returned, so both pipelines are flattered and hit@5 is clo
 its ceiling. The honest signal here is MRR — B puts the right page first more often —
 plus the one question A cannot reach at all. A harder, paraphrase-only set is the next
 thing this repo needs; its absence is the weakest part of the result.
+
+## Where the time goes
+
+One question, both arms, measured on this machine:
+
+| step | time |
+|---|---|
+| retrieval, both pipelines | 45 ms |
+| one answer | 1.9 s |
+| the two arms, side by side | 2.5–3.6 s |
+
+Retrieval is about 2% of the wait, so no storage engine can make this feel faster. The
+1,758 paragraphs and their 1,024-dimension vectors fit in memory, and a cosine sweep is
+20 ms. A vector database earns its place at millions of chunks, metadata filters, or
+writes during queries — none of which this corpus has. The time is the 27B model, and
+the levers that matter are the ones already pulled: an 8k context keeps it on the GPU,
+`think: false` stops it spending the token budget on reasoning, and the two arms no
+longer wait for each other.
 
 ## Three commands
 
