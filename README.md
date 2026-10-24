@@ -158,10 +158,10 @@ The last one is the only real confusion: both pages discuss flutter, and the mod
 the chapter 1 discussion over the chapter 4 rule. A reader would notice; that is why the
 page shows the sentence, not just the citation.
 
-Both pipelines answered all 60 questions and named the correct page in 55. Retrieval is not
-the limit: five pages were in front of the model and in five cases it quoted a different
-one. That is the cost of generation, and it is why the page marks the sentence instead of
-asking for trust.
+All three arms answered all 60 questions and named the gold page 55, 55 and 54 times.
+Retrieval is not the limit: five pages were in front of the model and in five or six cases
+it quoted a different one. That is the cost of generation, and it is why the page marks the
+sentence instead of asking for trust.
 
 The caveat, stated plainly: the questions were written after reading passages that
 retrieval had already returned, so every pipeline is flattered and hit@5 sits near its
@@ -202,7 +202,6 @@ can excessive moisture in a wood member be detected?"). Same pages, same evidenc
 | A · vector only | 11/12 | 0.812 | 8/12 |
 | B · hybrid | 9/12 | 0.569 | 8/12 |
 | C · hybrid + rerank | 11/12 | **0.833** | 10/12 |
-| C · hybrid + rerank | 11/12 | 0.833 | 10/12 |
 
 Hybrid loses the most, which is the predictable cost of keyword scoring: BM25 rewards the
 manual's own vocabulary, and a paraphrase has none of it. C recovers what B drops. Twelve
