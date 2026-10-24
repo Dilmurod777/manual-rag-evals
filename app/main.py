@@ -2,6 +2,8 @@
 
 import json
 import os
+import re
+import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -12,7 +14,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from app.corpus import paragraphs
-from app.search import BM25, Vector, hybrid
+from app.search import BM25, Vector, hybrid, tokens
 
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
@@ -76,22 +78,72 @@ def answer(question, ranked):
     return text
 
 
-def column(question, ranked):
+SENTENCE = re.compile(r"(?<=[.!?])\s+")
+
+
+def evidence(question, ranked, limit=2):
+    """The retrieved passage whose sentence best matches the question, with those
+    sentences marked so a reader can see where the answer came from."""
+    asked = set(tokens(question))
+    best = None
+    for rank, (_, chunk) in enumerate(ranked):
+        parts = [s.strip() for s in SENTENCE.split(chunk["text"]) if s.strip()]
+        # a chunk can start mid-sentence; a lowercase fragment is not worth reading
+        if (
+            parts
+            and not parts[0][:1].isupper()
+            and not re.match(r"[a-z]\.\s", parts[0])
+        ):
+            parts = parts[1:]
+        scores = [len(asked & set(tokens(s))) for s in parts]
+        peak = max(scores, default=0)
+        if best is None or peak > best[0]:
+            best = (peak, chunk, parts, scores)
+    peak, chunk, parts, scores = best
+    floor = max(2, peak - 1)
     return {
-        "answer": answer(question, ranked),
+        "page": chunk["page"],
+        "sentences": [
+            {"text": s, "hit": score >= floor} for s, score in zip(parts, scores)
+        ],
+    }
+
+
+def column(question, ranked, retrieval_ms):
+    started = time.perf_counter()
+    text = answer(question, ranked)
+    return {
+        "answer": text,
         "pages": list(dict.fromkeys(c["page"] for _, c in ranked)),
         "top": ranked[0][1]["text"][:420],
+        "evidence": evidence(question, ranked),
+        "retrieval_ms": retrieval_ms,
+        "answer_ms": round((time.perf_counter() - started) * 1000),
     }
+
+
+def search_timed(search, *args):
+    started = time.perf_counter()
+    ranked = search(*args, 5)
+    return ranked, round((time.perf_counter() - started) * 1000)
 
 
 @app.post("/api/ask")
 def ask(body: Ask):
     # The two arms share nothing after retrieval, so they run side by side:
     # 2 s instead of 4.
+    started = time.perf_counter()
     with ThreadPoolExecutor(2) as pool:
-        left = pool.submit(column, body.q, vector.search(body.q, 5))
-        right = pool.submit(column, body.q, hybrid(bm25, vector, body.q, 5))
-        return {"question": body.q, "vector": left.result(), "hybrid": right.result()}
+        left = pool.submit(lambda: column(body.q, *search_timed(vector.search, body.q)))
+        right = pool.submit(
+            lambda: column(body.q, *search_timed(hybrid, bm25, vector, body.q))
+        )
+        return {
+            "question": body.q,
+            "vector": left.result(),
+            "hybrid": right.result(),
+            "total_ms": round((time.perf_counter() - started) * 1000),
+        }
 
 
 @app.get("/api/results")
