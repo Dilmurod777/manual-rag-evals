@@ -57,12 +57,18 @@ def bars(categories, series, denom, title, subtitle, footer, height=250):
     return "\n".join(out)
 
 
-def rank_chart(data):
+def rank_counts(data):
+    """Counts behind the bars, so a test can compare the drawing with the results."""
     series = {mode: {} for mode in MODES}
     for mode in MODES:
         for row in data[mode]["rows"]:
             key = str(row["rank"]) if row["rank"] else "miss"
             series[mode][key] = series[mode].get(key, 0) + 1
+    return series
+
+
+def rank_chart(data):
+    series = rank_counts(data)
     categories = ["1", "2", "3", "4", "5", "miss"]
     total = len(data["vector"]["rows"])
     return bars(
@@ -84,9 +90,7 @@ def chapter_chart(data):
         denom[chapter] = sum(1 for r in rows if r["gold"].split("-")[0] == chapter)
         for mode in MODES:
             series[mode][chapter] = sum(
-                1
-                for r in data[mode]["rows"]
-                if r["gold"].split("-")[0] == chapter and r["rank"]
+                1 for r in data[mode]["rows"] if r["gold"].split("-")[0] == chapter and r["rank"]
             )
     return bars(
         chapters,
@@ -110,6 +114,7 @@ def main():
     data = json.loads(RESULTS.read_text(encoding="utf-8"))
     DOCS.mkdir(exist_ok=True)
     (DOCS / "rank.svg").write_text(rank_chart(data), encoding="utf-8")
+    (DOCS / "rank-data.json").write_text(json.dumps(rank_counts(data), indent=2), encoding="utf-8")
     (DOCS / "by_chapter.svg").write_text(chapter_chart(data), encoding="utf-8")
     for mode in MODES:
         rows = data[mode]["rows"]
