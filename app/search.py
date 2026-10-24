@@ -1,11 +1,15 @@
-"""BM25 over the manual's paragraphs. No dependencies."""
+"""BM25, vectors, and hybrid retrieval over the manual's paragraphs."""
 
+import argparse
 import math
 import re
 import sys
 from collections import Counter
 
+import numpy as np
+
 from app.corpus import paragraphs
+from app.embed import OUT, embed
 
 STOP = set(
     "the a an and or of to in for on with is are be by as at from that this it its not "
@@ -60,9 +64,51 @@ class BM25:
         return scored[:k]
 
 
-if __name__ == "__main__":
-    index = BM25(list(paragraphs()))
-    for query in sys.argv[1:]:
+class Vector:
+    def __init__(self, chunks):
+        saved = np.load(OUT)
+        by_id = {c["id"]: c for c in chunks}
+        self.vec = saved["vec"]
+        self.chunks = [by_id[str(i)] for i in saved["ids"]]
+
+    def search(self, query, k=5):
+        scores = self.vec @ embed([query])[0]
+        order = np.argsort(-scores)[:k]
+        return [(float(scores[i]), self.chunks[i]) for i in order]
+
+
+def hybrid(bm25, vector, query, k=5, depth=30):
+    """Reciprocal rank fusion of the two ranked lists."""
+    fused, chunks = {}, {}
+    for ranked in (bm25.search(query, depth), vector.search(query, depth)):
+        for rank, (_, chunk) in enumerate(ranked):
+            fused[chunk["id"]] = fused.get(chunk["id"], 0.0) + 1 / (60 + rank + 1)
+            chunks[chunk["id"]] = chunk
+    top = sorted(fused.items(), key=lambda pair: pair[1], reverse=True)[:k]
+    return [(score, chunks[chunk_id]) for chunk_id, score in top]
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("queries", nargs="+")
+    parser.add_argument("--mode", default="bm25", choices=["bm25", "vec", "hybrid"])
+    parser.add_argument("-k", type=int, default=5)
+    args = parser.parse_args()
+
+    chunks = list(paragraphs())
+    bm25 = BM25(chunks)
+    vector = Vector(chunks) if args.mode != "bm25" else None
+    for query in args.queries:
         print(f"\n{query}")
-        for score, chunk in index.search(query, 5):
-            print(f"  {chunk['page']:>7}  {score:6.2f}  {chunk['text'][:110]}")
+        if args.mode == "vec":
+            ranked = vector.search(query, args.k)
+        elif args.mode == "hybrid":
+            ranked = hybrid(bm25, vector, query, args.k)
+        else:
+            ranked = bm25.search(query, args.k)
+        for score, chunk in ranked:
+            print(f"  {chunk['page']:>7}  {score:6.3f}  {chunk['text'][:110]}")
+
+
+if __name__ == "__main__":
+    main()
