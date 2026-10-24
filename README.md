@@ -44,6 +44,63 @@ its page instead of inventing an answer, and says so in italics.
 
 ---
 
+## The measurement
+
+60 questions, five retrieved paragraphs each, every gold page verified by re-reading it.
+
+| pipeline | hit@5 | MRR | answer cites the gold page |
+|---|---|---|---|
+| A Â· vector only | 59/60 | 0.894 | 55/60 |
+| B Â· hybrid | **60/60** | **0.939** | **55/60** |
+| C Â· hybrid + rerank | **60/60** | **0.944** | 54/60 |
+
+One question is worth 1.7 points at this size. The 95% intervals are wide enough to swallow
+every gap in that table except the miss itself â€” hit@5 is 0.91â€“1.00 for A and 0.94â€“1.00 for
+B and C; citation is 0.82â€“0.96 for A and B, 0.80â€“0.95 for C. That is why the counts are
+written as counts.
+
+A misses exactly one page: "how is pressure applied over a laminated plastic repair while
+it cures" (Page 3-4) returns Pages 1-25, 3-6, 3-1 and 3-7 instead. B and C find it.
+
+### Question by question
+
+![which rank the gold page got](docs/rank.svg)
+
+Half the story is in the ranking: B puts the gold page first 53 times out of 60, A 49. A's
+single miss is the only question where the right page never appears. The chart shows all
+three arms; C's per-question ranks are in `eval/results.json`.
+
+![hit@5 by chapter](docs/by_chapter.svg)
+
+Every chapter is perfect except chapter 3, where the question about curing pressure is the
+one A loses. The chapters with two questions are thin evidence; the spread is there to show
+that the misses are not hiding in one section.
+
+The five answers that cited the wrong page are worth reading, because four of them are one
+page off â€” the answer is on the neighbouring page of a two-page spread:
+
+| question | gold page | page the answer cited |
+|---|---|---|
+| Which instruments can test bonded structure for disbonds from one side? | 5-46 | 5-48 |
+| If the original rib lace spacing is not known, what maximum spacing may be used on the wings? | 2-21 | 2-19 |
+| Can a copper-sleeve splice replace a five-tuck splice in a control cable? | 7-32 | 7-33 |
+| How is pressure applied over a laminated plastic repair while it cures? | 3-4 | 3-6 |
+| What precaution keeps a repaired flight control surface from fluttering? | 4-9 | 1-15 |
+
+The last one is the only real confusion: both pages discuss flutter, and the model picked
+the chapter 1 discussion over the chapter 4 rule. A reader would notice; that is why the
+page shows the sentence, not just the citation.
+
+All three arms answered all 60 questions and named the gold page 55, 55 and 54 times.
+Retrieval is not the limit: five pages were in front of the model and in five or six cases
+it quoted a different one. That is the cost of generation, and it is why the page marks the
+sentence instead of asking for trust.
+
+The caveat, stated plainly: the questions were written after reading passages that
+retrieval had already returned, so every pipeline is flattered and hit@5 sits near its
+ceiling. That is why there is a second set.
+
+
 ## How it was built
 
 1. **Pick a document a reader can check.** AC 43.13-1B is the FAA's handbook of acceptable
@@ -110,62 +167,6 @@ question
   first demo seem broken.
 
 ---
-
-## The measurement
-
-60 questions, five retrieved paragraphs each, every gold page verified by re-reading it.
-
-| pipeline | hit@5 | MRR | answer cites the gold page |
-|---|---|---|---|
-| A Â· vector only | 59/60 | 0.894 | 55/60 |
-| B Â· hybrid | **60/60** | **0.939** | **55/60** |
-| C Â· hybrid + rerank | **60/60** | **0.944** | 54/60 |
-
-One question is worth 1.7 points at this size. The 95% intervals are wide enough to swallow
-every gap in that table except the miss itself â€” hit@5 is 0.91â€“1.00 for A and 0.94â€“1.00 for
-B and C; citation is 0.82â€“0.96 for A and B, 0.80â€“0.95 for C. That is why the counts are
-written as counts.
-
-A misses exactly one page: "how is pressure applied over a laminated plastic repair while
-it cures" (Page 3-4) returns Pages 1-25, 3-6, 3-1 and 3-7 instead. B and C find it.
-
-### Question by question
-
-![which rank the gold page got](docs/rank.svg)
-
-Half the story is in the ranking: B puts the gold page first 53 times out of 60, A 49. A's
-single miss is the only question where the right page never appears. The chart shows all
-three arms; C's per-question ranks are in `eval/results.json`.
-
-![hit@5 by chapter](docs/by_chapter.svg)
-
-Every chapter is perfect except chapter 3, where the question about curing pressure is the
-one A loses. The chapters with two questions are thin evidence; the spread is there to show
-that the misses are not hiding in one section.
-
-The five answers that cited the wrong page are worth reading, because four of them are one
-page off â€” the answer is on the neighbouring page of a two-page spread:
-
-| question | gold page | page the answer cited |
-|---|---|---|
-| Which instruments can test bonded structure for disbonds from one side? | 5-46 | 5-48 |
-| If the original rib lace spacing is not known, what maximum spacing may be used on the wings? | 2-21 | 2-19 |
-| Can a copper-sleeve splice replace a five-tuck splice in a control cable? | 7-32 | 7-33 |
-| How is pressure applied over a laminated plastic repair while it cures? | 3-4 | 3-6 |
-| What precaution keeps a repaired flight control surface from fluttering? | 4-9 | 1-15 |
-
-The last one is the only real confusion: both pages discuss flutter, and the model picked
-the chapter 1 discussion over the chapter 4 rule. A reader would notice; that is why the
-page shows the sentence, not just the citation.
-
-All three arms answered all 60 questions and named the gold page 55, 55 and 54 times.
-Retrieval is not the limit: five pages were in front of the model and in five or six cases
-it quoted a different one. That is the cost of generation, and it is why the page marks the
-sentence instead of asking for trust.
-
-The caveat, stated plainly: the questions were written after reading passages that
-retrieval had already returned, so every pipeline is flattered and hit@5 sits near its
-ceiling. That is why there is a second set.
 
 ## A blind set
 
