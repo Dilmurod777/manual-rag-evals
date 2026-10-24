@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Two retrievers, one manual — AC 43.13-1B</title>
+<title>Three retrievers, one manual — AC 43.13-1B</title>
 <style>
   :root {
     --paper: #e4e3dd;
@@ -31,6 +31,26 @@
   h1 { font-size: clamp(1.9rem, 4.2vw, 3rem); line-height: 1.02; margin: 0 0 .7rem; letter-spacing: -.025em; font-weight: 700; }
   .lede { font-size: 1.02rem; line-height: 1.55; color: var(--muted); max-width: 58ch; margin: 0 0 2rem; }
   .lede b { color: var(--ink); font-weight: 600; }
+
+  .methods { margin: 0 0 2.2rem; overflow-x: auto; }
+  .lane {
+    display: grid; grid-template-columns: 2.2rem 1fr 1.2rem 1fr 1.2rem auto;
+    align-items: center; gap: .45rem; padding: .4rem 0;
+    border-top: 1px solid var(--rule); min-width: 620px;
+  }
+  .lane:last-of-type { border-bottom: 1px solid var(--rule); }
+  .lane .id { font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; color: var(--muted); }
+  .step {
+    font-family: var(--mono); font-size: .68rem; line-height: 1.3;
+    padding: .4rem .55rem; border: 1px solid var(--rule);
+    background: var(--card); color: var(--ink);
+  }
+  .step.on { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .arrow { font-family: var(--mono); color: var(--rule); text-align: center; font-size: .8rem; }
+  .method-foot {
+    font-size: .8rem; line-height: 1.55; color: var(--muted);
+    margin: .7rem 0 0; max-width: 62ch;
+  }
 
   form { display: flex; gap: .6rem; margin: 0 0 .9rem; }
   input[type=search] {
@@ -94,11 +114,39 @@
 <main>
   <p class="kicker">AC 43.13-1B · 646 pages · <span class="nq">60</span> gold questions</p>
   <h1>Three ways to find one page.</h1>
-  <p class="lede">Ask a question about aircraft inspection and repair. All three search the same
-  1,758 paragraphs and answer with the page the manual puts the answer on — <b>A</b> by vector
-  similarity alone, <b>B</b> with keywords added, <b>C</b> with those five read again by the model
-  and reordered. The marked sentence is what matched your question.</p>
+  <p class="lede">Ask a question about aircraft inspection and repair. All three read the same
+  1,758 paragraphs of AC 43.13-1B, and all three answer with the page the manual puts the
+  answer on. They differ in how they pick the five paragraphs the model is allowed to see.</p>
 
+  <div class="methods">
+    <div class="lane">
+      <span class="id">A</span>
+      <span class="step">embed the question</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step">cosine over 1,758 paragraphs</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step on">5 pages</span>
+    </div>
+    <div class="lane">
+      <span class="id">B</span>
+      <span class="step">BM25 top 30 + cosine top 30</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step">merge the two lists by rank</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step on">5 pages</span>
+    </div>
+    <div class="lane">
+      <span class="id">C</span>
+      <span class="step">B's top 30</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step">the model reads all 30</span>
+      <span class="arrow">&rarr;</span>
+      <span class="step on">5 pages</span>
+    </div>
+    <p class="method-foot">Then all three send their five pages, one paragraph each, to the same
+    local model. It writes two sentences and names the page it used. The page number is the
+    manual's own, so you can open the book and read it.</p>
+  </div>
   <form id="ask">
     <input id="q" type="search" placeholder="e.g. Why should a circuit breaker not be used as a switch?" autocomplete="off" required>
     <button id="go" type="submit">Ask</button>
@@ -149,19 +197,29 @@ EXAMPLES.forEach((text) => {
   $("chips").append(b);
 });
 
-function arm(prefix, data) {
+function meta(prefix, data) {
+  const ev = data.evidence;
+  const body = ev.sentences.map((s) => s.hit ? `<mark>${esc(s.text)}</mark>` : esc(s.text)).join(" ");
   $("t" + prefix).innerHTML =
-    `<b>${data.retrieval_ms} ms</b> retrieval · <b>${secs(data.answer_ms)}</b> answer` +
+    `<b>${data.retrieval_ms} ms</b> retrieval` +
     (data.pages[0] ? ` · page ${esc(data.pages[0])}` : "");
+  $("e" + prefix).innerHTML =
+    `<h3>Passage · <span class="page">Page ${esc(ev.page)}</span></h3><p>${body}</p>`;
+  const a = $("a" + prefix);
+  a.textContent = "";
+  a.classList.remove("pending");
+}
+
+function delta(prefix, text) {
+  $("a" + prefix).textContent += text;
+}
+
+function done(prefix, data) {
   const a = $("a" + prefix);
   a.textContent = data.answer;
   a.classList.remove("pending");
-  if (data.fallback) a.classList.add("fallback");
-
-  const ev = data.evidence;
-  const body = ev.sentences.map((s) => s.hit ? `<mark>${esc(s.text)}</mark>` : esc(s.text)).join(" ");
-  $("e" + prefix).innerHTML =
-    `<h3>Passage · <span class="page">Page ${esc(ev.page)}</span></h3><p>${body}</p>`;
+  a.classList.toggle("fallback", !!data.fallback);
+  $("t" + prefix).innerHTML += ` · <b>${secs(data.answer_ms)}</b> answer`;
 }
 
 $("ask").addEventListener("submit", async (event) => {
@@ -172,26 +230,44 @@ $("ask").addEventListener("submit", async (event) => {
   ["A", "B", "C"].forEach((p) => {
     $("a" + p).textContent = "Reading the manual…";
     $("a" + p).classList.add("pending");
+    $("a" + p).classList.remove("fallback");
     $("t" + p).textContent = "";
     $("e" + p).innerHTML = "";
   });
+  let finished = 0;
   try {
-    const response = await fetch("/api/ask", {
+    const response = await fetch("/api/ask/stream", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ q }),
     });
     if (!response.ok) throw new Error("server " + response.status);
-    const data = await response.json();
-    arm("A", data.vector);
-    arm("B", data.hybrid);
-    arm("C", data.rerank);
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    for (;;) {
+      const { value, done: ended } = await reader.read();
+      if (ended) break;
+      buffer += decoder.decode(value, { stream: true });
+      let cut;
+      while ((cut = buffer.indexOf("\n\n")) >= 0) {
+        const block = buffer.slice(0, cut);
+        buffer = buffer.slice(cut + 2);
+        if (!block.startsWith("data: ")) continue;
+        const update = JSON.parse(block.slice(6));
+        if (update.kind === "meta") meta(update.arm, update);
+        else if (update.kind === "delta") delta(update.arm, update.text);
+        else if (update.kind === "status") $("a" + update.arm).textContent = update.text + "…";
+        else if (update.kind === "done") { done(update.arm, update); finished += 1; }
+      }
+    }
   } catch (error) {
     ["A", "B", "C"].forEach((p) => {
       $("a" + p).textContent = "That question did not come back: " + error.message;
       $("a" + p).classList.remove("pending");
     });
   } finally {
+    if (finished < 3) ["A", "B", "C"].forEach((p) => $("a" + p).classList.remove("pending"));
     $("go").disabled = false;
   }
 });

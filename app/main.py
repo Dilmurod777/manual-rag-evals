@@ -1,5 +1,6 @@
 """Ask a question, get two answers with the page each one came from."""
 
+import asyncio
 import json
 import os
 import re
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import httpx
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -140,6 +141,117 @@ def search_timed(search, *args):
 def reranked(q, k=5):
     """Third arm: the same hybrid list, read by the model before it is kept."""
     return rerank(q, hybrid(bm25, vector, q, 30), keep=k)
+
+
+STREAM_OPTIONS = {"temperature": 0, "num_ctx": 8192, "num_predict": 160}
+
+
+def stream_answer(question, ranked, emit):
+    """Tokens as they arrive, so a column fills while the others are still thinking."""
+    text = ""
+    try:
+        with GENERATIONS:
+            payload = {
+                "model": MODEL,
+                "stream": True,
+                "think": False,
+                "options": STREAM_OPTIONS,
+                "messages": [
+                    {"role": "system", "content": SYSTEM},
+                    {
+                        "role": "user",
+                        "content": f"Passages:\n{passages(ranked)}\n\nQuestion: {question}",
+                    },
+                ],
+            }
+            with httpx.stream("POST", OLLAMA, json=payload, timeout=90) as response:
+                for line in response.iter_lines():
+                    if not line.strip():
+                        continue
+                    piece = json.loads(line)["message"]["content"]
+                    if piece:
+                        text += piece
+                        emit({"kind": "delta", "text": piece})
+    except Exception:
+        text = ""
+    if text.strip():
+        return text, False
+    # The model did not answer: show the passage it would have used, and say so.
+    return (
+        f"The model did not answer, so here is the passage itself: "
+        f"{ranked[0][1]['text'][:400]} (Page {ranked[0][1]['page']})",
+        True,
+    )
+
+
+@app.post("/api/ask/stream")
+async def ask_stream(body: Ask):
+    """One event stream for all three arms: meta, then tokens, then done."""
+    loop = asyncio.get_running_loop()
+    events: asyncio.Queue = asyncio.Queue()
+
+    def emit(payload):
+        loop.call_soon_threadsafe(events.put_nowait, payload)
+
+    def arm(name, ranked, retrieval_ms):
+        emit(
+            {
+                "arm": name,
+                "kind": "meta",
+                "retrieval_ms": retrieval_ms,
+                "pages": list(dict.fromkeys(c["page"] for _, c in ranked)),
+                "evidence": evidence(body.q, ranked),
+            }
+        )
+        started = time.perf_counter()
+        text, fallback = stream_answer(
+            body.q, ranked, lambda payload: emit({"arm": name, **payload})
+        )
+        emit(
+            {
+                "arm": name,
+                "kind": "done",
+                "answer": text,
+                "answer_ms": round((time.perf_counter() - started) * 1000),
+                "fallback": fallback,
+            }
+        )
+
+    def run(name, search, *args):
+        try:
+            ranked, ms = search_timed(search, *args)
+            arm(name, ranked, ms)
+        except Exception as error:  # never leave a column spinning
+            emit(
+                {
+                    "arm": name,
+                    "kind": "done",
+                    "answer": f"failed: {error}",
+                    "answer_ms": 0,
+                    "fallback": True,
+                }
+            )
+
+    def run_rerank():
+        emit({"arm": "C", "kind": "status", "text": "reading the top 30"})
+        run("C", reranked, body.q)
+
+    for name, args in (
+        ("A", (vector.search, body.q)),
+        ("B", (hybrid, bm25, vector, body.q)),
+    ):
+        threading.Thread(target=run, args=(name, *args), daemon=True).start()
+    threading.Thread(target=run_rerank, daemon=True).start()
+
+    async def events_out():
+        finished = 0
+        while finished < 3:
+            payload = await events.get()
+            if payload["kind"] == "done":
+                finished += 1
+            yield f"data: {json.dumps(payload)}\n\n"
+
+    return StreamingResponse(events_out(), media_type="text/event-stream")
 
 
 @app.post("/api/ask")

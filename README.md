@@ -214,7 +214,8 @@ returns the five that answer it.
 A cross-encoder would be the cheaper form of C — a small model instead of a 27B one — and is
 the obvious next step if this ever left a laptop.
 
-**Why no vector database.** Retrieval is 45 ms of a 2.5–3.6 s request. The corpus is 1,758
+**Why no vector database.** Retrieval is a quarter of a second of a request whose first words
+appear in half a second. The corpus is 1,758
 paragraphs; the vectors fit in memory and a cosine sweep is 20 ms. A vector database earns
 its place at millions of chunks, with metadata filters, or with writes during queries —
 none of which this has. Adding one would move 2% of the wait and add a service to run.
@@ -228,7 +229,8 @@ none of which this has. Adding one would move 2% of the wait and add a service t
 | retrieval, one pipeline (including the query embedding) | 210–250 ms |
 | the cosine or BM25 comparison alone | 20–45 ms |
 | one answer | 2.9 s |
-| the two arms, side by side | 2.5–3.6 s |
+| first words of an answer, streamed | 0.5–0.8 s |
+| A and B, side by side | 2.5–3.6 s |
 | all three arms, C answered after A and B | 6.5–7 s |
 | the rerank call alone | 1.7 s warm, up to 3 s cold |
 
@@ -238,7 +240,9 @@ comparison. The 1,758 paragraphs and their 1,024-dimension vectors fit in memory
 cosine sweep is 20 ms. A vector database earns its place at millions of chunks, metadata
 filters, or writes during queries — none of which this corpus has. The levers that mattered
 were an 8k context (keeps the 27B on the GPU instead of spilling to the CPU), `think:
-false`, and running the two arms in parallel instead of one after the other.
+false`, and running the arms in parallel instead of one after the other. Answers stream, so
+the first words appear at about 0.5 s and the page fills as each arm finishes — a 3 s answer
+that starts in half a second feels like a different product.
 
 ---
 
