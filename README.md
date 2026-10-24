@@ -5,11 +5,10 @@ names the page it came from.
 
 https://github.com/user-attachments/assets/a8d5e000-2201-4b9d-a07b-612d6bc51817
 
-Three questions, unanswered at the start ([26 s, 365 KB](docs/demo.mp4), same file in the
-repo). Each one sends five paragraphs to both pipelines; the page shows what each arm
-answered, which page it used, and the sentence that matched. The first asks about a circuit
-breaker (both cite Page 11-16), the second is the one A misses, the third is a flutter
-question whose citation lands on the wrong page.
+The clip runs three questions end to end. Each one sends five paragraphs to both pipelines;
+the page shows what each arm answered, which page it used, and the sentence that matched. The
+first asks about a circuit breaker (both cite Page 11-16); the second is the one A misses; the
+third is a flutter question whose citation lands on the wrong page.
 
 FAA AC 43.13-1B, *Acceptable Methods, Techniques, and Practices — Aircraft Inspection
 and Repair*: 646 pages, public domain, 1,758 paragraphs. Ask "why should a circuit breaker
