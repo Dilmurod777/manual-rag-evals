@@ -134,8 +134,8 @@ it cures" (Page 3-4) returns Pages 1-25, 3-6, 3-1 and 3-7 instead. B and C find 
 ![which rank the gold page got](docs/rank.svg)
 
 Half the story is in the ranking: B puts the gold page first 53 times out of 60, A 49. A's
-single miss is the only question where the right page never appears. The chart shows A and B;
-C's ranks are in `eval/results.json`.
+single miss is the only question where the right page never appears. The chart shows all
+three arms; C's per-question ranks are in `eval/results.json`.
 
 ![hit@5 by chapter](docs/by_chapter.svg)
 
@@ -325,6 +325,8 @@ trade: a two-slot attempt still serialised.
   It is the check a deploy would poll, and it is false when Ollama is down.
 - Each answer carries `grounded`: false when the page it named was not among the five it
   was shown. The page does not print it yet; the API does.
+- Repeated questions are cached on the passages they retrieved: an answer already produced
+  for the same five pages returns in 0 ms and skips the model, streaming included.
 - One log line per arm, with the question and the closeness of the best paragraph.
   `RAG_LOG=DEBUG` for more.
 - `docker build -t manual-rag . && docker run -p 8000:8000 -e OLLAMA_HOST=http://host.docker.internal:11434 manual-rag`.

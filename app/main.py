@@ -265,10 +265,28 @@ async def ask_stream(body: Ask):
                 }
             )
             return
+        key = (body.q, tuple(c["page"] for _, c in ranked))
+        if key in CACHE:
+            text, fallback = CACHE[key]
+            emit(
+                {
+                    "arm": name,
+                    "kind": "done",
+                    "answer": text,
+                    "answer_ms": 0,
+                    "fallback": fallback,
+                    "refused": False,
+                    "grounded": grounded(text, ranked),
+                }
+            )
+            return
         started = time.perf_counter()
         text, fallback = stream_answer(
             body.q, ranked, lambda payload: emit({"arm": name, **payload})
         )
+        if len(CACHE) >= 32:
+            CACHE.clear()
+        CACHE[key] = (text, fallback)
         emit(
             {
                 "arm": name,
