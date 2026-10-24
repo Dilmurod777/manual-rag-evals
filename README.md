@@ -25,13 +25,14 @@ answer.
 
 One question goes to two retrieval pipelines at once. Each returns five paragraphs, at most
 one per page. A local 27B model writes a two-sentence answer from those paragraphs and is
-told to end with the page it used. The page shows the two answers side by side with their
+told to end with the page it used. The page shows the three answers side by side with their
 timings, the passage behind each one, and the highlighted sentence that matched.
 
 | | retrieval | embedding |
 |---|---|---|
 | **A** | vector only, cosine | `qwen3-embedding:0.6b`, 1024-d, local |
 | **B** | BM25 + vectors, reciprocal rank fusion | same |
+| **C** | B's top 30, read again by the model, five kept | same |
 
 Generation is `qwen3.8-27b` through Ollama. If Ollama is down, the app shows the passage and
 its page instead of inventing an answer, and says so in italics.
@@ -193,10 +194,25 @@ rank fusion.
   over A.
 - Result here: 60/60 hit@5, better MRR, and the one page A misses.
 
-**Not implemented: a reranker.** A cross-encoder or a model pass over the top 30 would
-probably lift MRR and the citation number. It costs one generation per question, which is
-the same order as writing the answer itself — a real trade, and one this repo has not
-measured, so it does not claim it.
+**C — hybrid + rerank.** B's top 30, listed to the same local model with the question, which
+returns the five that answer it.
+
+- Good: ranking is the job a language model is good at here. It reads meaning, not token
+  overlap, and it never returns two slices of one page.
+- Bad: one more model call per question, 1.7 s warm and up to 3 s cold, which is most of the
+  cost of writing the answer itself. It is also a second place the model can be wrong: a bad
+  list loses a page retrieval had already found.
+- Result: the best ranker on both sets (MRR 0.944 tuned, 0.975 blind), and it recovers the
+  citations hybrid loses on questions nobody tuned for (38/40 against 34/40). On the tuned set
+  it costs one citation (54 against 55), which is inside noise.
+
+| questions nobody tuned for | hit@5 | MRR | answer cites gold page |
+|---|---|---|---|
+| B · hybrid | 38/40 | 0.921 | 34/40 |
+| C · hybrid + rerank | 39/40 | **0.975** | **38/40** |
+
+A cross-encoder would be the cheaper form of C — a small model instead of a 27B one — and is
+the obvious next step if this ever left a laptop.
 
 **Why no vector database.** Retrieval is 45 ms of a 2.5–3.6 s request. The corpus is 1,758
 paragraphs; the vectors fit in memory and a cosine sweep is 20 ms. A vector database earns
@@ -213,6 +229,8 @@ none of which this has. Adding one would move 2% of the wait and add a service t
 | the cosine or BM25 comparison alone | 20–45 ms |
 | one answer | 2.9 s |
 | the two arms, side by side | 2.5–3.6 s |
+| all three arms, C answered after A and B | 6.5–7 s |
+| the rerank call alone | 1.7 s warm, up to 3 s cold |
 
 Medians over the 60 gold questions: 252 ms for A, 209 ms for B, 2.9 s per answer. Retrieval
 is about 8% of the wait, and most of that is the HTTP call to the embedding model, not the

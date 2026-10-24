@@ -54,11 +54,11 @@
   }
   .chips button:hover { color: var(--ink); border-color: var(--ink); background: transparent; }
 
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
   @media (max-width: 780px) { .grid { grid-template-columns: 1fr; } form { flex-wrap: wrap; } button { padding: .9rem 1.2rem; } }
 
   article { border-top: 2px solid var(--ink); padding-top: .85rem; min-height: 12rem; }
-  .arm { display: flex; align-items: baseline; justify-content: space-between; gap: .8rem; margin-bottom: .7rem; }
+  .arm { display: flex; flex-direction: column; align-items: flex-start; gap: .25rem; margin-bottom: .7rem; }
   .arm h2 { font-size: .78rem; font-family: var(--mono); letter-spacing: .1em; text-transform: uppercase; margin: 0; font-weight: 600; }
   .arm.alt { color: var(--accent); }
   .timing { font-family: var(--mono); font-size: .7rem; color: var(--muted); white-space: nowrap; }
@@ -93,10 +93,11 @@
 <body>
 <main>
   <p class="kicker">AC 43.13-1B · 646 pages · <span class="nq">60</span> gold questions</p>
-  <h1>Two retrievers, one manual.</h1>
-  <p class="lede">Ask a question about aircraft inspection and repair. Both pipelines search the same
+  <h1>Three ways to find one page.</h1>
+  <p class="lede">Ask a question about aircraft inspection and repair. All three search the same
   1,758 paragraphs and answer with the page the manual puts the answer on — <b>A</b> by vector
-  similarity alone, <b>B</b> with keywords added. The marked sentence is what matched your question.</p>
+  similarity alone, <b>B</b> with keywords added, <b>C</b> with those five read again by the model
+  and reordered. The marked sentence is what matched your question.</p>
 
   <form id="ask">
     <input id="q" type="search" placeholder="e.g. Why should a circuit breaker not be used as a switch?" autocomplete="off" required>
@@ -114,6 +115,11 @@
       <div class="arm alt"><h2>B · vector + keywords</h2><span class="timing" id="tB"></span></div>
       <p class="answer pending" id="aB">Ask a question to see this arm.</p>
       <div class="evidence" id="eB"></div>
+    </article>
+    <article>
+      <div class="arm"><h2>C · hybrid + rerank</h2><span class="timing" id="tC"></span></div>
+      <p class="answer pending" id="aC">Ask a question to see this arm.</p>
+      <div class="evidence" id="eC"></div>
     </article>
   </div>
 
@@ -163,7 +169,7 @@ $("ask").addEventListener("submit", async (event) => {
   const q = $("q").value.trim();
   if (!q) return;
   $("go").disabled = true;
-  ["A", "B"].forEach((p) => {
+  ["A", "B", "C"].forEach((p) => {
     $("a" + p).textContent = "Reading the manual…";
     $("a" + p).classList.add("pending");
     $("t" + p).textContent = "";
@@ -179,8 +185,9 @@ $("ask").addEventListener("submit", async (event) => {
     const data = await response.json();
     arm("A", data.vector);
     arm("B", data.hybrid);
+    arm("C", data.rerank);
   } catch (error) {
-    ["A", "B"].forEach((p) => {
+    ["A", "B", "C"].forEach((p) => {
       $("a" + p).textContent = "That question did not come back: " + error.message;
       $("a" + p).classList.remove("pending");
     });
@@ -193,10 +200,13 @@ fetch("/api/results").then((r) => r.json()).then((res) => {
   const rows = [
     ["A hit@5", res.vector.hit_at_5, ""],
     ["B hit@5", res.hybrid.hit_at_5, "alt"],
+    ["C hit@5", res.rerank.hit_at_5, ""],
     ["A cited", res.vector.citation, ""],
     ["B cited", res.hybrid.citation, "alt"],
+    ["C cited", res.rerank.citation, ""],
     ["A MRR", res.vector.mrr, ""],
     ["B MRR", res.hybrid.mrr, "alt"],
+    ["C MRR", res.rerank.mrr, ""],
   ];
   $("bars").innerHTML = rows.map(([label, value, cls]) =>
     `<div class="bar ${cls}"><span class="label">${label}</span>

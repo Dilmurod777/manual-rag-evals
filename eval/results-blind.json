@@ -32,8 +32,8 @@
         "rank": 1,
         "cited": "1-11",
         "right": true,
-        "retrieval_ms": 1487,
-        "answer_ms": 8573
+        "retrieval_ms": 145,
+        "answer_ms": 2498
       },
       {
         "q": "Why are bolt holes a problem in wooden structure?",
@@ -41,8 +41,8 @@
         "rank": 1,
         "cited": "1-37",
         "right": true,
-        "retrieval_ms": 1590,
-        "answer_ms": 2695
+        "retrieval_ms": 135,
+        "answer_ms": 2782
       },
       {
         "q": "When may permanent tacks replace a hand-sewn seam?",
@@ -50,8 +50,8 @@
         "rank": 1,
         "cited": "2-8",
         "right": true,
-        "retrieval_ms": 388,
-        "answer_ms": 2440
+        "retrieval_ms": 169,
+        "answer_ms": 2468
       },
       {
         "q": "What holds reinforcing tape in place before cord lacing or hardware is installed?",
@@ -59,8 +59,8 @@
         "rank": 1,
         "cited": "2-10",
         "right": true,
-        "retrieval_ms": 193,
-        "answer_ms": 2726
+        "retrieval_ms": 144,
+        "answer_ms": 2686
       },
       {
         "q": "What are nitrate and butyrate dope made from?",
@@ -68,8 +68,8 @@
         "rank": 1,
         "cited": "2-25",
         "right": true,
-        "retrieval_ms": 215,
-        "answer_ms": 3198
+        "retrieval_ms": 155,
+        "answer_ms": 3113
       },
       {
         "q": "How large an opening may a doped-on patch repair?",
@@ -77,8 +77,8 @@
         "rank": 1,
         "cited": "2-39",
         "right": true,
-        "retrieval_ms": 243,
-        "answer_ms": 3250
+        "retrieval_ms": 143,
+        "answer_ms": 3184
       },
       {
         "q": "Why must laminate composition be considered before restoring a part?",
@@ -86,8 +86,8 @@
         "rank": 1,
         "cited": "3-1",
         "right": true,
-        "retrieval_ms": 195,
-        "answer_ms": 3141
+        "retrieval_ms": 140,
+        "answer_ms": 3089
       },
       {
         "q": "What are the two main classes of plastics?",
@@ -95,8 +95,8 @@
         "rank": 1,
         "cited": "3-15",
         "right": true,
-        "retrieval_ms": 219,
-        "answer_ms": 2570
+        "retrieval_ms": 147,
+        "answer_ms": 2462
       },
       {
         "q": "What is preferred over repairing a badly damaged transparent plastic part?",
@@ -104,8 +104,8 @@
         "rank": 1,
         "cited": "3-19",
         "right": true,
-        "retrieval_ms": 205,
-        "answer_ms": 2392
+        "retrieval_ms": 149,
+        "answer_ms": 2348
       },
       {
         "q": "What is the first step before repairing a metal structure?",
@@ -113,8 +113,8 @@
         "rank": 0,
         "cited": null,
         "right": false,
-        "retrieval_ms": 226,
-        "answer_ms": 1903
+        "retrieval_ms": 123,
+        "answer_ms": 1849
       },
       {
         "q": "What first-aid item belongs where welding is done?",
@@ -122,8 +122,8 @@
         "rank": 1,
         "cited": "4-82",
         "right": true,
-        "retrieval_ms": 495,
-        "answer_ms": 2492
+        "retrieval_ms": 393,
+        "answer_ms": 2429
       },
       {
         "q": "What does the NDI chapter say about covering every method in detail?",
@@ -131,8 +131,8 @@
         "rank": 3,
         "cited": "5-1",
         "right": true,
-        "retrieval_ms": 209,
-        "answer_ms": 2946
+        "retrieval_ms": 164,
+        "answer_ms": 2978
       },
       {
         "q": "Which parts deserve magnetic particle inspection?",
@@ -140,8 +140,8 @@
         "rank": 1,
         "cited": "5-20",
         "right": true,
-        "retrieval_ms": 196,
-        "answer_ms": 2854
+        "retrieval_ms": 131,
+        "answer_ms": 2885
       },
       {
         "q": "How does computed tomography differ from film radiography?",
@@ -149,8 +149,8 @@
         "rank": 2,
         "cited": "5-37",
         "right": true,
-        "retrieval_ms": 209,
-        "answer_ms": 2911
+        "retrieval_ms": 175,
+        "answer_ms": 2983
       },
       {
         "q": "What does shearography provide in real time?",
@@ -158,8 +158,8 @@
         "rank": 1,
         "cited": "5-55",
         "right": true,
-        "retrieval_ms": 213,
-        "answer_ms": 2461
+        "retrieval_ms": 171,
+        "answer_ms": 2435
       },
       {
         "q": "Why can corrosion be classified by its appearance?",
@@ -167,8 +167,8 @@
         "rank": 1,
         "cited": "6-5",
         "right": true,
-        "retrieval_ms": 240,
-        "answer_ms": 2471
+        "retrieval_ms": 161,
+        "answer_ms": 2356
       },
       {
         "q": "What is abrasive blasting used for on ferrous metals?",
@@ -176,8 +176,8 @@
         "rank": 1,
         "cited": "6-22",
         "right": true,
-        "retrieval_ms": 228,
-        "answer_ms": 3134
+        "retrieval_ms": 167,
+        "answer_ms": 3124
       },
       {
         "q": "Which parts of an aircraft recovered from water are processed as airframe components?",
@@ -185,8 +185,8 @@
         "rank": 1,
         "cited": null,
         "right": false,
-        "retrieval_ms": 193,
-        "answer_ms": 1812
+        "retrieval_ms": 181,
+        "answer_ms": 1808
       },
       {
         "q": "Where are AN21 through AN36 clevis bolts used?",
@@ -194,8 +194,8 @@
         "rank": 1,
         "cited": "7-10",
         "right": true,
-        "retrieval_ms": 532,
-        "answer_ms": 2531
+        "retrieval_ms": 472,
+        "answer_ms": 2484
       },
       {
         "q": "What wire are aircraft control cables made from?",
@@ -203,8 +203,8 @@
         "rank": 1,
         "cited": "7-27",
         "right": true,
-        "retrieval_ms": 232,
-        "answer_ms": 2481
+        "retrieval_ms": 179,
+        "answer_ms": 2456
       },
       {
         "q": "What is the first step in assembling a wire clip-locking turnbuckle?",
@@ -212,8 +212,8 @@
         "rank": 1,
         "cited": "7-45",
         "right": true,
-        "retrieval_ms": 229,
-        "answer_ms": 2905
+        "retrieval_ms": 175,
+        "answer_ms": 2886
       },
       {
         "q": "Where should engine repair information come from first?",
@@ -221,8 +221,8 @@
         "rank": 3,
         "cited": "8-1",
         "right": true,
-        "retrieval_ms": 220,
-        "answer_ms": 2467
+        "retrieval_ms": 157,
+        "answer_ms": 2512
       },
       {
         "q": "What determines the wire type used in an ignition harness?",
@@ -230,8 +230,8 @@
         "rank": 1,
         "cited": "8-14",
         "right": true,
-        "retrieval_ms": 223,
-        "answer_ms": 2426
+        "retrieval_ms": 187,
+        "answer_ms": 2330
       },
       {
         "q": "Why should exhaust system parts never be marked with a lead pencil?",
@@ -239,8 +239,8 @@
         "rank": 1,
         "cited": "8-26",
         "right": true,
-        "retrieval_ms": 186,
-        "answer_ms": 2718
+        "retrieval_ms": 185,
+        "answer_ms": 2687
       },
       {
         "q": "Why is propeller vibration troubleshooting difficult?",
@@ -248,8 +248,8 @@
         "rank": 1,
         "cited": "8-41",
         "right": true,
-        "retrieval_ms": 192,
-        "answer_ms": 2432
+        "retrieval_ms": 158,
+        "answer_ms": 2436
       },
       {
         "q": "What types of landing gear does the chapter cover?",
@@ -257,8 +257,8 @@
         "rank": 1,
         "cited": "9-1",
         "right": true,
-        "retrieval_ms": 236,
-        "answer_ms": 2158
+        "retrieval_ms": 181,
+        "answer_ms": 2113
       },
       {
         "q": "Where should a mechanic stand when servicing a tire?",
@@ -266,8 +266,8 @@
         "rank": 1,
         "cited": "9-11",
         "right": true,
-        "retrieval_ms": 192,
-        "answer_ms": 2444
+        "retrieval_ms": 146,
+        "answer_ms": 2448
       },
       {
         "q": "How is the flotation tube inspection date recorded?",
@@ -275,8 +275,8 @@
         "rank": 1,
         "cited": "9-32",
         "right": true,
-        "retrieval_ms": 252,
-        "answer_ms": 3430
+        "retrieval_ms": 138,
+        "answer_ms": 3352
       },
       {
         "q": "Why must soap be fully removed from washed upholstery?",
@@ -284,8 +284,8 @@
         "rank": 2,
         "cited": "9-46",
         "right": true,
-        "retrieval_ms": 207,
-        "answer_ms": 2354
+        "retrieval_ms": 146,
+        "answer_ms": 2363
       },
       {
         "q": "What happens to center of gravity when equipment is added or removed?",
@@ -293,8 +293,8 @@
         "rank": 3,
         "cited": "10-1",
         "right": true,
-        "retrieval_ms": 191,
-        "answer_ms": 2599
+        "retrieval_ms": 170,
+        "answer_ms": 2544
       },
       {
         "q": "Where are the weighing procedures for a given aircraft found?",
@@ -302,8 +302,8 @@
         "rank": 1,
         "cited": "10-11",
         "right": true,
-        "retrieval_ms": 236,
-        "answer_ms": 2125
+        "retrieval_ms": 174,
+        "answer_ms": 2054
       },
       {
         "q": "What is being checked in the most rearward weight and balance example?",
@@ -311,8 +311,8 @@
         "rank": 4,
         "cited": "10-15",
         "right": true,
-        "retrieval_ms": 216,
-        "answer_ms": 2863
+        "retrieval_ms": 253,
+        "answer_ms": 2813
       },
       {
         "q": "What counts as an aircraft's electrical system?",
@@ -320,8 +320,8 @@
         "rank": 2,
         "cited": "11-1",
         "right": true,
-        "retrieval_ms": 213,
-        "answer_ms": 2603
+        "retrieval_ms": 160,
+        "answer_ms": 2608
       },
       {
         "q": "When must wiring be replaced?",
@@ -329,8 +329,8 @@
         "rank": 1,
         "cited": "11-45",
         "right": true,
-        "retrieval_ms": 238,
-        "answer_ms": 3577
+        "retrieval_ms": 149,
+        "answer_ms": 3814
       },
       {
         "q": "What should component selection ensure between adjacent terminals?",
@@ -338,8 +338,8 @@
         "rank": 3,
         "cited": "11-75",
         "right": true,
-        "retrieval_ms": 204,
-        "answer_ms": 2592
+        "retrieval_ms": 172,
+        "answer_ms": 2802
       },
       {
         "q": "Where are more detailed electrical symbols found?",
@@ -347,8 +347,8 @@
         "rank": 1,
         "cited": "11-105",
         "right": true,
-        "retrieval_ms": 203,
-        "answer_ms": 2328
+        "retrieval_ms": 205,
+        "answer_ms": 2405
       },
       {
         "q": "How are avionics systems checked on the ground?",
@@ -356,8 +356,8 @@
         "rank": 1,
         "cited": "12-1",
         "right": true,
-        "retrieval_ms": 194,
-        "answer_ms": 2945
+        "retrieval_ms": 275,
+        "answer_ms": 3147
       },
       {
         "q": "What test equipment must a certificated avionics maintainer have?",
@@ -365,8 +365,8 @@
         "rank": 1,
         "cited": "12-25",
         "right": true,
-        "retrieval_ms": 200,
-        "answer_ms": 3576
+        "retrieval_ms": 170,
+        "answer_ms": 3703
       },
       {
         "q": "What three things must be in place before a mechanic can do maintenance?",
@@ -374,8 +374,8 @@
         "rank": 1,
         "cited": "13-1",
         "right": true,
-        "retrieval_ms": 188,
-        "answer_ms": 2264
+        "retrieval_ms": 191,
+        "answer_ms": 2329
       },
       {
         "q": "How far back does wood aircraft construction go?",
@@ -383,8 +383,8 @@
         "rank": 1,
         "cited": "1-1",
         "right": true,
-        "retrieval_ms": 235,
-        "answer_ms": 2186
+        "retrieval_ms": 160,
+        "answer_ms": 2263
       }
     ]
   },
@@ -431,8 +431,8 @@
         "rank": 1,
         "cited": "1-11",
         "right": true,
-        "retrieval_ms": 222,
-        "answer_ms": 2680
+        "retrieval_ms": 189,
+        "answer_ms": 2757
       },
       {
         "q": "Why are bolt holes a problem in wooden structure?",
@@ -440,8 +440,8 @@
         "rank": 1,
         "cited": "1-37",
         "right": true,
-        "retrieval_ms": 252,
-        "answer_ms": 3321
+        "retrieval_ms": 222,
+        "answer_ms": 3273
       },
       {
         "q": "When may permanent tacks replace a hand-sewn seam?",
@@ -449,8 +449,8 @@
         "rank": 1,
         "cited": "2-8",
         "right": true,
-        "retrieval_ms": 197,
-        "answer_ms": 2535
+        "retrieval_ms": 207,
+        "answer_ms": 2645
       },
       {
         "q": "What holds reinforcing tape in place before cord lacing or hardware is installed?",
@@ -458,8 +458,8 @@
         "rank": 1,
         "cited": "2-10",
         "right": true,
-        "retrieval_ms": 196,
-        "answer_ms": 2868
+        "retrieval_ms": 195,
+        "answer_ms": 2891
       },
       {
         "q": "What are nitrate and butyrate dope made from?",
@@ -467,8 +467,8 @@
         "rank": 1,
         "cited": "2-25",
         "right": true,
-        "retrieval_ms": 199,
-        "answer_ms": 2409
+        "retrieval_ms": 140,
+        "answer_ms": 2433
       },
       {
         "q": "How large an opening may a doped-on patch repair?",
@@ -476,8 +476,8 @@
         "rank": 1,
         "cited": "2-39",
         "right": true,
-        "retrieval_ms": 202,
-        "answer_ms": 3403
+        "retrieval_ms": 176,
+        "answer_ms": 3270
       },
       {
         "q": "Why must laminate composition be considered before restoring a part?",
@@ -485,8 +485,8 @@
         "rank": 1,
         "cited": "3-1",
         "right": true,
-        "retrieval_ms": 185,
-        "answer_ms": 3490
+        "retrieval_ms": 188,
+        "answer_ms": 3522
       },
       {
         "q": "What are the two main classes of plastics?",
@@ -494,8 +494,8 @@
         "rank": 1,
         "cited": "3-15",
         "right": true,
-        "retrieval_ms": 208,
-        "answer_ms": 2574
+        "retrieval_ms": 186,
+        "answer_ms": 2550
       },
       {
         "q": "What is preferred over repairing a badly damaged transparent plastic part?",
@@ -503,8 +503,8 @@
         "rank": 1,
         "cited": "3-19",
         "right": true,
-        "retrieval_ms": 206,
-        "answer_ms": 2520
+        "retrieval_ms": 166,
+        "answer_ms": 2474
       },
       {
         "q": "What is the first step before repairing a metal structure?",
@@ -512,8 +512,8 @@
         "rank": 0,
         "cited": "4-12",
         "right": false,
-        "retrieval_ms": 219,
-        "answer_ms": 3526
+        "retrieval_ms": 160,
+        "answer_ms": 3545
       },
       {
         "q": "What first-aid item belongs where welding is done?",
@@ -521,8 +521,8 @@
         "rank": 1,
         "cited": "4-82",
         "right": true,
-        "retrieval_ms": 232,
-        "answer_ms": 2866
+        "retrieval_ms": 163,
+        "answer_ms": 2846
       },
       {
         "q": "What does the NDI chapter say about covering every method in detail?",
@@ -530,8 +530,8 @@
         "rank": 2,
         "cited": "5-1",
         "right": true,
-        "retrieval_ms": 256,
-        "answer_ms": 3047
+        "retrieval_ms": 175,
+        "answer_ms": 3073
       },
       {
         "q": "Which parts deserve magnetic particle inspection?",
@@ -539,8 +539,8 @@
         "rank": 1,
         "cited": "5-19",
         "right": false,
-        "retrieval_ms": 198,
-        "answer_ms": 2982
+        "retrieval_ms": 182,
+        "answer_ms": 2944
       },
       {
         "q": "How does computed tomography differ from film radiography?",
@@ -548,8 +548,8 @@
         "rank": 1,
         "cited": "5-38",
         "right": false,
-        "retrieval_ms": 222,
-        "answer_ms": 2510
+        "retrieval_ms": 168,
+        "answer_ms": 2523
       },
       {
         "q": "What does shearography provide in real time?",
@@ -557,8 +557,8 @@
         "rank": 1,
         "cited": "5-55",
         "right": true,
-        "retrieval_ms": 258,
-        "answer_ms": 2490
+        "retrieval_ms": 249,
+        "answer_ms": 2402
       },
       {
         "q": "Why can corrosion be classified by its appearance?",
@@ -566,8 +566,8 @@
         "rank": 1,
         "cited": "6-5",
         "right": true,
-        "retrieval_ms": 175,
-        "answer_ms": 2374
+        "retrieval_ms": 227,
+        "answer_ms": 2417
       },
       {
         "q": "What is abrasive blasting used for on ferrous metals?",
@@ -575,8 +575,8 @@
         "rank": 1,
         "cited": "6-22",
         "right": true,
-        "retrieval_ms": 204,
-        "answer_ms": 3317
+        "retrieval_ms": 169,
+        "answer_ms": 3133
       },
       {
         "q": "Which parts of an aircraft recovered from water are processed as airframe components?",
@@ -584,8 +584,8 @@
         "rank": 1,
         "cited": null,
         "right": false,
-        "retrieval_ms": 230,
-        "answer_ms": 1953
+        "retrieval_ms": 204,
+        "answer_ms": 1983
       },
       {
         "q": "Where are AN21 through AN36 clevis bolts used?",
@@ -593,8 +593,8 @@
         "rank": 1,
         "cited": "7-10",
         "right": true,
-        "retrieval_ms": 410,
-        "answer_ms": 2877
+        "retrieval_ms": 317,
+        "answer_ms": 2936
       },
       {
         "q": "What wire are aircraft control cables made from?",
@@ -602,8 +602,8 @@
         "rank": 1,
         "cited": "7-27",
         "right": true,
-        "retrieval_ms": 197,
-        "answer_ms": 2625
+        "retrieval_ms": 271,
+        "answer_ms": 2655
       },
       {
         "q": "What is the first step in assembling a wire clip-locking turnbuckle?",
@@ -611,8 +611,8 @@
         "rank": 1,
         "cited": "7-45",
         "right": true,
-        "retrieval_ms": 172,
-        "answer_ms": 2969
+        "retrieval_ms": 232,
+        "answer_ms": 3026
       },
       {
         "q": "Where should engine repair information come from first?",
@@ -620,8 +620,8 @@
         "rank": 1,
         "cited": "8-1",
         "right": true,
-        "retrieval_ms": 209,
-        "answer_ms": 2631
+        "retrieval_ms": 166,
+        "answer_ms": 2624
       },
       {
         "q": "What determines the wire type used in an ignition harness?",
@@ -629,8 +629,8 @@
         "rank": 1,
         "cited": "8-14",
         "right": true,
-        "retrieval_ms": 183,
-        "answer_ms": 2879
+        "retrieval_ms": 253,
+        "answer_ms": 2832
       },
       {
         "q": "Why should exhaust system parts never be marked with a lead pencil?",
@@ -638,8 +638,8 @@
         "rank": 1,
         "cited": "8-26",
         "right": true,
-        "retrieval_ms": 214,
-        "answer_ms": 2779
+        "retrieval_ms": 186,
+        "answer_ms": 3056
       },
       {
         "q": "Why is propeller vibration troubleshooting difficult?",
@@ -647,8 +647,8 @@
         "rank": 1,
         "cited": "8-41",
         "right": true,
-        "retrieval_ms": 214,
-        "answer_ms": 3462
+        "retrieval_ms": 260,
+        "answer_ms": 3416
       },
       {
         "q": "What types of landing gear does the chapter cover?",
@@ -656,8 +656,8 @@
         "rank": 1,
         "cited": "4-73",
         "right": false,
-        "retrieval_ms": 209,
-        "answer_ms": 2332
+        "retrieval_ms": 178,
+        "answer_ms": 2363
       },
       {
         "q": "Where should a mechanic stand when servicing a tire?",
@@ -666,7 +666,7 @@
         "cited": "9-11",
         "right": true,
         "retrieval_ms": 192,
-        "answer_ms": 2570
+        "answer_ms": 2576
       },
       {
         "q": "How is the flotation tube inspection date recorded?",
@@ -674,8 +674,8 @@
         "rank": 1,
         "cited": "9-32",
         "right": true,
-        "retrieval_ms": 194,
-        "answer_ms": 3812
+        "retrieval_ms": 177,
+        "answer_ms": 3766
       },
       {
         "q": "Why must soap be fully removed from washed upholstery?",
@@ -683,8 +683,8 @@
         "rank": 1,
         "cited": "9-46",
         "right": true,
-        "retrieval_ms": 189,
-        "answer_ms": 2599
+        "retrieval_ms": 162,
+        "answer_ms": 2621
       },
       {
         "q": "What happens to center of gravity when equipment is added or removed?",
@@ -692,8 +692,8 @@
         "rank": 0,
         "cited": "10-22",
         "right": false,
-        "retrieval_ms": 207,
-        "answer_ms": 3603
+        "retrieval_ms": 145,
+        "answer_ms": 3610
       },
       {
         "q": "Where are the weighing procedures for a given aircraft found?",
@@ -701,8 +701,8 @@
         "rank": 1,
         "cited": "10-11",
         "right": true,
-        "retrieval_ms": 196,
-        "answer_ms": 2444
+        "retrieval_ms": 163,
+        "answer_ms": 2524
       },
       {
         "q": "What is being checked in the most rearward weight and balance example?",
@@ -710,8 +710,8 @@
         "rank": 1,
         "cited": "10-15",
         "right": true,
-        "retrieval_ms": 271,
-        "answer_ms": 3013
+        "retrieval_ms": 176,
+        "answer_ms": 2969
       },
       {
         "q": "What counts as an aircraft's electrical system?",
@@ -719,8 +719,8 @@
         "rank": 3,
         "cited": "11-1",
         "right": true,
-        "retrieval_ms": 191,
-        "answer_ms": 2614
+        "retrieval_ms": 173,
+        "answer_ms": 2607
       },
       {
         "q": "When must wiring be replaced?",
@@ -728,8 +728,8 @@
         "rank": 1,
         "cited": "11-45",
         "right": true,
-        "retrieval_ms": 200,
-        "answer_ms": 4163
+        "retrieval_ms": 157,
+        "answer_ms": 4209
       },
       {
         "q": "What should component selection ensure between adjacent terminals?",
@@ -737,8 +737,8 @@
         "rank": 1,
         "cited": "11-75",
         "right": true,
-        "retrieval_ms": 184,
-        "answer_ms": 2787
+        "retrieval_ms": 188,
+        "answer_ms": 2790
       },
       {
         "q": "Where are more detailed electrical symbols found?",
@@ -746,8 +746,8 @@
         "rank": 1,
         "cited": "11-105",
         "right": true,
-        "retrieval_ms": 250,
-        "answer_ms": 2489
+        "retrieval_ms": 145,
+        "answer_ms": 2507
       },
       {
         "q": "How are avionics systems checked on the ground?",
@@ -755,8 +755,8 @@
         "rank": 1,
         "cited": "12-1",
         "right": true,
-        "retrieval_ms": 204,
-        "answer_ms": 3724
+        "retrieval_ms": 261,
+        "answer_ms": 3710
       },
       {
         "q": "What test equipment must a certificated avionics maintainer have?",
@@ -764,8 +764,8 @@
         "rank": 1,
         "cited": "12-25",
         "right": true,
-        "retrieval_ms": 196,
-        "answer_ms": 3699
+        "retrieval_ms": 182,
+        "answer_ms": 3605
       },
       {
         "q": "What three things must be in place before a mechanic can do maintenance?",
@@ -773,8 +773,8 @@
         "rank": 1,
         "cited": "13-1",
         "right": true,
-        "retrieval_ms": 203,
-        "answer_ms": 2226
+        "retrieval_ms": 164,
+        "answer_ms": 2333
       },
       {
         "q": "How far back does wood aircraft construction go?",
@@ -782,8 +782,396 @@
         "rank": 1,
         "cited": "1-1",
         "right": true,
-        "retrieval_ms": 209,
-        "answer_ms": 2328
+        "retrieval_ms": 175,
+        "answer_ms": 2307
+      }
+    ]
+  },
+  "rerank": {
+    "hit_at_5": 0.975,
+    "hit_at_5_ci": [
+      0.871,
+      0.996
+    ],
+    "mrr": 0.975,
+    "citation": 0.95,
+    "citation_ci": [
+      0.835,
+      0.986
+    ],
+    "misses": [
+      {
+        "q": "What is the first step before repairing a metal structure?",
+        "page": "4-1",
+        "got": [
+          "1-11",
+          "6-30",
+          "4-40",
+          "1-35",
+          "4-12"
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "q": "Why does inspecting a wooden aircraft call for methods and equipment other aircraft do not need?",
+        "gold": "1-11",
+        "rank": 1,
+        "cited": "1-11",
+        "right": true,
+        "retrieval_ms": 2375,
+        "answer_ms": 1846
+      },
+      {
+        "q": "Why are bolt holes a problem in wooden structure?",
+        "gold": "1-37",
+        "rank": 1,
+        "cited": "1-37",
+        "right": true,
+        "retrieval_ms": 2422,
+        "answer_ms": 1953
+      },
+      {
+        "q": "When may permanent tacks replace a hand-sewn seam?",
+        "gold": "2-8",
+        "rank": 1,
+        "cited": "2-8",
+        "right": true,
+        "retrieval_ms": 2468,
+        "answer_ms": 1727
+      },
+      {
+        "q": "What holds reinforcing tape in place before cord lacing or hardware is installed?",
+        "gold": "2-10",
+        "rank": 1,
+        "cited": "2-10",
+        "right": true,
+        "retrieval_ms": 2468,
+        "answer_ms": 2118
+      },
+      {
+        "q": "What are nitrate and butyrate dope made from?",
+        "gold": "2-25",
+        "rank": 1,
+        "cited": "2-25",
+        "right": true,
+        "retrieval_ms": 2538,
+        "answer_ms": 2501
+      },
+      {
+        "q": "How large an opening may a doped-on patch repair?",
+        "gold": "2-39",
+        "rank": 1,
+        "cited": "2-39",
+        "right": true,
+        "retrieval_ms": 2525,
+        "answer_ms": 2505
+      },
+      {
+        "q": "Why must laminate composition be considered before restoring a part?",
+        "gold": "3-1",
+        "rank": 1,
+        "cited": "3-1",
+        "right": true,
+        "retrieval_ms": 2441,
+        "answer_ms": 2841
+      },
+      {
+        "q": "What are the two main classes of plastics?",
+        "gold": "3-15",
+        "rank": 1,
+        "cited": "3-15",
+        "right": true,
+        "retrieval_ms": 2645,
+        "answer_ms": 1787
+      },
+      {
+        "q": "What is preferred over repairing a badly damaged transparent plastic part?",
+        "gold": "3-19",
+        "rank": 1,
+        "cited": "3-19",
+        "right": true,
+        "retrieval_ms": 2469,
+        "answer_ms": 1459
+      },
+      {
+        "q": "What is the first step before repairing a metal structure?",
+        "gold": "4-1",
+        "rank": 0,
+        "cited": "4-40",
+        "right": false,
+        "retrieval_ms": 2501,
+        "answer_ms": 2429
+      },
+      {
+        "q": "What first-aid item belongs where welding is done?",
+        "gold": "4-82",
+        "rank": 1,
+        "cited": "4-82",
+        "right": true,
+        "retrieval_ms": 2513,
+        "answer_ms": 1691
+      },
+      {
+        "q": "What does the NDI chapter say about covering every method in detail?",
+        "gold": "5-1",
+        "rank": 1,
+        "cited": "5-1",
+        "right": true,
+        "retrieval_ms": 2520,
+        "answer_ms": 2208
+      },
+      {
+        "q": "Which parts deserve magnetic particle inspection?",
+        "gold": "5-20",
+        "rank": 1,
+        "cited": "5-20",
+        "right": true,
+        "retrieval_ms": 2474,
+        "answer_ms": 2260
+      },
+      {
+        "q": "How does computed tomography differ from film radiography?",
+        "gold": "5-37",
+        "rank": 1,
+        "cited": "5-38",
+        "right": false,
+        "retrieval_ms": 2338,
+        "answer_ms": 2187
+      },
+      {
+        "q": "What does shearography provide in real time?",
+        "gold": "5-55",
+        "rank": 1,
+        "cited": "5-55",
+        "right": true,
+        "retrieval_ms": 2402,
+        "answer_ms": 1544
+      },
+      {
+        "q": "Why can corrosion be classified by its appearance?",
+        "gold": "6-5",
+        "rank": 1,
+        "cited": "6-5",
+        "right": true,
+        "retrieval_ms": 2430,
+        "answer_ms": 1776
+      },
+      {
+        "q": "What is abrasive blasting used for on ferrous metals?",
+        "gold": "6-22",
+        "rank": 1,
+        "cited": "6-22",
+        "right": true,
+        "retrieval_ms": 2488,
+        "answer_ms": 2497
+      },
+      {
+        "q": "Which parts of an aircraft recovered from water are processed as airframe components?",
+        "gold": "6-43",
+        "rank": 1,
+        "cited": "6-43",
+        "right": true,
+        "retrieval_ms": 2502,
+        "answer_ms": 2242
+      },
+      {
+        "q": "Where are AN21 through AN36 clevis bolts used?",
+        "gold": "7-10",
+        "rank": 1,
+        "cited": "7-10",
+        "right": true,
+        "retrieval_ms": 2680,
+        "answer_ms": 1761
+      },
+      {
+        "q": "What wire are aircraft control cables made from?",
+        "gold": "7-27",
+        "rank": 1,
+        "cited": "7-27",
+        "right": true,
+        "retrieval_ms": 2462,
+        "answer_ms": 1706
+      },
+      {
+        "q": "What is the first step in assembling a wire clip-locking turnbuckle?",
+        "gold": "7-45",
+        "rank": 1,
+        "cited": "7-45",
+        "right": true,
+        "retrieval_ms": 2644,
+        "answer_ms": 2195
+      },
+      {
+        "q": "Where should engine repair information come from first?",
+        "gold": "8-1",
+        "rank": 1,
+        "cited": "8-1",
+        "right": true,
+        "retrieval_ms": 2369,
+        "answer_ms": 1682
+      },
+      {
+        "q": "What determines the wire type used in an ignition harness?",
+        "gold": "8-14",
+        "rank": 1,
+        "cited": "8-14",
+        "right": true,
+        "retrieval_ms": 2482,
+        "answer_ms": 1781
+      },
+      {
+        "q": "Why should exhaust system parts never be marked with a lead pencil?",
+        "gold": "8-26",
+        "rank": 1,
+        "cited": "8-26",
+        "right": true,
+        "retrieval_ms": 2442,
+        "answer_ms": 1869
+      },
+      {
+        "q": "Why is propeller vibration troubleshooting difficult?",
+        "gold": "8-41",
+        "rank": 1,
+        "cited": "8-41",
+        "right": true,
+        "retrieval_ms": 2593,
+        "answer_ms": 2783
+      },
+      {
+        "q": "What types of landing gear does the chapter cover?",
+        "gold": "9-1",
+        "rank": 1,
+        "cited": "9-1",
+        "right": true,
+        "retrieval_ms": 2482,
+        "answer_ms": 1723
+      },
+      {
+        "q": "Where should a mechanic stand when servicing a tire?",
+        "gold": "9-11",
+        "rank": 1,
+        "cited": "9-11",
+        "right": true,
+        "retrieval_ms": 2442,
+        "answer_ms": 1936
+      },
+      {
+        "q": "How is the flotation tube inspection date recorded?",
+        "gold": "9-32",
+        "rank": 1,
+        "cited": "9-32",
+        "right": true,
+        "retrieval_ms": 2505,
+        "answer_ms": 2970
+      },
+      {
+        "q": "Why must soap be fully removed from washed upholstery?",
+        "gold": "9-46",
+        "rank": 1,
+        "cited": "9-46",
+        "right": true,
+        "retrieval_ms": 2446,
+        "answer_ms": 1569
+      },
+      {
+        "q": "What happens to center of gravity when equipment is added or removed?",
+        "gold": "10-1",
+        "rank": 1,
+        "cited": "10-1",
+        "right": true,
+        "retrieval_ms": 2518,
+        "answer_ms": 2562
+      },
+      {
+        "q": "Where are the weighing procedures for a given aircraft found?",
+        "gold": "10-11",
+        "rank": 1,
+        "cited": "10-11",
+        "right": true,
+        "retrieval_ms": 2382,
+        "answer_ms": 1504
+      },
+      {
+        "q": "What is being checked in the most rearward weight and balance example?",
+        "gold": "10-15",
+        "rank": 1,
+        "cited": "10-15",
+        "right": true,
+        "retrieval_ms": 2466,
+        "answer_ms": 3081
+      },
+      {
+        "q": "What counts as an aircraft's electrical system?",
+        "gold": "11-1",
+        "rank": 1,
+        "cited": "11-1",
+        "right": true,
+        "retrieval_ms": 2443,
+        "answer_ms": 1710
+      },
+      {
+        "q": "When must wiring be replaced?",
+        "gold": "11-45",
+        "rank": 1,
+        "cited": "11-45",
+        "right": true,
+        "retrieval_ms": 2436,
+        "answer_ms": 2851
+      },
+      {
+        "q": "What should component selection ensure between adjacent terminals?",
+        "gold": "11-75",
+        "rank": 1,
+        "cited": "11-75",
+        "right": true,
+        "retrieval_ms": 2532,
+        "answer_ms": 1878
+      },
+      {
+        "q": "Where are more detailed electrical symbols found?",
+        "gold": "11-105",
+        "rank": 1,
+        "cited": "11-105",
+        "right": true,
+        "retrieval_ms": 2436,
+        "answer_ms": 1495
+      },
+      {
+        "q": "How are avionics systems checked on the ground?",
+        "gold": "12-1",
+        "rank": 1,
+        "cited": "12-1",
+        "right": true,
+        "retrieval_ms": 2406,
+        "answer_ms": 2031
+      },
+      {
+        "q": "What test equipment must a certificated avionics maintainer have?",
+        "gold": "12-25",
+        "rank": 1,
+        "cited": "12-25",
+        "right": true,
+        "retrieval_ms": 2496,
+        "answer_ms": 2752
+      },
+      {
+        "q": "What three things must be in place before a mechanic can do maintenance?",
+        "gold": "13-1",
+        "rank": 1,
+        "cited": "13-1",
+        "right": true,
+        "retrieval_ms": 2400,
+        "answer_ms": 1406
+      },
+      {
+        "q": "How far back does wood aircraft construction go?",
+        "gold": "1-1",
+        "rank": 1,
+        "cited": "1-1",
+        "right": true,
+        "retrieval_ms": 2436,
+        "answer_ms": 1392
       }
     ]
   }

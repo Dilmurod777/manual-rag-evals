@@ -15,6 +15,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from app.corpus import paragraphs
+from app.rerank import rerank
 from app.search import BM25, Vector, hybrid, tokens
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -40,6 +41,7 @@ SYSTEM = (
 
 class Ask(BaseModel):
     q: str = Field(min_length=3, max_length=400)
+    rerank: bool = False
 
 
 def passages(ranked):
@@ -135,6 +137,11 @@ def search_timed(search, *args):
     return ranked, round((time.perf_counter() - started) * 1000)
 
 
+def reranked(q, k=5):
+    """Third arm: the same hybrid list, read by the model before it is kept."""
+    return rerank(q, hybrid(bm25, vector, q, 30), keep=k)
+
+
 @app.post("/api/ask")
 def ask(body: Ask):
     # Two arms share nothing after retrieval, so they run side by side: 2 s
@@ -143,6 +150,7 @@ def ask(body: Ask):
         raise HTTPException(429, "two answers at a time; try again in a few seconds")
     try:
         started = time.perf_counter()
+
         with ThreadPoolExecutor(2) as pool:
             left = pool.submit(
                 lambda: column(body.q, *search_timed(vector.search, body.q))
@@ -150,12 +158,17 @@ def ask(body: Ask):
             right = pool.submit(
                 lambda: column(body.q, *search_timed(hybrid, bm25, vector, body.q))
             )
-            return {
-                "question": body.q,
-                "vector": left.result(),
-                "hybrid": right.result(),
-                "total_ms": round((time.perf_counter() - started) * 1000),
-            }
+            third = pool.submit(lambda: search_timed(reranked, body.q))
+            first, second = left.result(), right.result()
+            ranked_c, rerank_ms = third.result()
+        # C is answered after A and B, so three answers never share the GPU
+        return {
+            "question": body.q,
+            "vector": first,
+            "hybrid": second,
+            "rerank": column(body.q, ranked_c, rerank_ms),
+            "total_ms": round((time.perf_counter() - started) * 1000),
+        }
     finally:
         GENERATIONS.release()
 

@@ -10,6 +10,7 @@ from pathlib import Path
 
 from app.corpus import paragraphs
 from app.main import answer
+from app.rerank import rerank
 from app.search import BM25, Vector, hybrid
 
 GOLD = (
@@ -42,14 +43,16 @@ def main():
     vector = Vector(chunks)
 
     results = {"questions": len(gold)}
-    for mode in ("vector", "hybrid"):
+    for mode in ("vector", "hybrid", "rerank"):
         hits, rr, cited, misses, rows = 0, 0.0, 0, [], []
         for row in gold:
             started = time.perf_counter()
             if mode == "vector":
                 ranked = vector.search(row["q"], 5)
-            else:
+            elif mode == "hybrid":
                 ranked = hybrid(bm25, vector, row["q"], 5)
+            else:
+                ranked = rerank(row["q"], hybrid(bm25, vector, row["q"], 30))
             retrieval_ms = round((time.perf_counter() - started) * 1000)
             pages = [chunk["page"] for _, chunk in ranked]
             hit = row["page"] in pages
