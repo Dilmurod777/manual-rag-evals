@@ -93,6 +93,7 @@ def main():
     parser.add_argument("queries", nargs="+")
     parser.add_argument("--mode", default="bm25", choices=["bm25", "vec", "hybrid"])
     parser.add_argument("-k", type=int, default=5)
+    parser.add_argument("--chars", type=int, default=110)
     args = parser.parse_args()
 
     chunks = list(paragraphs())
@@ -107,7 +108,7 @@ def main():
         else:
             ranked = bm25.search(query, args.k)
         for score, chunk in ranked:
-            print(f"  {chunk['page']:>7}  {score:6.3f}  {chunk['text'][:110]}")
+            print(f"  {chunk['page']:>7}  {score:6.3f}  {chunk['text'][: args.chars]}")
 
 
 if __name__ == "__main__":

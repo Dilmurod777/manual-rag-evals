@@ -46,6 +46,10 @@ def paragraphs():
             text = re.sub(
                 r"[ \t]+", " ", HEADER.sub("", block).replace("\n", " ")
             ).strip()
+            # soft hyphens from the PDF: "rea­ son" -> "reason"
+            text = re.sub("\u00ad\\s*", "", text)
+            # a word broken at a line end: "de- vices" -> "devices"
+            text = re.sub(r"(\w)- (\w)", r"\1\2", text)
             if len(text) < 80 or re.search(r"\.{4,}", text):
                 continue
             par = PAR_START.match(text)
