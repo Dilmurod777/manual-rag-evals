@@ -3,13 +3,12 @@
 import argparse
 import math
 import re
-import sys
 from collections import Counter
 
 import numpy as np
 
 from app.corpus import paragraphs
-from app.embed import OUT, embed
+from app.embed import OUT, embed, fingerprint
 
 STOP = set(
     "the a an and or of to in for on with is are be by as at from that this it its not "
@@ -39,16 +38,19 @@ class BM25:
 
     def search(self, query, k=5):
         terms = tokens(query)
+        total = len(self.docs)
+        idfs = {
+            term: math.log(1 + (total - self.df[term] + 0.5) / (self.df[term] + 0.5))
+            for term in terms
+            if self.df[term]
+        }
         scored = []
         for i, doc in enumerate(self.docs):
             score = 0.0
-            for term in terms:
+            for term, idf in idfs.items():
                 tf = doc.get(term)
                 if not tf:
                     continue
-                idf = math.log(
-                    1 + (len(self.docs) - self.df[term] + 0.5) / (self.df[term] + 0.5)
-                )
                 score += (
                     idf
                     * tf
@@ -67,6 +69,12 @@ class BM25:
 class Vector:
     def __init__(self, chunks):
         saved = np.load(OUT)
+        expected = fingerprint(chunks)
+        if str(saved["fingerprint"]) != expected:
+            raise RuntimeError(
+                "data/embeddings.npz was built from different text; "
+                "run `python app/embed.py` before searching"
+            )
         by_id = {c["id"]: c for c in chunks}
         self.vec = saved["vec"]
         self.chunks = [by_id[str(i)] for i in saved["ids"]]

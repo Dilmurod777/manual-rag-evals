@@ -28,13 +28,19 @@ running, the app shows the passage and its page instead of inventing an answer.
 **60 questions**, each with the printed page that answers it, every page verified by
 re-reading it (see `eval/check_gold.py`). Five retrieved paragraphs per question.
 
-| pipeline | hit@5 | MRR |
-|---|---|---|
-| A · vector only | 0.98 | 0.894 |
-| B · hybrid | **1.00** | **0.939** |
+| pipeline | hit@5 | MRR | answer cites the gold page |
+|---|---|---|---|
+| A · vector only | 0.98 | 0.894 | 0.92 |
+| B · hybrid | **1.00** | **0.939** | **0.92** |
 
 A misses exactly one: "how is pressure applied over a laminated plastic repair while it
 cures" (Page 3-4) returns Pages 1-25, 3-6, 3-1 and 3-7 instead. B finds it.
+
+The last column is the one that matters to a reader and the one most demos skip: the
+model answered all 60 questions and named the correct page in 55. Retrieval is not the
+limit — both pipelines put five pages in front of the model, and in five cases it quoted
+a page other than the gold one. That gap is the honest cost of generation, and it is why
+the page marks the sentence the answer came from instead of asking for trust.
 
 The caveat, stated plainly: the questions were written after reading passages that
 retrieval had already returned, so both pipelines are flattered and hit@5 is close to
@@ -70,7 +76,9 @@ python -m app.setup            # download the manual, extract, embed (about a mi
 python -m uvicorn app.main:app --port 8041
 ```
 
-Open <http://127.0.0.1:8041>. `python -m eval.run_eval` re-scores both pipelines and
+Open <http://127.0.0.1:8041>. It runs on your machine only: the model is a 17 GB local
+27B, so the demo holds two generations at a time and refuses the third with a 429 rather
+than queueing it. `python -m eval.run_eval` re-scores both pipelines and
 rewrites `eval/results.json`; `python -m eval.check_gold` proves all 60 gold pages.
 
 ## Layout
@@ -81,7 +89,7 @@ app/embed.py    embeddings, cached in data/embeddings.npz
 app/search.py   BM25, vector search, fusion
 app/main.py     FastAPI: /api/ask, /api/results, the page
 eval/gold.jsonl 60 questions with page + the sentence that proves it
-eval/run_eval.py hit@5 and MRR for both pipelines
+eval/run_eval.py hit@5, MRR and citation accuracy for both pipelines
 public/index.html  the page (no build step)
 ```
 

@@ -1,5 +1,6 @@
 """Download the manual, extract its text, embed the paragraphs."""
 
+import shutil
 import subprocess
 import urllib.request
 from pathlib import Path
@@ -18,7 +19,8 @@ def main():
     PDF.parent.mkdir(exist_ok=True)
     if not PDF.exists():
         print(f"downloading {URL}")
-        urllib.request.urlretrieve(URL, PDF)
+        with urllib.request.urlopen(URL, timeout=120) as reply, PDF.open("wb") as out:
+            shutil.copyfileobj(reply, out)
     if not TXT.exists():
         subprocess.run(["pdftotext", "-raw", str(PDF), str(TXT)], check=True)
     print(f"paragraphs: {len(list(corpus.paragraphs()))}")

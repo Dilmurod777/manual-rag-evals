@@ -66,6 +66,7 @@
 
   .answer { font-size: 1.02rem; line-height: 1.55; margin: 0 0 1rem; min-height: 3.2rem; }
   .answer.pending { color: var(--rule); }
+.answer.fallback { color: var(--muted); font-style: italic; }
 
   .evidence { border-left: 2px solid var(--rule); padding-left: .85rem; }
   .evidence h3 {
@@ -91,7 +92,7 @@
 </head>
 <body>
 <main>
-  <p class="kicker">AC 43.13-1B · 646 pages · 60 gold questions</p>
+  <p class="kicker">AC 43.13-1B · 646 pages · <span class="nq">60</span> gold questions</p>
   <h1>Two retrievers, one manual.</h1>
   <p class="lede">Ask a question about aircraft inspection and repair. Both pipelines search the same
   1,758 paragraphs and answer with the page the manual puts the answer on — <b>A</b> by vector
@@ -117,7 +118,7 @@
   </div>
 
   <footer>
-    <h2>Measured on the same 60 questions</h2>
+    <h2>Measured on the same <span class="nq">60</span> questions</h2>
     <div class="bars" id="bars"></div>
     <p class="foot" id="foot">Loading the evaluation…</p>
   </footer>
@@ -149,6 +150,7 @@ function arm(prefix, data) {
   const a = $("a" + prefix);
   a.textContent = data.answer;
   a.classList.remove("pending");
+  if (data.fallback) a.classList.add("fallback");
 
   const ev = data.evidence;
   const body = ev.sentences.map((s) => s.hit ? `<mark>${esc(s.text)}</mark>` : esc(s.text)).join(" ");
@@ -191,6 +193,8 @@ fetch("/api/results").then((r) => r.json()).then((res) => {
   const rows = [
     ["A hit@5", res.vector.hit_at_5, ""],
     ["B hit@5", res.hybrid.hit_at_5, "alt"],
+    ["A cited", res.vector.citation, ""],
+    ["B cited", res.hybrid.citation, "alt"],
     ["A MRR", res.vector.mrr, ""],
     ["B MRR", res.hybrid.mrr, "alt"],
   ];
@@ -198,8 +202,9 @@ fetch("/api/results").then((r) => r.json()).then((res) => {
     `<div class="bar ${cls}"><span class="label">${label}</span>
      <span class="track"><span class="fill" style="width:${(value * 100).toFixed(1)}%"></span></span>
      <span class="num">${value.toFixed(2)}</span></div>`).join("");
+  document.querySelectorAll(".nq").forEach((el) => { el.textContent = res.questions; });
   $("foot").textContent =
-    `60 questions · one passage per page · answers by qwen3.8-27b, two sentences, always cited.`;
+    `${res.questions} questions · one passage per page · answers by qwen3.8-27b, two sentences, always cited.`;
 }).catch(() => { $("foot").textContent = "Evaluation numbers are not available."; });
 </script>
 </body>

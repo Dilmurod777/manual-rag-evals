@@ -3,15 +3,16 @@
 import json
 import os
 import re
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import httpx
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.corpus import paragraphs
 from app.search import BM25, Vector, hybrid, tokens
@@ -21,6 +22,8 @@ PUBLIC = ROOT / "public"
 OLLAMA = "http://127.0.0.1:11434/api/chat"
 MODEL = os.environ.get("RAG_MODEL", "qwen3.8-27b")
 RESULTS = ROOT / "eval" / "results.json"
+# The model runs on one GPU; two generations at a time is all it can hold.
+GENERATIONS = threading.Semaphore(2)
 
 app = FastAPI(title="manual-rag-evals")
 chunks = list(paragraphs())
@@ -36,7 +39,7 @@ SYSTEM = (
 
 
 class Ask(BaseModel):
-    q: str
+    q: str = Field(min_length=3, max_length=400)
 
 
 def passages(ranked):
@@ -73,15 +76,19 @@ def answer(question, ranked):
         text = reply.json()["message"]["content"].strip()
         if not text:
             raise ValueError("empty reply")
+        return text, False
     except Exception:
-        text = f"No model running, so here is the passage itself: {ranked[0][1]['text'][:400]} (Page {ranked[0][1]['page']})"
-    return text
+        return (
+            "The model did not answer, so here is the passage itself: "
+            f"{ranked[0][1]['text'][:400]} (Page {ranked[0][1]['page']})",
+            True,
+        )
 
 
 SENTENCE = re.compile(r"(?<=[.!?])\s+")
 
 
-def evidence(question, ranked, limit=2):
+def evidence(question, ranked):
     """The retrieved passage whose sentence best matches the question, with those
     sentences marked so a reader can see where the answer came from."""
     asked = set(tokens(question))
@@ -111,14 +118,14 @@ def evidence(question, ranked, limit=2):
 
 def column(question, ranked, retrieval_ms):
     started = time.perf_counter()
-    text = answer(question, ranked)
+    text, fallback = answer(question, ranked)
     return {
         "answer": text,
         "pages": list(dict.fromkeys(c["page"] for _, c in ranked)),
-        "top": ranked[0][1]["text"][:420],
         "evidence": evidence(question, ranked),
         "retrieval_ms": retrieval_ms,
         "answer_ms": round((time.perf_counter() - started) * 1000),
+        "fallback": fallback,
     }
 
 
@@ -130,20 +137,27 @@ def search_timed(search, *args):
 
 @app.post("/api/ask")
 def ask(body: Ask):
-    # The two arms share nothing after retrieval, so they run side by side:
-    # 2 s instead of 4.
-    started = time.perf_counter()
-    with ThreadPoolExecutor(2) as pool:
-        left = pool.submit(lambda: column(body.q, *search_timed(vector.search, body.q)))
-        right = pool.submit(
-            lambda: column(body.q, *search_timed(hybrid, bm25, vector, body.q))
-        )
-        return {
-            "question": body.q,
-            "vector": left.result(),
-            "hybrid": right.result(),
-            "total_ms": round((time.perf_counter() - started) * 1000),
-        }
+    # Two arms share nothing after retrieval, so they run side by side: 2 s
+    # instead of 4. One GPU holds two generations; beyond that, say no.
+    if not GENERATIONS.acquire(blocking=False):
+        raise HTTPException(429, "two answers at a time; try again in a few seconds")
+    try:
+        started = time.perf_counter()
+        with ThreadPoolExecutor(2) as pool:
+            left = pool.submit(
+                lambda: column(body.q, *search_timed(vector.search, body.q))
+            )
+            right = pool.submit(
+                lambda: column(body.q, *search_timed(hybrid, bm25, vector, body.q))
+            )
+            return {
+                "question": body.q,
+                "vector": left.result(),
+                "hybrid": right.result(),
+                "total_ms": round((time.perf_counter() - started) * 1000),
+            }
+    finally:
+        GENERATIONS.release()
 
 
 @app.get("/api/results")

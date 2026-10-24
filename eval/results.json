@@ -1,7 +1,9 @@
 {
+  "questions": 60,
   "vector": {
     "hit_at_5": 0.9833,
     "mrr": 0.8944,
+    "citation": 0.9167,
     "misses": [
       {
         "q": "How is pressure applied over a laminated plastic repair while it cures?",
@@ -19,6 +21,7 @@
   "hybrid": {
     "hit_at_5": 1.0,
     "mrr": 0.9389,
+    "citation": 0.9167,
     "misses": []
   }
 }

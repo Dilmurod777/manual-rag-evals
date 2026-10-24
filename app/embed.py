@@ -1,5 +1,6 @@
 """Embed every chunk with the local Ollama and cache it in data/embeddings.npz."""
 
+import hashlib
 import json
 import time
 import urllib.request
@@ -13,6 +14,11 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "embeddings.npz"
 MODEL = "qwen3-embedding:0.6b"
 URL = "http://127.0.0.1:11434/api/embed"
+
+
+def fingerprint(chunks):
+    """The ids are positional, so a cache from different text must be refused."""
+    return hashlib.sha256("".join(c["text"] for c in chunks).encode()).hexdigest()
 
 
 def embed(texts):
@@ -36,6 +42,7 @@ def main():
         OUT,
         vec=vectors,
         ids=np.array([c["id"] for c in chunks]),
+        fingerprint=fingerprint(chunks),
     )
     print(f"{vectors.shape} in {time.time() - started:.1f}s -> {OUT}")
 
