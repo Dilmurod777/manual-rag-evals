@@ -406,6 +406,29 @@ Dockerfile       build, corpus on first start, uvicorn on 8000
 
 ---
 
+## What production would need
+
+The current shape is one process, one GPU and one user. The measurement would not change;
+who can ask would.
+
+```
+browser -> gateway (quota, auth) -> queue -> retriever workers (stateless, N)
+                                            -> model service (one GPU, batching)
+                                            -> index (Redis / SQLite, keyed by fingerprint)
+```
+
+| here | in production |
+|---|---|
+| answers cached in a 32-entry dict inside the process | Redis or SQLite, keyed by corpus fingerprint and question |
+| one uvicorn worker | several, behind the queue; the GPU is a service they share |
+| `Semaphore(2)` is the admission control | a real queue with per-IP quotas and retry |
+| embeddings rebuilt by a script | a versioned index, rebuilt when the corpus changes |
+| `qwen3.8-27b` is a local name | a pinned Modelfile, pulled and health-checked at boot |
+| one laptop 5090 | rented GPU with a warm model, or a hosted API |
+
+The cache is the only piece with a visible limit today: it holds 32 answers and clears on
+restart, which is correct for a demo and wrong for anything shared.
+
 ## Limits
 
 - One manual, one machine. The numbers describe this corpus.

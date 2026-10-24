@@ -8,6 +8,7 @@ from app.corpus import paragraphs
 from app.search import BM25, Vector
 
 HERE = Path(__file__).resolve().parent
+REFUSE_BELOW = 0.58
 
 
 def load(name):
@@ -31,11 +32,7 @@ def main():
 
     fit, held = unknown[:6], unknown[6:]
     ceiling = min(gold + blind)  # no answerable question may fall below the line
-    fitted = (
-        round((max(fit) + ceiling) / 2, 3)
-        if max(fit) < ceiling
-        else round(ceiling - 0.005, 3)
-    )
+    fitted = round((max(fit) + ceiling) / 2, 3) if max(fit) < ceiling else round(ceiling - 0.005, 3)
 
     caught = sum(1 for score in held if score < fitted)
     print(f"answerable  min {ceiling:.3f} over {len(gold) + len(blind)} questions")
