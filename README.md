@@ -1,5 +1,7 @@
 # manual-rag-evals
 
+[![tests](https://github.com/Dilmurod777/manual-rag-evals/actions/workflows/tests.yml/badge.svg)](https://github.com/Dilmurod777/manual-rag-evals/actions/workflows/tests.yml)
+
 Ask an aircraft-maintenance manual a question; two retrievers answer, and every answer
 names the page it came from.
 
@@ -292,6 +294,24 @@ request leaves immediately, the text appears as it is produced, and the first an
 readable at 1.5 s instead of 5.9 s. Real overlap needs the server restarted with
 `OLLAMA_NUM_PARALLEL=2`, which halves each arm's tokens per second and was not worth the
 trade: a two-slot attempt still serialised.
+
+## Running it like a service
+
+- `GET /health` answers `{"ok": true, "chunks": 1758, "model_present": true, "refuse_below": 0.58}`.
+  It is the check a deploy would poll, and it is false when Ollama is down.
+- Each answer carries `grounded`: false when the page it named was not among the five it
+  was shown. The page does not print it yet; the API does.
+- One log line per arm, with the question and the closeness of the best paragraph.
+  `RAG_LOG=DEBUG` for more.
+- `docker build -t manual-rag . && docker run -p 8000:8000 -e OLLAMA_HOST=http://host.docker.internal:11434 manual-rag`.
+  The container builds the corpus on first start; the manual is not stored in the image.
+- Every knob lives in `app/config.py` and reads the environment: `OLLAMA_HOST`, `RAG_MODEL`,
+  `RAG_EMBED_MODEL`, `RAG_TOP_K`, `RAG_REFUSE_BELOW`, `RAG_NUM_CTX`, `RAG_CORPUS_URL`.
+- CI (`.github/workflows/tests.yml`) runs the unit tests, downloads the manual, and re-proves
+  all 60 gold and 40 blind pages against it on every push.
+
+The page is usable without a mouse and without motion: answers are `aria-live` regions, focus
+is visible, and `prefers-reduced-motion` turns off the transitions.
 
 ## Run it
 

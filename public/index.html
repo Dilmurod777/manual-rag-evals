@@ -108,6 +108,10 @@
   .bar.alt .fill { background: var(--accent); }
   .bar .num { text-align: right; color: var(--ink); }
   .foot { font-size: .74rem; color: var(--muted); margin-top: .9rem; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -157,17 +161,17 @@
   <div class="grid">
     <article>
       <div class="arm"><h2>A · vector only</h2><span class="timing" id="tA"></span></div>
-      <p class="answer pending" id="aA">Ask a question to see this arm.</p>
+      <p class="answer pending" id="aA" aria-live="polite" aria-atomic="true">Ask a question to see this arm.</p>
       <div class="evidence" id="eA"></div>
     </article>
     <article>
       <div class="arm alt"><h2>B · vector + keywords</h2><span class="timing" id="tB"></span></div>
-      <p class="answer pending" id="aB">Ask a question to see this arm.</p>
+      <p class="answer pending" id="aB" aria-live="polite" aria-atomic="true">Ask a question to see this arm.</p>
       <div class="evidence" id="eB"></div>
     </article>
     <article>
       <div class="arm"><h2>C · hybrid + rerank</h2><span class="timing" id="tC"></span></div>
-      <p class="answer pending" id="aC">Ask a question to see this arm.</p>
+      <p class="answer pending" id="aC" aria-live="polite" aria-atomic="true">Ask a question to see this arm.</p>
       <div class="evidence" id="eC"></div>
     </article>
   </div>

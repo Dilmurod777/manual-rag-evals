@@ -1,0 +1,32 @@
+﻿name: tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      RAG_CORPUS_URL: https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC_43.13-1B_w-chg1.pdf
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Poppler for pdftotext
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Dependencies
+        run: pip install -r requirements.txt pytest
+      - name: Manual
+        run: |
+          mkdir -p data
+          curl -sSL -o data/ac43-13-1b.pdf "$RAG_CORPUS_URL"
+          pdftotext -raw data/ac43-13-1b.pdf data/ac43-13-1b.txt
+      - name: Unit tests
+        run: pytest -q
+      - name: Every gold and blind page still proves its question
+        run: |
+          python -m eval.check_gold
+          python -m eval.check_gold eval/blind.jsonl

@@ -2,6 +2,7 @@
 
 import asyncio
 import json
+import logging
 import os
 import re
 import threading
@@ -15,14 +16,15 @@ from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+from app import config as cfg
 from app.corpus import paragraphs
 from app.rerank import rerank
 from app.search import BM25, Vector, hybrid, tokens
 
 ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = ROOT / "public"
-OLLAMA = "http://127.0.0.1:11434/api/chat"
-MODEL = os.environ.get("RAG_MODEL", "qwen3.8-27b")
+OLLAMA = cfg.CHAT_URL
+MODEL = cfg.MODEL
 RESULTS = ROOT / "eval" / "results.json"
 # The model runs on one GPU; two generations at a time is all it can hold.
 GENERATIONS = threading.Semaphore(2)
@@ -119,7 +121,18 @@ def evidence(question, ranked):
     }
 
 
-REFUSE_BELOW = 0.58
+REFUSE_BELOW = cfg.REFUSE_BELOW
+log = logging.getLogger("rag")
+logging.basicConfig(level=cfg.LOG_LEVEL, format="%(asctime)s %(levelname)s %(message)s")
+CITED = re.compile(r"\(Page (\d+-\d+)\)")
+
+
+def grounded(text, ranked):
+    """True when the answer names a page the model was actually shown."""
+    found = CITED.search(text)
+    return bool(found and found.group(1) in {c["page"] for _, c in ranked})
+
+
 REFUSAL = "The manual does not cover this question: nothing in AC 43.13-1B answers it."
 
 
@@ -130,6 +143,7 @@ def confidence(question):
 
 
 def column(question, ranked, retrieval_ms, top=1.0):
+    log.info("ask %r top=%.3f", question[:80], top)
     if top < REFUSE_BELOW:
         return {
             "answer": REFUSAL,
@@ -139,6 +153,7 @@ def column(question, ranked, retrieval_ms, top=1.0):
             "answer_ms": 0,
             "fallback": False,
             "refused": True,
+            "grounded": False,
         }
     started = time.perf_counter()
     text, fallback = answer(question, ranked)
@@ -150,6 +165,7 @@ def column(question, ranked, retrieval_ms, top=1.0):
         "answer_ms": round((time.perf_counter() - started) * 1000),
         "fallback": fallback,
         "refused": False,
+        "grounded": grounded(text, ranked),
     }
 
 
@@ -235,6 +251,7 @@ async def ask_stream(body: Ask):
                     "answer_ms": 0,
                     "fallback": False,
                     "refused": True,
+                    "grounded": False,
                 }
             )
             return
@@ -249,6 +266,8 @@ async def ask_stream(body: Ask):
                 "answer": text,
                 "answer_ms": round((time.perf_counter() - started) * 1000),
                 "fallback": fallback,
+                "refused": False,
+                "grounded": grounded(text, ranked),
             }
         )
 
@@ -321,6 +340,26 @@ def ask(body: Ask):
         }
     finally:
         GENERATIONS.release()
+
+
+@app.get("/health")
+def health():
+    """Is the app able to answer: corpus loaded, model reachable, threshold set."""
+    try:
+        tags = httpx.get(f"{cfg.OLLAMA_HOST}/api/tags", timeout=3).json()
+        models = [m.get("name", "") for m in tags.get("models", [])]
+        reachable = True
+    except Exception:
+        models, reachable = [], False
+    base = MODEL.split(":")[0]
+    present = any(name.split(":")[0] == base for name in models)
+    return {
+        "ok": reachable and present,
+        "chunks": len(chunks),
+        "model": MODEL,
+        "model_present": present,
+        "refuse_below": REFUSE_BELOW,
+    }
 
 
 @app.get("/api/results")
