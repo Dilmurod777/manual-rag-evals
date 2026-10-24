@@ -1,20 +1,13 @@
-﻿"""Does the manual cover the question? Score the gate, and what the model said before it."""
+﻿"""Fit the refusal threshold on half the unanswerable questions, report on the other half."""
 
 import json
-import re
 import sys
 from pathlib import Path
 
 from app.corpus import paragraphs
-from app.main import answer
-from app.search import BM25, Vector, hybrid
+from app.search import BM25, Vector
 
 HERE = Path(__file__).resolve().parent
-REFUSE_BELOW = 0.58
-REFUSED = re.compile(
-    r"(do|does) not (cover|contain|answer|specify|address|describe)|no passage|cannot find|cannot answer",
-    re.I,
-)
 
 
 def load(name):
@@ -27,33 +20,30 @@ def load(name):
 
 def main():
     chunks = list(paragraphs())
-    bm25 = BM25(chunks)
-    vector = Vector(chunks)
+    bm25, vector = BM25(chunks), Vector(chunks)
 
-    def tops(rows):
-        return [max(score for score, _ in vector.search(row["q"], 5)) for row in rows]
+    def top(row):
+        return max(score for score, _ in vector.search(row["q"], 5))
 
-    gold, blind, unknown = (
-        load("gold.jsonl"),
-        load("blind.jsonl"),
-        load("unanswerable.jsonl"),
+    gold = [top(row) for row in load("gold.jsonl")]
+    blind = [top(row) for row in load("blind.jsonl")]
+    unknown = [top(row) for row in load("unanswerable.jsonl")]
+
+    fit, held = unknown[:6], unknown[6:]
+    ceiling = min(gold + blind)  # no answerable question may fall below the line
+    fitted = (
+        round((max(fit) + ceiling) / 2, 3)
+        if max(fit) < ceiling
+        else round(ceiling - 0.005, 3)
     )
-    for label, rows in (("gold", gold), ("blind", blind), ("unanswerable", unknown)):
-        scores = tops(rows)
-        below = sum(1 for s in scores if s < REFUSE_BELOW)
-        print(
-            f"gate  {label:<13} {below:>2}/{len(rows):<3} below {REFUSE_BELOW}  min {min(scores):.3f}"
-        )
 
-    if "--model" in sys.argv:
-        right = 0
-        for row in unknown:
-            text, _ = answer(row["q"], hybrid(bm25, vector, row["q"], 5))
-            if REFUSED.search(text):
-                right += 1
-            else:
-                print(f"  invented: {row['q'][:50]} -> {text[:90]}")
-        print(f"model refused {right}/{len(unknown)} without the gate")
+    caught = sum(1 for score in held if score < fitted)
+    print(f"answerable  min {ceiling:.3f} over {len(gold) + len(blind)} questions")
+    print(f"fit half    max {max(fit):.3f}  -> threshold {fitted}")
+    print(
+        f"held half   {caught}/{len(held)} below {fitted}  (scores {[round(s, 3) for s in held]})"
+    )
+    return 0 if caught else 1
 
 
 if __name__ == "__main__":

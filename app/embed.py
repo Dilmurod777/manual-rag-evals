@@ -1,6 +1,7 @@
 """Embed every chunk with the local Ollama and cache it in data/embeddings.npz."""
 
 import hashlib
+import os
 import json
 import time
 import urllib.request
@@ -38,12 +39,15 @@ def main():
         parts.append(embed([c["text"] for c in batch]))
         print(f"{start + len(batch)}/{len(chunks)}", flush=True)
     vectors = np.vstack(parts)
+    # write beside the target, then rename: an interrupted run must not leave a half file
+    tmp = OUT.with_suffix(".tmp.npz")
     np.savez_compressed(
-        OUT,
+        tmp,
         vec=vectors,
         ids=np.array([c["id"] for c in chunks]),
         fingerprint=fingerprint(chunks),
     )
+    os.replace(tmp, OUT)
     print(f"{vectors.shape} in {time.time() - started:.1f}s -> {OUT}")
 
 

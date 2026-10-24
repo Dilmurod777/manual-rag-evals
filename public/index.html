@@ -109,6 +109,7 @@
   .bar .num { text-align: right; color: var(--ink); }
   .foot { font-size: .74rem; color: var(--muted); margin-top: .9rem; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .ungrounded { color: var(--muted); font-style: italic; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
@@ -224,6 +225,12 @@ function done(prefix, data) {
   a.textContent = data.answer;
   a.classList.remove("pending");
   a.classList.toggle("fallback", !!data.fallback);
+  if (data.grounded === false) {
+    const note = document.createElement("span");
+    note.className = "ungrounded";
+    note.textContent = " · page not shown";
+    a.append(note);
+  }
   $("t" + prefix).innerHTML += ` · <b>${secs(data.answer_ms)}</b> answer`;
 }
 

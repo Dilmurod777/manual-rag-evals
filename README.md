@@ -212,14 +212,20 @@ consistent with why C exists.
 
 Twelve questions the manual cannot answer: type-specific torque values, avionics tests,
 another aircraft's service ceiling. Before the gate, the prompt's "say so if the passages do
-not answer" instruction was obeyed 12 of 12 times; the model did not invent a page. After:
-a cosine gate at 0.58 refuses 6 of the 12 before the model is called (0 ms of generation),
-and the other 6 still come back refused by the model. False refusals: 0 of the 60 tuned and
-0 of the 40 blind questions, whose lowest score is 0.584.
+not answer" instruction was obeyed 12 of 12 times; the model did not invent a page.
+
+The gate was fitted on six of those questions and checked on the other six, because a
+threshold chosen and scored on the same rows proves nothing. Fitted line: 0.579, set halfway
+between the highest unanswerable score in the fit half and the lowest answerable score over
+all 100 tuned and blind questions. On the six it never saw it catches **2 of 6** before the
+model is called, which is the honest number: the gate skips a three-second generation on the
+obvious misses, and the model still refuses the rest. False refusals: 0 of the 60 tuned and 0
+of the 40 blind questions, whose lowest score is 0.584.
 
 The gate is not a better reader than the model. It is a guarantee that does not depend on
-prompt compliance, and it skips a three-second generation on questions the manual cannot
-answer. `python -m eval.refusal --model` prints both counts.
+prompt compliance. `python -m eval.refusal` re-fits and re-checks; six fit questions is a
+small sample, and the split is there to keep the claim from being circular, not to make it
+precise.
 
 ## The three approaches, and what each is good at
 

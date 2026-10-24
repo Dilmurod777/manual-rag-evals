@@ -28,6 +28,8 @@ MODEL = cfg.MODEL
 RESULTS = ROOT / "eval" / "results.json"
 # The model runs on one GPU; two generations at a time is all it can hold.
 GENERATIONS = threading.Semaphore(2)
+STREAMS = threading.Semaphore(2)
+CACHE = {}
 
 app = FastAPI(title="manual-rag-evals")
 chunks = list(paragraphs())
@@ -44,7 +46,6 @@ SYSTEM = (
 
 class Ask(BaseModel):
     q: str = Field(min_length=3, max_length=400)
-    rerank: bool = False
 
 
 def passages(ranked):
@@ -156,7 +157,14 @@ def column(question, ranked, retrieval_ms, top=1.0):
             "grounded": False,
         }
     started = time.perf_counter()
-    text, fallback = answer(question, ranked)
+    key = (question, tuple(c["page"] for _, c in ranked))
+    if key in CACHE:
+        text, fallback = CACHE[key]
+    else:
+        text, fallback = answer(question, ranked)
+        if len(CACHE) >= 32:
+            CACHE.clear()
+        CACHE[key] = (text, fallback)
     return {
         "answer": text,
         "pages": list(dict.fromkeys(c["page"] for _, c in ranked)),
@@ -226,6 +234,8 @@ async def ask_stream(body: Ask):
     """One event stream for all three arms: meta, then tokens, then done."""
     loop = asyncio.get_running_loop()
     events: asyncio.Queue = asyncio.Queue()
+    if not STREAMS.acquire(blocking=False):
+        raise HTTPException(429, "two answers at a time; try again in a few seconds")
     top = confidence(body.q)
 
     def emit(payload):
@@ -299,11 +309,14 @@ async def ask_stream(body: Ask):
 
     async def events_out():
         finished = 0
-        while finished < 3:
-            payload = await events.get()
-            if payload["kind"] == "done":
-                finished += 1
-            yield f"data: {json.dumps(payload)}\n\n"
+        try:
+            while finished < 3:
+                payload = await events.get()
+                if payload["kind"] == "done":
+                    finished += 1
+                yield f"data: {json.dumps(payload)}\n\n"
+        finally:
+            STREAMS.release()
 
     return StreamingResponse(events_out(), media_type="text/event-stream")
 
@@ -364,7 +377,17 @@ def health():
 
 @app.get("/api/results")
 def results():
-    return json.loads(RESULTS.read_text(encoding="utf-8"))
+    """Nine aggregates for the bars. The per-question rows stay in the file."""
+    data = json.loads(RESULTS.read_text(encoding="utf-8"))
+    fields = ("hit_at_5", "hit_at_5_ci", "mrr", "citation", "citation_ci")
+    return {
+        "questions": data.get("questions"),
+        **{
+            arm: {field: values.get(field) for field in fields}
+            for arm, values in data.items()
+            if isinstance(values, dict) and "hit_at_5" in values
+        },
+    }
 
 
 @app.get("/")

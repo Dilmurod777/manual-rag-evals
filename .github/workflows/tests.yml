@@ -19,9 +19,15 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - name: Dependencies
         run: pip install -r requirements.txt pytest
+      - name: Cache the extracted manual
+        uses: actions/cache@v4
+        with:
+          path: data
+          key: ac43-13-1b-raw-v1
       - name: Manual
         run: |
           mkdir -p data
+          test -f data/ac43-13-1b.txt && exit 0
           curl -sSL -o data/ac43-13-1b.pdf "$RAG_CORPUS_URL"
           pdftotext -raw data/ac43-13-1b.pdf data/ac43-13-1b.txt
       - name: Unit tests

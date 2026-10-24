@@ -47,7 +47,15 @@ def rerank(question, ranked, depth=12, keep=5):
     }
     try:
         reply = httpx.post(OLLAMA, json=payload, timeout=60).json()
-        order = [int(n) for n in re.findall(r"\d+", reply["message"]["content"])]
+        raw = reply["message"]["content"]
+        order = []
+        # "Page 11-16" must not become indices 11 and 16
+        for n in re.findall(r"(?<![\d-])(\d{1,2})(?![\d-])", raw):
+            i = int(n)
+            if 0 <= i < len(candidates) and i not in order:
+                order.append(i)
+        if len(order) < 3:
+            return ranked[:keep]
     except Exception:
         return ranked[:keep]
     picked, seen, pages = [], set(), set()
