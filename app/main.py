@@ -48,16 +48,21 @@ def answer(question, ranked):
             json={
                 "model": MODEL,
                 "stream": False,
-                "options": {"temperature": 0},
+                # Thinking burns the whole token budget before any answer appears,
+                # and 8k context keeps the 27B on the GPU instead of the CPU.
+                "think": False,
+                "options": {"temperature": 0, "num_ctx": 8192, "num_predict": 160},
                 "messages": [
                     {"role": "system", "content": SYSTEM},
                     {"role": "user", "content": prompt},
                 ],
             },
-            timeout=90,
+            timeout=60,
         )
         reply.raise_for_status()
         text = reply.json()["message"]["content"].strip()
+        if not text:
+            raise ValueError("empty reply")
     except Exception:
         text = f"No model running, so here is the passage itself: {ranked[0][1]['text'][:400]} (Page {ranked[0][1]['page']})"
     return text
@@ -66,7 +71,7 @@ def answer(question, ranked):
 def column(question, ranked):
     return {
         "answer": answer(question, ranked),
-        "pages": [c["page"] for _, c in ranked],
+        "pages": list(dict.fromkeys(c["page"] for _, c in ranked)),
         "top": ranked[0][1]["text"][:420],
     }
 
