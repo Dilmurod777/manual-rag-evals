@@ -68,18 +68,26 @@ class BM25:
 
 class Vector:
     def __init__(self, chunks):
+        # Loaded on first search, so importing the package does not need the cache.
+        self.source = chunks
+        self.vec = None
+        self.chunks = None
+
+    def load(self):
+        if self.vec is not None:
+            return
         saved = np.load(OUT)
-        expected = fingerprint(chunks)
-        if str(saved["fingerprint"]) != expected:
+        if str(saved["fingerprint"]) != fingerprint(self.source):
             raise RuntimeError(
                 "data/embeddings.npz was built from different text; "
                 "run `python app/embed.py` before searching"
             )
-        by_id = {c["id"]: c for c in chunks}
+        by_id = {c["id"]: c for c in self.source}
         self.vec = saved["vec"]
         self.chunks = [by_id[str(i)] for i in saved["ids"]]
 
     def search(self, query, k=5):
+        self.load()
         scores = self.vec @ embed([query])[0]
         order = np.argsort(-scores)[:k]
         return [(float(scores[i]), self.chunks[i]) for i in order]
