@@ -102,8 +102,12 @@ question
 
 | pipeline | hit@5 | MRR | answer cites the gold page |
 |---|---|---|---|
-| A · vector only | 0.98 | 0.894 | 0.92 |
-| B · hybrid | **1.00** | **0.939** | **0.92** |
+| A · vector only | 59/60 | 0.894 | 55/60 |
+| B · hybrid | **60/60** | **0.939** | **55/60** |
+
+One question is worth 1.7 points at this size. The 95% intervals are wide enough to swallow
+every gap in that table except the miss itself — hit@5 is 0.91–1.00 for A and 0.94–1.00 for
+B; citation is 0.82–0.96 for both. That is why the counts are written as counts.
 
 A misses exactly one page: "how is pressure applied over a laminated plastic repair while
 it cures" (Page 3-4) returns Pages 1-25, 3-6, 3-1 and 3-7 instead. B finds it.
@@ -143,9 +147,28 @@ asking for trust.
 
 The caveat, stated plainly: the questions were written after reading passages that
 retrieval had already returned, so both pipelines are flattered and hit@5 sits near its
-ceiling. The honest signals are MRR — B puts the right page first more often — and the one
-page A cannot reach at all. A paraphrase-only question set is the next thing this repo
-needs; its absence is the weakest part of the result.
+ceiling. That is why there is a second set.
+
+## A blind set
+
+Forty more questions were written from the manual's table of contents alone — pick a
+section, read its opening page, write the question — with no retrieval result in view.
+Nothing was tuned against them. `eval/blind.jsonl`, checked by the same reader.
+
+| pipeline | hit@5 | MRR | answer cites the gold page |
+|---|---|---|---|
+| A · vector only | 39/40 | 0.852 | 38/40 |
+| B · hybrid | 38/40 | 0.921 | 34/40 |
+
+This is the more interesting table. With 40 questions the 95% interval is about ±9 points,
+so the two pipelines are not distinguishable on hit@5, and the citation gap sits inside its
+own interval as well. What survives is MRR: on questions nobody tuned for, B still puts the
+right page first more often (0.921 against 0.852), while its written answers named the gold
+page less often (34 against 38). Hybrid retrieves better, vector answers more reliably, and
+forty questions cannot settle which matters more. Both misses are honest: "what is the first
+step before repairing a metal structure" (Page 4-1, the chapter's opening instruction) is
+not a paragraph a retriever can match to a question, and hybrid's other miss is the
+equipment-change question on Page 10-1, answered one section later on 10-14.
 
 ---
 
@@ -250,6 +273,7 @@ tests/          three asserts on the parts that would break silently
 ## Limits
 
 - One manual, 60 questions, one machine. The numbers describe this corpus.
-- The gold set is not paraphrase-hard; read the caveat above before quoting hit@5.
+- The blind set is 40 questions: enough to keep the tuned set honest, not enough to rank the
+  two pipelines.
 - Local only. A public deploy would need a queue, a quota and a GPU that is not a laptop.
 - No fine-tuning, no OCR, no answer without a citation.

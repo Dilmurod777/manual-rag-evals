@@ -558,6 +558,14 @@
         "retrieval_ms": 245,
         "answer_ms": 2668
       }
+    ],
+    "hit_at_5_ci": [
+      0.911,
+      0.997
+    ],
+    "citation_ci": [
+      0.819,
+      0.964
     ]
   },
   "hybrid": {
@@ -1106,6 +1114,14 @@
         "retrieval_ms": 183,
         "answer_ms": 2614
       }
+    ],
+    "hit_at_5_ci": [
+      0.94,
+      1.0
+    ],
+    "citation_ci": [
+      0.819,
+      0.964
     ]
   }
 }

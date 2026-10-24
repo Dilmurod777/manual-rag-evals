@@ -1,12 +1,17 @@
 """Every gold row must be provable: its evidence has to exist on its own page."""
 
 import json
+import sys
 from collections import defaultdict
 from pathlib import Path
 
 from app.corpus import paragraphs
 
-GOLD = Path(__file__).resolve().parent / "gold.jsonl"
+GOLD = (
+    Path(sys.argv[1])
+    if len(sys.argv) > 1
+    else Path(__file__).resolve().parent / "gold.jsonl"
+)
 
 
 def flat(text):
