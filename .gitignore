@@ -2,3 +2,4 @@ data/
 .venv/
 __pycache__/
 *.egg-info/
+eval/variance-[0-9].json

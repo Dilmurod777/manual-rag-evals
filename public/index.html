@@ -108,6 +108,8 @@
   .bar.alt .fill { background: var(--accent); }
   .bar .num { text-align: right; color: var(--ink); }
   .foot { font-size: .74rem; color: var(--muted); margin-top: .9rem; }
+  .diff { grid-column: 1 / -1; margin: .9rem 0 0; font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+  .diff.disagree { color: var(--accent); }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .ungrounded { color: var(--muted); font-style: italic; }
   @media (prefers-reduced-motion: reduce) {
@@ -203,7 +205,25 @@ EXAMPLES.forEach((text) => {
   $("chips").append(b);
 });
 
+const chosen = {};
+const diff = document.createElement("p");
+diff.className = "diff";
+diff.style.gridColumn = "1 / -1";
+document.querySelector("main").append(diff);
+
+function renderDiff() {
+  const names = ["A", "B", "C"];
+  if (!names.every((name) => chosen[name])) return;
+  const same = new Set(names.map((name) => chosen[name])).size === 1;
+  diff.textContent =
+    names.map((name) => `${name} ${chosen[name]}`).join(" · ") +
+    (same ? " · same page" : " · they disagree");
+  diff.classList.toggle("disagree", !same);
+}
+
 function meta(prefix, data) {
+  chosen[prefix] = data.pages[0] || "";
+  renderDiff();
   const ev = data.evidence;
   const body = ev.sentences.map((s) => s.hit ? `<mark>${esc(s.text)}</mark>` : esc(s.text)).join(" ");
   $("t" + prefix).innerHTML =
