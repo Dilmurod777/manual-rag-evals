@@ -1,0 +1,491 @@
+{
+  "model": "qwen3.8-27b",
+  "measured": "2026-10-25",
+  "counts": {
+    "PARTIAL": 6,
+    "SUPPORTED": 52,
+    "UNSUPPORTED": 2
+  },
+  "rows": [
+    {
+      "q": "When inspecting wood, how do you decide whether a stain is harmless or decay?",
+      "gold": "1-3",
+      "answer": "Examine all stains and discoloration carefully to determine whether they are harmless or in a stage of preliminary or advanced decay. In doubtful cases, reject the wood or make a further inspection in the form of microscopic examination or toughness test, the latter means being the more reliable. (Page 1-3)",
+      "cited": "1-3",
+      "verdict": "PARTIAL",
+      "why": "The specific instruction to examine stains and discoloration to determine if they are harmless or decay is present in the text, but the recommendation to use microscopic examination or a toughness test in doubtful cases is found in the section for compression failures, not the section for decay."
+    },
+    {
+      "q": "Can a cracked wooden spar be repaired instead of replaced?",
+      "gold": "1-16",
+      "answer": "Yes, cracked spars (except box spars) may be repaired by bonding plates of spruce or plywood to develop longitudinal shear on both sides. The presence of cracks does not necessarily mean that the spar must be discarded. (Page 1-16)",
+      "cited": "1-16",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that cracked spars (except box spars) may be repaired by bonding plates of spruce or plywood to develop longitudinal shear on both sides, which directly supports the answer's claims."
+    },
+    {
+      "q": "Are punch-type fabric testers FAA approved?",
+      "gold": "2-35",
+      "answer": "No, mechanical devices used to test fabric by pressing against or piercing the finished fabric are not FAA approved. (Page 2-35)",
+      "cited": "2-35",
+      "verdict": "SUPPORTED",
+      "why": "The text on Page 2-34 explicitly states that \"Mechanical devices used to test fabric by pressing against or piercing the finished fabric are not FAA approved,\" which directly supports the mechanic's answer."
+    },
+    {
+      "q": "Why is dope-proof paint applied over an organic coating before fabric is doped?",
+      "gold": "6-12",
+      "answer": "Dope-proof paint is applied to prevent the dope from soaking through and loosening the organic finish on the metal structure. (Page 6-12)",
+      "cited": "6-12",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that dope-proof paint is applied to prevent the dope from soaking through and loosening the organic finish on the metal structure."
+    },
+    {
+      "q": "What governs the seams when a large section of fabric is installed on a wing?",
+      "gold": "2-37",
+      "answer": "All machine-sewn and/or overlapped and doped seams should be made in accordance with the guidelines specified in paragraphs 2-7 and 2-8. (Page 2-37)",
+      "cited": "2-37",
+      "verdict": "SUPPORTED",
+      "why": "The text in paragraph 2-42, item g, explicitly states that when installing large sections of fabric on a wing, all machine-sewn and/or overlapped and doped seams should be made in accordance with the guidelines specified in paragraphs 2-7 and 2-8."
+    },
+    {
+      "q": "How can excessive moisture in a wood member be detected?",
+      "gold": "1-14",
+      "answer": "Moisture meters are effective tools for detecting excessive moisture content by inserting a probe into the wood member to read the moisture content directly. A reading over 20 percent indicates the probability of fungus growth in the member. (Page 1-14)",
+      "cited": "1-14",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that moisture meters detect excessive moisture by inserting a probe to read content directly and that any reading over 20 percent indicates the probability of fungus growth."
+    },
+    {
+      "q": "What does a satisfactory bonded wood joint require of the adhesive film?",
+      "gold": "1-5",
+      "answer": "The bonding operation must be carefully controlled to obtain a continuous thin and uniform film of solid adhesive in the joint. This film must provide adequate adhesion and penetration to both surfaces of the wood. (Page 1-5)",
+      "cited": "1-5",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that the bonding operation must be carefully controlled to obtain a continuous thin and uniform film of solid adhesive with adequate adhesion and penetration to both surfaces of the wood."
+    },
+    {
+      "q": "Before repairing a damaged tubular member, what else must be inspected?",
+      "gold": "4-62",
+      "answer": "Prior to repairing tubular members, you must carefully examine the structure surrounding any visible damage to ensure no secondary damage remains undetected. This secondary damage may occur remote from the primary damage due to the transmission of the damaging load along the tube. (Page 4-62)",
+      "cited": "4-62",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that prior to repairing tubular members, one must examine the surrounding structure for secondary damage that may be remote from the primary damage due to the transmission of the damaging load along the tube."
+    },
+    {
+      "q": "At what temperature do brazing and soldering differ?",
+      "gold": "4-53",
+      "answer": "Brazing materials normally melt at temperatures above 425 \u00b0C (800 \u00b0F), while solders melt at temperatures considerably lower. (Page 4-53)",
+      "cited": "4-53",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states in paragraph c that brazing materials normally melt at temperatures above 425 \u00b0C (800 \u00b0F) while solders melt at temperatures considerably lower, which matches the answer's claims."
+    },
+    {
+      "q": "Where are the minimum bend radii for aircraft plywood tabulated?",
+      "gold": "1-25",
+      "answer": "The minimum recommended bend radii for aircraft plywood are tabulated in Table 1-2. (Page 1-25)",
+      "cited": "1-25",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly contains the heading \"TABLE 1-2. Minimum recommended bend radii for aircraft plywood,\" which directly confirms the answer's claim."
+    },
+    {
+      "q": "What precautions apply when handling hydraulic fluid?",
+      "gold": "9-14",
+      "answer": "Ensure the system is properly identified, never mix different fluid categories, and protect fluids from contamination. Additionally, wear impervious gloves and eye protection, use a respirator if mist exposure is possible, and avoid ingestion. (Page 9-14)",
+      "cited": "9-14",
+      "verdict": "PARTIAL",
+      "why": "The page text supports the claims regarding system identification, not mixing fluids, and protecting from contamination, but it does not contain the specific instructions to wear impervious gloves, use a respirator for mist exposure, or avoid ingestion."
+    },
+    {
+      "q": "What can cause banging and chattering noises in a hydraulic system?",
+      "gold": "9-17",
+      "answer": "Unusual noise such as banging and chattering may be caused by air or contamination in the system. It can also be caused by a faulty pressure regulator, another pressure-control unit, or a lack of proper accumulator action (Page 9-17).",
+      "cited": "9-17",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states in point (5) that unusual noise such as banging and chattering may be caused by air or contamination, a faulty pressure regulator, another pressure-control unit, or a lack of proper accumulator action."
+    },
+    {
+      "q": "What defects should a tire inspection look for?",
+      "gold": "9-10",
+      "answer": "Inspect for cuts, foreign object damage, weather checking, cracking, snags, and bulges that indicate separation or damage. Also check for flat spots exposing fabric, bead damage from heat, and clearance rubbing marks (Page 9-10).",
+      "cited": "9-10",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly lists cuts, foreign object damage, weather checking, cracking, snags, bulges indicating separation, flat spots exposing fabric, bead damage from heat, and clearance rubbing marks as items to inspect for."
+    },
+    {
+      "q": "Why must welding on an engine mount be of the highest quality?",
+      "gold": "4-71",
+      "answer": "Vibration tends to accentuate any minor defect. (Page 4-71)",
+      "cited": "4-71",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that \"vibration tends to accentuate any minor defect\" as the reason why welding on an engine mount must be of the highest quality."
+    },
+    {
+      "q": "How should control cable tension be set?",
+      "gold": "7-39",
+      "answer": "Carefully adjust control cable tension in accordance with the airframe manufacturer's recommendations. On large aircraft, take the temperature of the immediate area into consideration when using a tension meter. (Page 7-39)",
+      "cited": "7-39",
+      "verdict": "SUPPORTED",
+      "why": "The answer accurately reflects the instructions in paragraph 7-153 regarding adjusting tension per manufacturer recommendations and considering temperature on large aircraft."
+    },
+    {
+      "q": "Which aluminum fuel tanks may be repaired by welding?",
+      "gold": "8-19",
+      "answer": "Welded or riveted fuel tanks made of commercially pure aluminum, 3003, 5052, or similar alloys may be repaired by welding. (Page 8-19)",
+      "cited": "8-19",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that welded or riveted fuel tanks made of commercially pure aluminum, 3003, 5052, or similar alloys may be repaired by welding."
+    },
+    {
+      "q": "What should a periodic wheel inspection look for?",
+      "gold": "9-5",
+      "answer": "Inspect the wheels periodically for cracks, corrosion, dents, distortion, and faulty bearings in accordance with the manufacturer\u2019s service information. (Page 9-5)",
+      "cited": "9-5",
+      "verdict": "SUPPORTED",
+      "why": "The text on Page 9-5 explicitly states to inspect wheels periodically for cracks, corrosion, dents, distortion, and faulty bearings in accordance with the manufacturer\u2019s service information."
+    },
+    {
+      "q": "Can intergranular corrosion on a propeller blade be repaired in the field?",
+      "gold": "8-39",
+      "answer": "No, when intergranular corrosion is present, the repair can be properly accomplished only by an appropriately certificated propeller repair facility. (Page 8-39)",
+      "cited": "8-39",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that when intergranular corrosion is present, the repair can be properly accomplished only by an appropriately certificated propeller repair facility, which confirms that it cannot be repaired in the field."
+    },
+    {
+      "q": "Why are acrylic windshields called lifetime windshields?",
+      "gold": "3-24",
+      "answer": "Acrylic windshields are called \"lifetime\" windshields to distinguish them from those made of the much shorter-lived acetate material. (Page 3-24)",
+      "cited": "3-24",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that acrylic windshields are called \"lifetime\" windshields to distinguish them from those made of the much shorter-lived acetate material."
+    },
+    {
+      "q": "Why should rivet heads not be removed with a cold chisel?",
+      "gold": "4-12",
+      "answer": "Removal of rivet heads with a cold chisel and hammer is not recommended because skin damage and distorted rivet holes will probably result (Page 4-12).",
+      "cited": "4-12",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that removal of rivet heads with a cold chisel and hammer is not recommended because skin damage and distorted rivet holes will probably result."
+    },
+    {
+      "q": "A fatigue crack is suspected at the surface of an accessible part. Which inspection finds it with little part preparation?",
+      "gold": "5-16",
+      "answer": "A high-frequency eddy current inspection can be performed with a minimum of part preparation and a high degree of sensitivity. (Page 5-16)",
+      "cited": "5-16",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that if the surface is accessible, a high-frequency eddy current inspection can be performed with a minimum of part preparation and a high degree of sensitivity."
+    },
+    {
+      "q": "Why is magnetic particle inspection unsuitable for an aluminum fitting?",
+      "gold": "5-19",
+      "answer": "Magnetic particle inspection can be used only on ferro-magnetic materials, such as iron and steel. Since aluminum is not a ferro-magnetic material, the method is unsuitable for it. (Page 5-19)",
+      "cited": "5-19",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that magnetic particle inspection can be used only on ferro-magnetic materials (iron and steel), which logically confirms that it is unsuitable for aluminum, a non-ferro-magnetic material."
+    },
+    {
+      "q": "Which method detects surface defects in nonmagnetic metals and in nonmetallic materials?",
+      "gold": "5-29",
+      "answer": "The penetrant method is effective for detecting surface defects in nonmagnetic metals and in a variety of nonmetallic materials. (Page 5-29)",
+      "cited": "5-29",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that \"The penetrant method is effective for detecting surface defects in nonmagnetic metals and in a variety of nonmetallic materials,\" which directly supports the answer's claim."
+    },
+    {
+      "q": "Which instruments can test bonded structure for disbonds from one side?",
+      "gold": "5-46",
+      "answer": "The Sondicator, Harmonic Bond Tester, Acoustic Flaw Detector, Audible Bond Tester, Fokker Bond Tester, 210 Bond Tester, and Bondascope 2100 can be used for the inspection of bonded structures. (Page 5-48)",
+      "cited": "5-48",
+      "verdict": "PARTIAL",
+      "why": "The page text lists the instruments as representative examples for the inspection of bonded structures but does not explicitly state that they can test for disbonds \"from one side.\""
+    },
+    {
+      "q": "What must the equipment list show for a special equipment item when its arm is unknown?",
+      "gold": "10-14",
+      "answer": "Show the item by name, make, model, weight, and arm, and determine the arm by actual measurement when it is not available. (Page 10-14)",
+      "cited": "10-14",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states to show special equipment items by name, make, model, weight, and arm, and to determine the arm by actual measurement when it is not available."
+    },
+    {
+      "q": "What should be checked where electrical arcing has left marks on conducting surfaces?",
+      "gold": "11-73",
+      "answer": "Check for intermittent electrical contact between conducting surfaces that may become a part of a ground plane or a current path. (Page 11-73)",
+      "cited": "11-73",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states in section 11-188.a that if there is evidence of electrical arcing, one should check for intermittent electrical contact between conducting surfaces that may become a part of a ground plane or a current path."
+    },
+    {
+      "q": "What do the battery compartment venting tubes and attachments prevent?",
+      "gold": "11-6",
+      "answer": "Battery and battery compartment venting system tubes, nipples, and attachments provide a means of avoiding the potential buildup of explosive gases. (Page 11-6)",
+      "cited": "11-6",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that the battery and battery compartment venting system tubes, nipples, and attachments provide a means of avoiding the potential buildup of explosive gases."
+    },
+    {
+      "q": "When must a pitot-static leak test be performed?",
+      "gold": "12-20",
+      "answer": "Pitot-static leak tests should be accomplished whenever a connection has been loosened or an instrument replaced. (Page 12-20)",
+      "cited": "12-20",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that pitot-static leak tests should be accomplished whenever a connection has been loosened or an instrument replaced."
+    },
+    {
+      "q": "What must a repair or refinish of a control surface avoid doing aft of the hinge line?",
+      "gold": "1-15",
+      "answer": "Repairs or refinishing must avoid the addition of weight aft of the hinge line. (Page 1-15)",
+      "cited": "1-15",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states in paragraph 1-38 that care must be exercised to ensure repairs do not involve the addition of weight aft of the hinge line."
+    },
+    {
+      "q": "How are aluminum plate and sheet usually marked to show their grade?",
+      "gold": "4-2",
+      "answer": "Aluminum plate and sheet are usually marked with specification numbers or code markings in rows approximately 5 inches apart. (Page 4-2)",
+      "cited": "4-2",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that plate and sheet are usually marked with specification numbers or code markings in rows approximately 5 inches apart."
+    },
+    {
+      "q": "When repairing sheet metal, how should the rivet spacing and edge distance be chosen?",
+      "gold": "4-19",
+      "answer": "Unless structural deficiencies are suspected, the rivet spacing and edge distance should duplicate those of the original aircraft structure. If structural deficiencies are suspected, minimum edge distance and spacing values should be used, such as 2 times the rivet diameter for edge distance and 3 times for spacing in single rows. (Page 4-19)",
+      "cited": "4-19",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that unless structural deficiencies are suspected, spacing and edge distance should duplicate the original structure, and if they are suspected, minimums of 2 times the rivet diameter for edge distance and 3 times for spacing apply to single rows."
+    },
+    {
+      "q": "If the original rib lace spacing is not known, what maximum spacing may be used on the wings?",
+      "gold": "2-21",
+      "answer": "When the original spacing cannot be determined, the maximum spacing illustrated in figure 2-12 should be used on the wings and wing control surfaces. (Page 2-19)",
+      "cited": "2-19",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that when the original spacing cannot be determined, the maximum spacing illustrated in figure 2-12 should be used on the wings and wing control surfaces."
+    },
+    {
+      "q": "What should be inspected in a battery compartment and around its vent?",
+      "gold": "6-15",
+      "answer": "Inspect the battery compartment for electrolyte spillage, corrosion, and the condition of protective paint. Inspect the area around the battery vent for corrosion (Page 6-15).",
+      "cited": "6-15",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states in paragraph 6-65 to inspect the battery compartment for electrolyte spillage, corrosion, and condition of protective paint, and to inspect the area around the battery vent for corrosion."
+    },
+    {
+      "q": "Which rivets are used to join corrosion-resistant steel parts such as firewalls and exhaust stack brackets?",
+      "gold": "7-1",
+      "answer": "Corrosion-resistant steel rivets are used primarily in riveting corrosion-resistant steel parts such as firewalls and exhaust stack bracket attachments. (Page 7-1)",
+      "cited": "7-1",
+      "verdict": "SUPPORTED",
+      "why": "The text on Page 7-1, paragraph 7-2.f, explicitly states that corrosion-resistant steel rivets are used primarily in riveting corrosion-resistant steel parts such as firewalls and exhaust stack bracket attachments."
+    },
+    {
+      "q": "After a turnbuckle is adjusted, how must it be secured, and may the safety wire be reused?",
+      "gold": "7-43",
+      "answer": "After adjustment, the turnbuckle must be secured with safety wire using the double or single-wrap method, or an approved special safetying device. Safety wire must not be reused. (Page 7-43)",
+      "cited": "7-43",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that turnbuckles must be safetied with safety wire using the double or single-wrap method or an approved special safetying device, and it explicitly commands \"Do not reuse safety wire.\""
+    },
+    {
+      "q": "What must be done to the wheel bearings before a wheel is installed on the axle?",
+      "gold": "9-12",
+      "answer": "The wheel bearings should be cleaned and packed with approved grease. (Page 9-12)",
+      "cited": "9-12",
+      "verdict": "PARTIAL",
+      "why": "The provided text confirms that wheel bearings should be cleaned, but it cuts off before stating that they must be packed with approved grease."
+    },
+    {
+      "q": "How often must the static system and each altimeter be inspected and tested for IFR operations?",
+      "gold": "12-7",
+      "answer": "Aircraft conducting operations in controlled airspace under instrument flight rule (IFR) are required to have their static system(s) and each altimeter instrument inspected and tested within the previous 24 calendar months. (Page 12-7)",
+      "cited": "12-7",
+      "verdict": "SUPPORTED",
+      "why": "The text on Page 12-7 explicitly states that aircraft conducting IFR operations in controlled airspace are required to have their static systems and each altimeter inspected and tested within the previous 24 calendar months."
+    },
+    {
+      "q": "How is a pitot heater checked for proper operation?",
+      "gold": "12-19",
+      "answer": "Check the heater element or the entire tube for proper operation by noting either ammeter current or that the tube or port is hot to the touch. (Page 12-19)",
+      "cited": "12-19",
+      "verdict": "SUPPORTED",
+      "why": "The text in paragraph 12-55 explicitly states to check the heater element or entire tube by noting ammeter current or that the tube or port is hot to the touch."
+    },
+    {
+      "q": "When may 2017 or 2024 rivets be replaced with 2117 rivets?",
+      "gold": "4-16",
+      "answer": "2017 rivets of 3/16 inch diameter or less, and 2024 rivets of 5/32 inch diameter or less, may be replaced with 2117 rivets for general repairs. The replacement 2117 rivets must be 1/32 inch greater in diameter than the rivets they replace. (Page 4-16)",
+      "cited": "4-16",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that 2017 rivets of 3/16 inch or less and 2024 rivets of 5/32 inch or less may be replaced with 2117 rivets for general repairs, provided the replacement rivets are 1/32 inch greater in diameter."
+    },
+    {
+      "q": "What must be done before an air-oil shock strut is removed or disassembled?",
+      "gold": "9-2",
+      "answer": "The air valve should be opened to make sure that all air pressure is removed. (Page 9-2)",
+      "cited": "9-2",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states in the caution section that the air valve should be opened to ensure all air pressure is removed before an air-oil strut is removed or disassembled."
+    },
+    {
+      "q": "What defects should a general inspection of a fabric covering look for?",
+      "gold": "2-33",
+      "answer": "A general inspection should look for loose finishing tape and reinforcing patches, chafing under fairings, brittle, cracking, peeling, or deteriorated coatings, fabric tears and rock damage, broken or missing rib lacing, and rodent nests. The covering should also be uniformly taut with no loose or wrinkled areas, or excess tension. (Page 2-33)",
+      "cited": "2-33",
+      "verdict": "SUPPORTED",
+      "why": "Every defect listed in the answer (loose tape/patches, chafing, coating issues, tears/rock damage, lacing issues, rodent nests, and tension/wrinkle conditions) is explicitly stated in the text on Page 2-33."
+    },
+    {
+      "q": "How should rivets be arranged in a splice so the member does not fail at its outermost holes?",
+      "gold": "4-27",
+      "answer": "Arrange the rivets in the splice so that the design tensile load for the member and splice plate can be carried into the splice without failing the member at the outermost rivet holes. (Page 4-27)",
+      "cited": "4-27",
+      "verdict": "SUPPORTED",
+      "why": "The answer is a direct paraphrase of the final sentence in section j(2) of the provided text, which explicitly states to \"arrange the rivets in the splice so that the design tensile load for the member and splice plate can be carried into the splice without failing the member at the outermost rivet holes.\""
+    },
+    {
+      "q": "What is the first step in removing corrosion from an aluminum part?",
+      "gold": "6-26",
+      "answer": "The first step is to positively identify the metal as aluminum. (Page 6-26)",
+      "cited": "6-26",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly lists \"Positively identify the metal as aluminum\" as step (a) in the examples of removing corrosion from aluminum."
+    },
+    {
+      "q": "Can a copper-sleeve splice replace a five-tuck splice in a control cable?",
+      "gold": "7-32",
+      "answer": "Yes, a patented process using copper sleeves may be used in place of the five-tuck splice on cables up to and including 3/8 inch diameter. (Page 7-33)",
+      "cited": "7-33",
+      "verdict": "PARTIAL",
+      "why": "The page text confirms that copper sleeves can be used for cables up to 3/8 inch diameter, but it does not state that this process is \"patented\" nor does it explicitly mention replacing a \"five-tuck splice\" (it only discusses nicopress, thimble-eye, and lap splices)."
+    },
+    {
+      "q": "How is a tin-plated copper wire size checked for voltage drop over a run?",
+      "gold": "11-22",
+      "answer": "The voltage drop is checked by calculating the product of the resistance per foot, the run length in feet, and the circuit current in amps. This method is demonstrated in Table 11-7 using the formula VD = (Resistance/Ft) (Length) (Current). (Page 11-22)",
+      "cited": "11-22",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly defines the formula for checking calculated voltage drop as the product of resistance per foot, length, and current, and demonstrates this method in Table 11-7."
+    },
+    {
+      "q": "Why should a circuit breaker not be used as a switch?",
+      "gold": "11-16",
+      "answer": "Using a circuit breaker as a switch is not recommended because it will decrease the life of the circuit breaker. (Page 11-16)",
+      "cited": "11-16",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that using a circuit breaker as a switch is not recommended because it will decrease the life of the circuit breaker."
+    },
+    {
+      "q": "What should an antenna inspection check at its mounting base?",
+      "gold": "12-4",
+      "answer": "The inspection should check for missing or poor sealant at the base of the antenna and verify the bonding from the mounting base to the aircraft skin. (Page 12-4)",
+      "cited": "12-4",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly lists \"missing or poor sealant at base of antenna\" and instructs to \"Check the bonding of each antenna from mounting base to the aircraft skin.\""
+    },
+    {
+      "q": "When a wood spar splice is made where the routing is feathered, what plates go on first?",
+      "gold": "1-18",
+      "answer": "Tapered plates conforming to the contour of the routing should be added first. (Page 1-18)",
+      "cited": "1-18",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that if the routing is feathered to the full width of the spar, tapered plates conforming to the contour of the routing should be added first."
+    },
+    {
+      "q": "When is empty weight center of gravity computed with oil included?",
+      "gold": "10-12",
+      "answer": "The empty weight center of gravity is computed with oil included when the aircraft is weighed with full oil, requiring the oil weight to be subtracted to determine the true empty weight. (Page 10-12)",
+      "cited": "10-12",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly provides a calculation example titled \"Empty weight and empty weight center of gravity when aircraft is weighed with oil\" which demonstrates subtracting the oil weight from the total weighed weight to determine the empty weight and center of gravity."
+    },
+    {
+      "q": "Which engine case defects call for disassembling the gear train?",
+      "gold": "8-3",
+      "answer": "Disassemble the gear train and inspect the propeller shaft, reduction gears, and accessory drive gears for nicks, cracks, or spalling. (Page 8-3)",
+      "cited": "8-3",
+      "verdict": "UNSUPPORTED",
+      "why": "The page text lists \"Loose, sheared, or spalled cap screws or bolts\" and \"Cracks in the case\" as the defects requiring disassembly, whereas the answer incorrectly claims that nicks, cracks, or spalling on the propeller shaft, reduction gears, and accessory drive gears are the defects that call for disassembling the gear train."
+    },
+    {
+      "q": "Are rasped surfaces acceptable at the corners of a scarf patch?",
+      "gold": "1-26",
+      "answer": "The provided passages do not state whether rasped surfaces are acceptable at the corners of a scarf patch. (Page 1-26)",
+      "cited": "1-26",
+      "verdict": "UNSUPPORTED",
+      "why": "The page text explicitly states that rasped surfaces are not recommended except at the corners of scarf patches, directly contradicting the answer's claim that the text does not state whether they are acceptable."
+    },
+    {
+      "q": "How should the viscosity of dope be set for coating fabric?",
+      "gold": "2-27",
+      "answer": "The viscosity should be adjusted to uniformly wet the fabric, indicated by the fabric becoming translucent so that it penetrates through but does not drip or run down the opposite side. (Page 2-27)",
+      "cited": "2-27",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that the viscosity should be adjusted to uniformly wet the fabric, indicated by it becoming translucent so it penetrates through but does not drip or run down the opposite side."
+    },
+    {
+      "q": "How is pressure applied over a laminated plastic repair while it cures?",
+      "gold": "3-4",
+      "answer": "Pressure is applied by enclosing the repair in a bag of plastic film or thin rubber and removing air with a vacuum source so atmospheric pressure exerts force on the repair. Alternatively, pressure can be applied using tape or sandbags over the repair. (Page 3-6)",
+      "cited": "3-6",
+      "verdict": "PARTIAL",
+      "why": "The text supports the claim about using a vacuum bag to apply atmospheric pressure, but it does not mention using tape or sandbags as an alternative method for applying pressure."
+    },
+    {
+      "q": "Should propeller bolt threads be lubricated before torquing?",
+      "gold": "8-40",
+      "answer": "No, torquing procedures require all bolt threads to be dry, clean, and free of any lubrication before torquing. (Page 8-40)",
+      "cited": "8-40",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that \"torquing procedures require all bolt threads to be dry, clean, and free of any lubrication before torquing,\" which directly supports the answer's claim."
+    },
+    {
+      "q": "Why does hydraulic system troubleshooting depend on the system's complexity?",
+      "gold": "9-16",
+      "answer": "Hydraulic system troubleshooting varies according to the complexity of the system and the components in the system. (Page 9-16)",
+      "cited": "9-16",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that \"Hydraulic system troubleshooting varies according to the complexity of the system and the components in the system,\" which directly supports the answer's claim."
+    },
+    {
+      "q": "What does minimum fuel mean in weight and balance?",
+      "gold": "10-8",
+      "answer": "The minimum fuel for balance purposes is defined as 1/12 gallon per maximum except-take-off horsepower (METO). (Page 10-8)",
+      "cited": "10-8",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that the minimum fuel for balance purposes is 1/12 gallon per maximum except-take-off horsepower (METO)."
+    },
+    {
+      "q": "Where are the detailed magneto-to-engine timing procedures found?",
+      "gold": "8-17",
+      "answer": "The actual process of timing magnetos to an engine is covered in the engine manufacturer\u2019s technical manuals. (Page 8-17)",
+      "cited": "8-17",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that the actual process of timing magnetos to an engine is covered in the engine manufacturer\u2019s technical manuals."
+    },
+    {
+      "q": "What should an electrical connector inspection look for?",
+      "gold": "6-16",
+      "answer": "Inspect electrical connectors for breaks in potting compound and corrosion of pins and wires. If moisture intrusion is suspected, disassemble and clean the connector to inspect it for corrosion (Page 6-16).",
+      "cited": "6-16",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states to inspect electrical connectors for breaks in potting compound and corrosion of pins and wires, and to disassemble and clean them if moisture intrusion is suspected to inspect for corrosion."
+    },
+    {
+      "q": "What load may a swage-type terminal carry?",
+      "gold": "7-30",
+      "answer": "Swage-type terminals are suitable for use in civil aircraft up to, and including, maximum cable loads. (Page 7-30)",
+      "cited": "7-30",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that swage-type terminals are suitable for use in civil aircraft up to, and including, maximum cable loads."
+    },
+    {
+      "q": "What precaution keeps a repaired flight control surface from fluttering?",
+      "gold": "4-9",
+      "answer": "Repair the control surface in such a manner that the weight distribution, stiffness, and mass balance are not affected in any way. (Page 1-15)",
+      "cited": "1-15",
+      "verdict": "SUPPORTED",
+      "why": "The text in paragraph 1-38 explicitly states that control surfaces must be repaired in a manner where \"stiffness, weight distribution, and mass balance are not affected in any way\" to prevent flutter."
+    }
+  ]
+}

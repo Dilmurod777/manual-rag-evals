@@ -1,0 +1,24 @@
+# Judge agreement worksheet
+
+Mark the last column **Y** when the judge is right, **N** when it is wrong.
+Do not read the judge's verdict first if you can avoid it: the point is independent labels.
+
+| # | question | answer | page | your call (Y/N) |
+|---|---|---|---|---|
+| 1 | When inspecting wood, how do you decide whether a stain is harmless or decay? | Examine all stains and discoloration carefully to determine whether they are harmless or in a stage of preliminary or advanced decay. In doubtful cases, reject the wood or make a further inspection in the form of microscopic examination or toughness test, the latter means being the more reliable. (Page 1-3) | 1-3 |  |
+| 2 | What precautions apply when handling hydraulic fluid? | Ensure the system is properly identified, never mix different fluid categories, and protect fluids from contamination. Additionally, wear impervious gloves and eye protection, use a respirator if mist exposure is possible, and avoid ingestion. (Page 9-14) | 9-14 |  |
+| 3 | Which instruments can test bonded structure for disbonds from one side? | The Sondicator, Harmonic Bond Tester, Acoustic Flaw Detector, Audible Bond Tester, Fokker Bond Tester, 210 Bond Tester, and Bondascope 2100 can be used for the inspection of bonded structures. (Page 5-48) | 5-48 |  |
+| 4 | What must be done to the wheel bearings before a wheel is installed on the axle? | The wheel bearings should be cleaned and packed with approved grease. (Page 9-12) | 9-12 |  |
+| 5 | Can a copper-sleeve splice replace a five-tuck splice in a control cable? | Yes, a patented process using copper sleeves may be used in place of the five-tuck splice on cables up to and including 3/8 inch diameter. (Page 7-33) | 7-33 |  |
+| 6 | Which engine case defects call for disassembling the gear train? | Disassemble the gear train and inspect the propeller shaft, reduction gears, and accessory drive gears for nicks, cracks, or spalling. (Page 8-3) | 8-3 |  |
+| 7 | Are rasped surfaces acceptable at the corners of a scarf patch? | The provided passages do not state whether rasped surfaces are acceptable at the corners of a scarf patch. (Page 1-26) | 1-26 |  |
+| 8 | How is pressure applied over a laminated plastic repair while it cures? | Pressure is applied by enclosing the repair in a bag of plastic film or thin rubber and removing air with a vacuum source so atmospheric pressure exerts force on the repair. Alternatively, pressure can be applied using tape or sandbags over the repair. (Page 3-6) | 3-6 |  |
+| 9 | Can a cracked wooden spar be repaired instead of replaced? | Yes, cracked spars (except box spars) may be repaired by bonding plates of spruce or plywood to develop longitudinal shear on both sides. The presence of cracks does not necessarily mean that the spar must be discarded. (Page 1-16) | 1-16 |  |
+| 10 | Are punch-type fabric testers FAA approved? | No, mechanical devices used to test fabric by pressing against or piercing the finished fabric are not FAA approved. (Page 2-35) | 2-35 |  |
+| 11 | Why is dope-proof paint applied over an organic coating before fabric is doped? | Dope-proof paint is applied to prevent the dope from soaking through and loosening the organic finish on the metal structure. (Page 6-12) | 6-12 |  |
+| 12 | What governs the seams when a large section of fabric is installed on a wing? | All machine-sewn and/or overlapped and doped seams should be made in accordance with the guidelines specified in paragraphs 2-7 and 2-8. (Page 2-37) | 2-37 |  |
+| 13 | How can excessive moisture in a wood member be detected? | Moisture meters are effective tools for detecting excessive moisture content by inserting a probe into the wood member to read the moisture content directly. A reading over 20 percent indicates the probability of fungus growth in the member. (Page 1-14) | 1-14 |  |
+| 14 | What does a satisfactory bonded wood joint require of the adhesive film? | The bonding operation must be carefully controlled to obtain a continuous thin and uniform film of solid adhesive in the joint. This film must provide adequate adhesion and penetration to both surfaces of the wood. (Page 1-5) | 1-5 |  |
+| 15 | Before repairing a damaged tubular member, what else must be inspected? | Prior to repairing tubular members, you must carefully examine the structure surrounding any visible damage to ensure no secondary damage remains undetected. This secondary damage may occur remote from the primary damage due to the transmission of the damaging load along the tube. (Page 4-62) | 4-62 |  |
+
+File: `eval/agreement.md`. Send it back filled and the agreement rate goes in the README.
