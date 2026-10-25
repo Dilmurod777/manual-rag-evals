@@ -81,8 +81,8 @@ Every chapter is perfect except chapter 3, where the question about curing press
 one A loses. The chapters with two questions are thin evidence; the spread is there to show
 that the misses are not hiding in one section.
 
-The five answers that cited the wrong page are worth reading, because four of them are one
-page off — the answer is on the neighbouring page of a two-page spread:
+The five answers that cited the wrong page are worth reading, because four of them land
+within two page numbers of the gold page:
 
 | question | gold page | page the answer cited |
 |---|---|---|
@@ -131,7 +131,7 @@ ceiling. That is why there is a second set.
    cited page and fails if the evidence sentence is not there. Questions were written after
    reading the page, never from memory. Three more sets keep that one honest: 40 blind
    questions written from the table of contents, 12 paraphrases that avoid the manual's words,
-   and 12 questions the manual cannot answer.
+   and 40 questions the manual cannot answer.
 6. **Score retrieval and generation separately.** `eval/run_eval.py` reports hit@5, MRR, and
    whether the generated answer cites the gold page. The third number is the one a reader
    cares about and the one most demos skip.
