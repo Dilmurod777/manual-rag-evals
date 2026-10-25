@@ -12,7 +12,7 @@ the page shows what each arm answered, which page it used, and the sentence that
 first asks about a circuit breaker (all three cite Page 11-16); the second is the one A misses;
 the third is a flutter question whose citation lands on the wrong page.
 
-FAA AC 43.13-1B, *Acceptable Methods, Techniques, and Practices Ã¢â‚¬â€ Aircraft Inspection
+FAA AC 43.13-1B, *Acceptable Methods, Techniques, and Practices — Aircraft Inspection
 and Repair*: 646 pages, public domain, 1,758 paragraphs. Ask "why should a circuit breaker
 not be used as a switch?" and every pipeline answers from the same passage on **Page
 11-16**.
@@ -50,13 +50,13 @@ its page instead of inventing an answer, and says so in italics.
 
 | pipeline | hit@5 | MRR | answer cites the gold page |
 |---|---|---|---|
-| A Ã‚Â· vector only | 59/60 | 0.894 | 55/60 |
-| B Ã‚Â· hybrid | **60/60** | **0.939** | **55/60** |
-| C Ã‚Â· hybrid + rerank | **60/60** | **0.944** | 54/60 |
+| A · vector only | 59/60 | 0.894 | 55/60 |
+| B · hybrid | **60/60** | **0.939** | **55/60** |
+| C · hybrid + rerank | **60/60** | **0.944** | 54/60 |
 
 One question is worth 1.7 points at this size. The 95% intervals are wide enough to swallow
-every gap in that table except the miss itself Ã¢â‚¬â€ hit@5 is 0.91Ã¢â‚¬â€œ1.00 for A and 0.94Ã¢â‚¬â€œ1.00 for
-B and C; citation is 0.82Ã¢â‚¬â€œ0.96 for A and B, 0.80Ã¢â‚¬â€œ0.95 for C. That is why the counts are
+every gap in that table except the miss itself — hit@5 is 0.91–1.00 for A and 0.94–1.00 for
+B and C; citation is 0.82â€“0.96 for A and B, 0.80â€“0.95 for C. That is why the counts are
 written as counts. These numbers are repeatable: three full runs over the same 60 questions
 gave identical hit@5, identical citations and MRR to three decimals, because decoding runs at
 temperature 0. What that does **not** buy is confidence in the question set â€” the intervals
@@ -82,7 +82,7 @@ one A loses. The chapters with two questions are thin evidence; the spread is th
 that the misses are not hiding in one section.
 
 The five answers that cited the wrong page are worth reading, because four of them are one
-page off Ã¢â‚¬â€ the answer is on the neighbouring page of a two-page spread:
+page off — the answer is on the neighbouring page of a two-page spread:
 
 | question | gold page | page the answer cited |
 |---|---|---|
@@ -116,7 +116,7 @@ ceiling. That is why there is a second set.
 2. **Extract without destroying the reading order.** `pdftotext -raw`, not `-layout`: the
    manual is two columns, and layout mode interleaves them into sentences like "IN-PLACE
    TREATMENT OF c. Strip paint if required. MAGNESIUM CASTINGS". The PDF also splits words
-   across lines ("reaÃ‚Â­ son", "de- vices"); `app/corpus.py` repairs both.
+   across lines ("rea­ son", "de- vices"); `app/corpus.py` repairs both.
 3. **Cut on the manual's own boundaries.** Paragraphs start with `6-151.`; the splitter
    uses those markers, drops table-of-contents rows (dot leaders), running headers and
    footers, and cuts anything past ~1,100 characters at a sentence end. Each chunk keeps
@@ -156,7 +156,7 @@ question
    +--> {answer, page, grounded, highlighted sentence, retrieval ms, answer ms}
 ```
 
-- `POST /api/ask {"q": "..."}` returns all three arms at once. `q` is 3Ã¢â‚¬â€œ400 characters;
+- `POST /api/ask {"q": "..."}` returns all three arms at once. `q` is 3â€“400 characters;
   anything else is a 422 before a model is touched.
 - `POST /api/ask/stream` is the same question as server-sent events, which is what the page
   uses: `status`, then `meta` (timing, pages, passage), `delta` per token, `done` with the
@@ -168,24 +168,24 @@ question
   a queue. Inside one request, A and B answer together and C answers after them, because the
   27B is already holding the GPU. This is a local demo by design.
 - Context is capped at 8k and `think: false` is set. Without those, Qwen3 spends its whole
-  token budget on hidden reasoning and returns an empty answer Ã¢â‚¬â€ the bug that made the
+  token budget on hidden reasoning and returns an empty answer — the bug that made the
   first demo seem broken.
 
 ---
 
 ## A blind set
 
-Forty more questions were written from the manual's table of contents alone Ã¢â‚¬â€ pick a
-section, read its opening page, write the question Ã¢â‚¬â€ with no retrieval result in view.
+Forty more questions were written from the manual's table of contents alone — pick a
+section, read its opening page, write the question — with no retrieval result in view.
 Nothing was tuned against them. `eval/blind.jsonl`, checked by the same reader.
 
 | pipeline | hit@5 | MRR | answer cites the gold page |
 |---|---|---|---|
-| A Ã‚Â· vector only | 39/40 | 0.852 | 38/40 |
-| B Ã‚Â· hybrid | 38/40 | 0.921 | 34/40 |
-| C Ã‚Â· hybrid + rerank | 39/40 | **0.975** | 38/40 |
+| A · vector only | 39/40 | 0.852 | 38/40 |
+| B · hybrid | 38/40 | 0.921 | 34/40 |
+| C · hybrid + rerank | 39/40 | **0.975** | 38/40 |
 
-This is the more interesting table. With 40 questions the 95% interval is about Ã‚Â±9 points,
+This is the more interesting table. With 40 questions the 95% interval is about ±9 points,
 so the pipelines are not distinguishable on hit@5, and the citation gap sits inside its
 own interval as well. What survives is MRR: on questions nobody tuned for, C puts the
 right page first most often (0.975), then B (0.921), then A (0.852). C also restores the
@@ -205,13 +205,13 @@ can excessive moisture in a wood member be detected?"). Same pages, same evidenc
 
 | pipeline | hit@5 | MRR | answer cites the gold page |
 |---|---|---|---|
-| A Ã‚Â· vector only | 11/12 | 0.812 | 8/12 |
-| B Ã‚Â· hybrid | 9/12 | 0.569 | 8/12 |
-| C Ã‚Â· hybrid + rerank | 11/12 | **0.833** | 10/12 |
+| A · vector only | 11/12 | 0.812 | 8/12 |
+| B · hybrid | 9/12 | 0.569 | 8/12 |
+| C · hybrid + rerank | 11/12 | **0.833** | 10/12 |
 
 Hybrid loses the most, which is the predictable cost of keyword scoring: BM25 rewards the
 manual's own vocabulary, and a paraphrase has none of it. C recovers what B drops. Twelve
-questions is a pilot, not a result Ã¢â‚¬â€ the intervals are enormous Ã¢â‚¬â€ but the direction is
+questions is a pilot, not a result — the intervals are enormous — but the direction is
 consistent with why C exists.
 
 ## Refusing
@@ -236,28 +236,28 @@ being circular, not to make it precise.
 
 ## The three approaches, and what each is good at
 
-**A Ã¢â‚¬â€ vector only.** Embeds the question and compares it to paragraph embeddings.
+**A — vector only.** Embeds the question and compares it to paragraph embeddings.
 
 - Good: finds the right passage when the words differ ("how tight should a turnbuckle be"
   against "cable tension"). Ignores spelling and word order. One index, one comparison, 20 ms.
-- Bad: weak on rare tokens that matter Ã¢â‚¬â€ part numbers, `AN470`, `2117`, `4130`. A paragraph
+- Bad: weak on rare tokens that matter — part numbers, `AN470`, `2117`, `4130`. A paragraph
   that is *about* the topic but does not answer the question ranks well. It cannot tell you
   the page says "do not" rather than "do".
 - Failure here: Page 3-4, the laminate cure pressure, buried in a chapter full of similar
   repair text.
 
-**B Ã¢â‚¬â€ BM25 + vectors, fused.** Keyword scoring and vector scoring, combined by reciprocal
+**B — BM25 + vectors, fused.** Keyword scoring and vector scoring, combined by reciprocal
 rank fusion.
 
 - Good: keeps the exact-token strength of BM25 (part numbers, "circuit breaker", "2117")
-  without giving up semantic matching. Fusion needs no score calibration Ã¢â‚¬â€ it combines
+  without giving up semantic matching. Fusion needs no score calibration — it combines
   ranks, so a BM25 score of 30 and a cosine of 0.8 never have to be made comparable.
 - Bad: two indexes to build and keep. Fusion adds a knob (how deep each list goes) that is
   tuned, not derived. A question whose answer has no exact keyword overlap gains nothing
   over A.
 - Result here: 60/60 hit@5, better MRR, and the one page A misses.
 
-**C Ã¢â‚¬â€ hybrid + rerank.** B's top 30, listed to the same local model with the question, which
+**C — hybrid + rerank.** B's top 30, listed to the same local model with the question, which
 returns the five that answer it.
 
 - Good: ranking is the job a language model is good at here. It reads meaning, not token
@@ -271,16 +271,16 @@ returns the five that answer it.
 
 | questions nobody tuned for | hit@5 | MRR | answer cites gold page |
 |---|---|---|---|
-| B Ã‚Â· hybrid | 38/40 | 0.921 | 34/40 |
-| C Ã‚Â· hybrid + rerank | 39/40 | **0.975** | **38/40** |
+| B · hybrid | 38/40 | 0.921 | 34/40 |
+| C · hybrid + rerank | 39/40 | **0.975** | **38/40** |
 
-A cross-encoder would be the cheaper form of C Ã¢â‚¬â€ a small model instead of a 27B one Ã¢â‚¬â€ and is
+A cross-encoder would be the cheaper form of C — a small model instead of a 27B one — and is
 the obvious next step if this ever left a laptop.
 
 **Why no vector database.** Retrieval is a quarter of a second of a request whose first words
 appear in half a second. The corpus is 1,758
 paragraphs; the vectors fit in memory and a cosine sweep is 20 ms. A vector database earns
-its place at millions of chunks, with metadata filters, or with writes during queries Ã¢â‚¬â€
+its place at millions of chunks, with metadata filters, or with writes during queries —
 none of which this has. Adding one would move 2% of the wait and add a service to run.
 
 ---
@@ -289,22 +289,22 @@ none of which this has. Adding one would move 2% of the wait and add a service t
 
 | step | time |
 |---|---|
-| retrieval, one pipeline (including the query embedding) | 210Ã¢â‚¬â€œ250 ms |
-| the cosine or BM25 comparison alone | 20Ã¢â‚¬â€œ45 ms |
+| retrieval, one pipeline (including the query embedding) | 210â€“250 ms |
+| the cosine or BM25 comparison alone | 20â€“45 ms |
 | one answer | 2.9 s |
-| first words of an answer, streamed | 0.5Ã¢â‚¬â€œ0.8 s |
-| A and B, side by side | 2.5Ã¢â‚¬â€œ3.6 s |
-| all three arms, C answered after A and B | 6.5Ã¢â‚¬â€œ7 s |
+| first words of an answer, streamed | 0.5â€“0.8 s |
+| A and B, side by side | 2.5â€“3.6 s |
+| all three arms, C answered after A and B | 6.5â€“7 s |
 | the rerank call alone | 1.7 s warm, up to 3 s cold |
 
 Medians over the 60 gold questions: 252 ms for A, 209 ms for B, 2.9 s per answer. Retrieval
 is about 8% of the wait, and most of that is the HTTP call to the embedding model, not the
 comparison. The 1,758 paragraphs and their 1,024-dimension vectors fit in memory, and a
 cosine sweep is 20 ms. A vector database earns its place at millions of chunks, metadata
-filters, or writes during queries Ã¢â‚¬â€ none of which this corpus has. The levers that mattered
+filters, or writes during queries — none of which this corpus has. The levers that mattered
 were an 8k context (keeps the 27B on the GPU instead of spilling to the CPU), `think:
 false`, and running the arms in parallel instead of one after the other. Answers stream, so
-the first words appear at about 0.5 s and the page fills as each arm finishes Ã¢â‚¬â€ a 3 s answer
+the first words appear at about 0.5 s and the page fills as each arm finishes — a 3 s answer
 that starts in half a second feels like a different product.
 
 ---
@@ -390,7 +390,7 @@ with `python -m eval.check_gold`; run the tests with `pytest -q`.
   pages do not print `Page X-Y` and `Par X-Y` footers, change `PAGE_LABEL` and `PAR_START` in
   `app/corpus.py`; the rest of the pipeline does not care where the label comes from.
 - **After any text change**: `python -m app.corpus`, then `python -m app.embed`. The first
-  search then refuses with a fingerprint error until the vectors match the text Ã¢â‚¬â€ on purpose.
+  search then refuses with a fingerprint error until the vectors match the text — on purpose.
   Finish with `python -m eval.run_eval`.
 - **Another model.** `RAG_MODEL=qwen3.6-27b python -m uvicorn app.main:app`. Anything that
   Ollama serves over `/api/chat` works.
@@ -450,7 +450,7 @@ restart, which is correct for a demo and wrong for anything shared.
 
 - One manual, one machine. The numbers describe this corpus.
 - Four question sets, not one: 60 tuned, 40 blind, 12 paraphrases, 40 unanswerable. The last
-  two are pilots Ã¢â‚¬â€ wide intervals, useful direction, not enough to rank the pipelines.
+  two are pilots — wide intervals, useful direction, not enough to rank the pipelines.
 - The blind set is 40 questions: enough to keep the tuned set honest, not enough to rank the
   pipelines.
 - Local only. A public deploy would need a queue, a quota and a GPU that is not a laptop.
