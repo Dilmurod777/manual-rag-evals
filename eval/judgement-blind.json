@@ -1,0 +1,332 @@
+{
+  "model": "qwen3.8-27b",
+  "measured": "2026-10-25",
+  "counts": {
+    "SUPPORTED": 37,
+    "UNSUPPORTED": 1,
+    "NO-CITATION": 1,
+    "PARTIAL": 1
+  },
+  "rows": [
+    {
+      "q": "Why does inspecting a wooden aircraft call for methods and equipment other aircraft do not need?",
+      "gold": "1-11",
+      "answer": "Inspection of wooden structure includes some methods, equipment, and awareness of failure modes which are unique to wooden aircraft. (Page 1-11)",
+      "cited": "1-11",
+      "verdict": "SUPPORTED",
+      "why": "The answer is a direct paraphrase of paragraph 1-27, which explicitly states that inspection of wooden structure includes methods, equipment, and awareness of failure modes unique to wooden aircraft."
+    },
+    {
+      "q": "Why are bolt holes a problem in wooden structure?",
+      "gold": "1-37",
+      "answer": "Bolt holes in wooden structure provide a vulnerable entry point for moisture, which can lead to decay or splitting due to moisture content variations. Additionally, excessive moisture at these holes promotes corrosion of the bolts (Page 1-37).",
+      "cited": "1-37",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that bolt holes are a vulnerable entry point for moisture, that moisture variations can lead to decay or splitting, and that excessive moisture promotes bolt corrosion."
+    },
+    {
+      "q": "When may permanent tacks replace a hand-sewn seam?",
+      "gold": "2-8",
+      "answer": "Permanent tacks may be used to secure fabric at wing butt structures in lieu of a hand-sewn seam. (Page 2-8)",
+      "cited": "2-8",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that permanent tacks may be used to secure fabric at wing butt structures in lieu of a hand-sewn seam."
+    },
+    {
+      "q": "What holds reinforcing tape in place before cord lacing or hardware is installed?",
+      "gold": "2-10",
+      "answer": "Reinforcing tape should be securely bonded to the fabric surface with dope before cord lacing or installation of hardware. (Page 2-10)",
+      "cited": "2-10",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that reinforcing tape should be securely bonded to the fabric surface with dope before cord lacing or installation of hardware."
+    },
+    {
+      "q": "What are nitrate and butyrate dope made from?",
+      "gold": "2-25",
+      "answer": "The provided passages do not state what nitrate and butyrate dope are made from. (Page 2-25)",
+      "cited": "2-25",
+      "verdict": "UNSUPPORTED",
+      "why": "The answer claims the text does not state what the dope is made from, but the text explicitly states it is manufactured by treating cellulose derived from wood pulp or cotton linter."
+    },
+    {
+      "q": "How large an opening may a doped-on patch repair?",
+      "gold": "2-39",
+      "answer": "An opening not over 8 inches in length in any direction may be repaired with a doped-on patch on an aircraft with a Vne speed less than 150 mph. (Page 2-39)",
+      "cited": "2-39",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states in paragraph 2-45 that an opening not over 8 inches in length in any direction on an aircraft with a Vne speed less than 150 mph may be repaired with a doped patch."
+    },
+    {
+      "q": "Why must laminate composition be considered before restoring a part?",
+      "gold": "3-1",
+      "answer": "There is a wide variation in the composition and structural application of laminates, which is essential to consider when restoration activities are undertaken. This variation determines which specific type of repair is permissible and appropriate for the damage at hand (Page 3-1).",
+      "cited": "3-1",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that the wide variation in laminate composition and structural application is essential to consider and that this variation determines which specific type of repair is permissible and appropriate for the damage."
+    },
+    {
+      "q": "What are the two main classes of plastics?",
+      "gold": "3-15",
+      "answer": "Plastics may be divided into two main classifications: thermoplastics and thermosetting plastics. (Page 3-15)",
+      "cited": "3-15",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that plastics may be divided into two main classifications, thermoplastics and thermosetting plastics."
+    },
+    {
+      "q": "What is preferred over repairing a badly damaged transparent plastic part?",
+      "gold": "3-19",
+      "answer": "Replace, rather than repair extensively damaged transparent plastic, whenever possible. (Page 3-19)",
+      "cited": "3-19",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states to \"Replace, rather than repair extensively damaged transparent plastic, whenever possible,\" which directly supports the answer's claim."
+    },
+    {
+      "q": "What is the first step before repairing a metal structure?",
+      "gold": "4-1",
+      "answer": "If the parts to be removed are essential to the rigidity of the complete structure, support the structure prior to disassembly in such a manner as to prevent distortion and permanent damage to the remainder of the structure. (Page 4-12)",
+      "cited": "4-12",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states under section \"b. Disassembly Prior to Repairing\" that if parts are essential to rigidity, the structure must be supported prior to disassembly to prevent distortion and permanent damage."
+    },
+    {
+      "q": "What first-aid item belongs where welding is done?",
+      "gold": "4-82",
+      "answer": "A special welder\u2019s first-aid kit should always be kept where it is easily accessible. (Page 4-82)",
+      "cited": "4-82",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states under section 4-116 to \"Always keep a special welder\u2019s first-aid kit where it is easily accessible,\" which directly supports the answer's claim."
+    },
+    {
+      "q": "What does the NDI chapter say about covering every method in detail?",
+      "gold": "5-1",
+      "answer": "The chapter states that the field of NDI is too varied to be covered in detail in the Advisory Circular. It provides only a brief description of the various Nondestructive Testing methods used for inspection. (Page 5-1)",
+      "cited": "5-1",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that the field of NDI is too varied to be covered in detail and that the chapter provides a brief description of the various Nondestructive Testing methods."
+    },
+    {
+      "q": "Which parts deserve magnetic particle inspection?",
+      "gold": "5-20",
+      "answer": "Magnetic particle inspection can be performed on raw material, billets, finished and semifinished materials, welds, and in-service assembled or disassembled parts. (Page 5-19)",
+      "cited": "5-19",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that magnetic particle inspection \"can be performed on raw material, billets, finished and semifinished materials, welds, and in-service assembled or disassembled parts,\" which matches the list of parts provided in the answer."
+    },
+    {
+      "q": "How does computed tomography differ from film radiography?",
+      "gold": "5-37",
+      "answer": "CT involves the generation of cross-sectional views instead of a planar projection, and its images are not obscured by overlying and underlying structures. (Page 5-38)",
+      "cited": "5-38",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that CT produces a cross-sectional image comparable to a physically sectioned slab and that this image is not obscured by overlying and underlying structures, which aligns with the claims in the answer."
+    },
+    {
+      "q": "What does shearography provide in real time?",
+      "gold": "5-55",
+      "answer": "Shearography provides a full-field video strain gauge in real time over large areas. (Page 5-55)",
+      "cited": "5-55",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that the process \"provides a full-field video strain gauge, in real time, over large areas,\" which matches the answer's claims exactly."
+    },
+    {
+      "q": "Why can corrosion be classified by its appearance?",
+      "gold": "6-5",
+      "answer": "Corrosion can be classified by physical appearance because all corrosive attacks begin on the surface of the metal. (Page 6-5)",
+      "cited": "6-5",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that all corrosive attacks begin on the surface of the metal, which makes classification by physical appearance a convenient means of identification."
+    },
+    {
+      "q": "What is abrasive blasting used for on ferrous metals?",
+      "gold": "6-22",
+      "answer": "Abrasive blasting is used for cleaning or finishing ferrous metals by directing a stream of abrasive particles against the surface. It is specifically used for the removal of rust and corrosion and for cleaning prior to painting or plating (Page 6-22).",
+      "cited": "6-22",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that abrasive blasting is a process for cleaning or finishing ferrous metals by directing a stream of abrasive particles against the surface, and that it is used for the removal of rust and corrosion and for cleaning prior to painting or plating."
+    },
+    {
+      "q": "Which parts of an aircraft recovered from water are processed as airframe components?",
+      "gold": "6-43",
+      "answer": "The passages do not answer the question.",
+      "cited": null,
+      "verdict": "NO-CITATION",
+      "why": "answer named no page"
+    },
+    {
+      "q": "Where are AN21 through AN36 clevis bolts used?",
+      "gold": "7-10",
+      "answer": "These bolts are used in applications subject to shear stress and are often used as mechanical pins in control systems (Page 7-10).",
+      "cited": "7-10",
+      "verdict": "SUPPORTED",
+      "why": "The text in paragraph 7-50 explicitly states that AN21 through AN36 clevis bolts are used in applications subject to shear stress and are often used as mechanical pins in control systems."
+    },
+    {
+      "q": "What wire are aircraft control cables made from?",
+      "gold": "7-27",
+      "answer": "Aircraft control cables are generally fabricated from carbon steel or corrosion-resistant steel wire. (Page 7-27)",
+      "cited": "7-27",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states in paragraph 7-140 that aircraft control cables are generally fabricated from carbon steel or corrosion-resistant steel wire."
+    },
+    {
+      "q": "What is the first step in assembling a wire clip-locking turnbuckle?",
+      "gold": "7-45",
+      "answer": "The first step is to engage the threads of the turnbuckle barrel with the threads of the cable terminal and turn the barrel until proper cable tension is reached (Page 7-45).",
+      "cited": "7-45",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly lists \"Engage threads of turnbuckle barrel with threads of cable terminal and turn barrel until proper cable tension is reached\" as step 'a' in the assembly process for clip-locking turnbuckles."
+    },
+    {
+      "q": "Where should engine repair information come from first?",
+      "gold": "8-1",
+      "answer": "Consult the manufacturer\u2019s manuals, service bulletins, and instruction books regarding the repair and overhaul of aircraft engines. (Page 8-1)",
+      "cited": "8-1",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states to \"Consult the manufacturer\u2019s manuals, service bulletins, and instruction books regarding the repair and overhaul... of aircraft engines,\" which directly supports the answer's claim."
+    },
+    {
+      "q": "What determines the wire type used in an ignition harness?",
+      "gold": "8-14",
+      "answer": "The wire type used in an ignition harness depends upon the manufacturing specification for the particular engine. (Page 8-14)",
+      "cited": "8-14",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that the type of wire used in an ignition harness depends upon the manufacturing specification for the particular engine."
+    },
+    {
+      "q": "Why should exhaust system parts never be marked with a lead pencil?",
+      "gold": "8-26",
+      "answer": "Never use lead pencils to mark exhaust system parts because the carbon deposited by those tools will cause cracks from heat concentration and carbonization of the metal. (Page 8-26)",
+      "cited": "8-26",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that carbon deposited by lead pencils will cause cracks from heat concentration and carbonization of the metal."
+    },
+    {
+      "q": "Why is propeller vibration troubleshooting difficult?",
+      "gold": "8-41",
+      "answer": "Vibration troubleshooting is difficult because numerous sources other than the propeller can cause it. Additionally, propeller issues typically vibrate throughout the entire RPM range, while vibrations at specific RPMs indicate an engine/propeller match problem. (Page 8-41)",
+      "cited": "8-41",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that numerous other sources make troubleshooting difficult and confirms that propeller issues typically vibrate throughout the entire RPM range while specific RPM vibrations indicate an engine/propeller match problem."
+    },
+    {
+      "q": "What types of landing gear does the chapter cover?",
+      "gold": "9-1",
+      "answer": "The chapter covers landing gear made of round tubing, streamlined tubing, and axle assemblies. (Page 4-73)",
+      "cited": "4-73",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly lists \"Round Tube Construction,\" \"Streamline Tube Construction,\" and \"Axle Assemblies\" as the types of landing gear covered in section 4-102."
+    },
+    {
+      "q": "Where should a mechanic stand when servicing a tire?",
+      "gold": "9-11",
+      "answer": "Personnel should stand either in the front or rear of the wheel and avoid approaching from either side of the tire. (Page 9-11)",
+      "cited": "9-11",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states in paragraph 9-16 that personnel should stand either in the front or rear of the wheel and avoid approaching from either side of the tire."
+    },
+    {
+      "q": "How is the flotation tube inspection date recorded?",
+      "gold": "9-32",
+      "answer": "The date the inspection was completed is stenciled on the flotation tube at the left of the cylinder using lettering that is not less than 1/4-inch or greater than 1/2-inch in height. Previous inspection dates are arranged in columnar form with the latest date at the top. (Page 9-32)",
+      "cited": "9-32",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that the inspection date is stenciled on the flotation tube at the left of the cylinder, specifies the lettering height constraints (1/4 to 1/2 inch), and confirms that previous dates are arranged in columnar form with the latest date at the top."
+    },
+    {
+      "q": "Why must soap be fully removed from washed upholstery?",
+      "gold": "9-46",
+      "answer": "Unless the soap is completely removed from the cloth, the strength of the material may be significantly reduced. (Page 9-46)",
+      "cited": "9-46",
+      "verdict": "SUPPORTED",
+      "why": "The text on Page 9-46 explicitly states that unless soap is completely removed from the cloth, the strength of the material may be significantly reduced."
+    },
+    {
+      "q": "What happens to center of gravity when equipment is added or removed?",
+      "gold": "10-1",
+      "answer": "The center of gravity shifts based on the algebraic sum of the moments of items added or removed relative to the empty weight moment. The new center of gravity is calculated by dividing the total net moment by the total net weight. (Page 10-22)",
+      "cited": "10-22",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly demonstrates the calculation of the new center of gravity by dividing the Net Moment (NM) by the Net Weight (NW) after accounting for the algebraic sum of moments from added and removed equipment."
+    },
+    {
+      "q": "Where are the weighing procedures for a given aircraft found?",
+      "gold": "10-11",
+      "answer": "The weighing procedures are contained in the manufacturer\u2019s maintenance manual for each particular aircraft. (Page 10-11)",
+      "cited": "10-11",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that \"The weighing procedures contained in the manufacturer\u2019s maintenance manual should be followed for each particular aircraft,\" which directly supports the answer's claim."
+    },
+    {
+      "q": "What is being checked in the most rearward weight and balance example?",
+      "gold": "10-15",
+      "answer": "The example checks the most rearward weight and balance extreme to ensure that neither the maximum weight nor the rearward C.G. limit is exceeded. (Page 10-15)",
+      "cited": "10-15",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that the check is performed to ensure the rearward C.G. limit and maximum weight are not exceeded, confirming the answer's claims."
+    },
+    {
+      "q": "What counts as an aircraft's electrical system?",
+      "gold": "11-1",
+      "answer": "The aircraft's electrical system includes those parts that generate, distribute, and use electrical energy, along with their support and attachments. (Page 11-1)",
+      "cited": "11-1",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly defines the electrical system as \"those parts of the aircraft that generate, distribute, and use electrical energy, including their support and attachments,\" which matches the answer's claims."
+    },
+    {
+      "q": "When must wiring be replaced?",
+      "gold": "11-45",
+      "answer": "Wiring must be replaced when it exhibits defects such as chafing, fraying, severe damage, brittle or weather-cracked insulation, or exposure to electrolyte. It also requires replacement if the insulation is saturated with fluids, the wire is crushed or kinked, the shield is frayed or corroded, or there is evidence of overheating. (Page 11-45)",
+      "cited": "11-45",
+      "verdict": "PARTIAL",
+      "why": "The provided text supports the claims regarding chafing, fraying, severe damage, brittle insulation, weather-cracked insulation, and electrolyte exposure, but it does not contain the claims about insulation saturated with fluids, crushed or kinked wire, frayed or corroded shields, or evidence of overheating."
+    },
+    {
+      "q": "What should component selection ensure between adjacent terminals?",
+      "gold": "11-75",
+      "answer": "Component selection should ensure that electrical clearance and creepage distance along surfaces between adjacent terminals at different potentials are adequate for the voltages involved (Page 11-75).",
+      "cited": "11-75",
+      "verdict": "SUPPORTED",
+      "why": "The text in paragraph 11-190 explicitly states that component selection should ensure electrical clearance and creepage distance along surfaces between adjacent terminals at different potentials are adequate for the voltages involved."
+    },
+    {
+      "q": "Where are more detailed electrical symbols found?",
+      "gold": "11-105",
+      "answer": "More specific detail on each symbol is found in ANSI-Y32.2-1975. (Page 11-105)",
+      "cited": "11-105",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states to \"Refer to ANSI-Y32.2-1975 for more specific detail on each symbol,\" which directly supports the answer's claim."
+    },
+    {
+      "q": "How are avionics systems checked on the ground?",
+      "gold": "12-1",
+      "answer": "Avionics systems are checked on the ground using methods such as visual checks, operation checks, functional tests, bench tests, and electromagnetic interference (EMI) tests. These checks involve inspecting physical condition, verifying operation, testing calibration with equipment, removing units for repair, and evaluating interference levels. (Page 12-1)",
+      "cited": "12-1",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly lists visual checks, operation checks, functional tests, bench tests, and EMI tests as methods for ground checking avionics systems, and describes the specific actions (inspecting physical condition, verifying operation, testing calibration, removing units, and referring to EMI procedures) that correspond to the claims in the answer."
+    },
+    {
+      "q": "What test equipment must a certificated avionics maintainer have?",
+      "gold": "12-25",
+      "answer": "Certificated individuals who maintain airborne avionics equipment must have test equipment suitable to perform that maintenance. The equipment must be the one called for by the manufacturer or equivalent, and it must be capable of performing all normal tests and checking all parameters of the equipment under test (Page 12-25).",
+      "cited": "12-25",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that certificated individuals must have suitable test equipment (12-70), that it must be the equipment called for by the manufacturer or equivalent (12-71b), and that it must be capable of performing all normal tests and checking all parameters (12-71b(2))."
+    },
+    {
+      "q": "What three things must be in place before a mechanic can do maintenance?",
+      "gold": "13-1",
+      "answer": "A mechanic must have the tools, data, and technical skill to perform maintenance. (Page 13-1)",
+      "cited": "13-1",
+      "verdict": "SUPPORTED",
+      "why": "The text explicitly states that a mechanic must have the tools, data, and technical skill to perform maintenance."
+    },
+    {
+      "q": "How far back does wood aircraft construction go?",
+      "gold": "1-1",
+      "answer": "Wood aircraft construction dates back to the early days of certificated aircraft. (Page 1-1)",
+      "cited": "1-1",
+      "verdict": "SUPPORTED",
+      "why": "The page text explicitly states that \"Wood aircraft construction dates back to the early days of certificated aircraft,\" which matches the factual claim in the answer."
+    }
+  ]
+}

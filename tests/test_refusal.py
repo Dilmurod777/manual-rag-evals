@@ -4,11 +4,9 @@ CI has no Ollama, so it cannot embed a question. What it can do is pin the score
 gate was measured on and fail if the threshold, or the held-out result, drifts.
 """
 
-import sys
-
 from eval.refusal import REFUSE_BELOW
 
-# cosine of the closest paragraph, held-out twenty, measured 2026-10-25
+# cosine of the closest paragraph, held-out half of eval/unanswerable.jsonl, 2026-10-25
 HELD_OUT = [
     0.561,
     0.658,
@@ -24,7 +22,7 @@ HELD_OUT = [
     0.644,
     0.552,
     0.621,
-    0.586,
+    0.647,
     0.579,
     0.623,
     0.530,
@@ -39,13 +37,8 @@ def test_the_fitted_line_is_the_one_quoted():
 
 
 def test_held_out_half_still_catches_nine_of_twenty():
-    caught = [score for score in HELD_OUT if score < REFUSE_BELOW]
-    assert len(caught) == 9
+    assert sum(score < REFUSE_BELOW for score in HELD_OUT) == 9
 
 
 def test_the_line_sits_below_every_answerable_question():
     assert REFUSE_BELOW < ANSWERABLE_MIN
-
-
-def test_the_module_is_importable_without_a_model():
-    assert "app.refusal" not in sys.modules

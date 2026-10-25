@@ -7,6 +7,7 @@ is in the manual, which is a different claim and the one a reader cares about.
 import json
 import os
 import re
+import sys
 import time
 from pathlib import Path
 
@@ -17,7 +18,8 @@ from app.main import answer
 from app.search import BM25, Vector, hybrid
 
 HERE = Path(__file__).resolve().parent
-OUT = HERE / "judgement.json"
+SOURCE = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE / "gold.jsonl"
+OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE / "judgement.json"
 OLLAMA = "http://127.0.0.1:11434/api/chat"
 MODEL = os.environ.get("RAG_JUDGE_MODEL", "qwen3.8-27b")
 
@@ -68,9 +70,7 @@ def main():
     chunks = list(paragraphs())
     bm25, vector = BM25(chunks), Vector(chunks)
     gold = [
-        json.loads(line)
-        for line in (HERE / "gold.jsonl").read_text(encoding="utf-8").splitlines()
-        if line.strip()
+        json.loads(line) for line in SOURCE.read_text(encoding="utf-8").splitlines() if line.strip()
     ]
     rows = []
     for row in gold:

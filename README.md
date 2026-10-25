@@ -326,6 +326,20 @@ readable at 1.5 s instead of 5.9 s. Real overlap needs the server restarted with
 `OLLAMA_NUM_PARALLEL=2`, which halves each arm's tokens per second and was not worth the
 trade: a two-slot attempt still serialised.
 
+## Does the answer exist on the page it cites?
+
+A second model reads the question, the answer and the text of the page the answer cites, and
+says whether the sentence is supported there.
+
+| questions | supported | partial | unsupported | no citation |
+|---|---|---|---|---|
+| 60 tuned | 52 | 6 | 2 | 0 |
+| 40 blind | 37 | 1 | 1 | 1 |
+
+The judge grades fidelity to the cited page. It does not grade whether that page was the
+right one to cite — the citation column in the tables above does that. The two numbers
+answer different questions, and neither is the other.
+
 ## Running it like a service
 
 - `GET /health` answers `{"ok": true, "chunks": 1758, "model_present": true, "refuse_below": 0.58}`.
