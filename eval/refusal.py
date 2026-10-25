@@ -30,7 +30,7 @@ def main():
     blind = [top(row) for row in load("blind.jsonl")]
     unknown = [top(row) for row in load("unanswerable.jsonl")]
 
-    fit, held = unknown[:6], unknown[6:]
+    fit, held = unknown[:20], unknown[20:]
     ceiling = min(gold + blind)  # no answerable question may fall below the line
     fitted = round((max(fit) + ceiling) / 2, 3) if max(fit) < ceiling else round(ceiling - 0.005, 3)
 
