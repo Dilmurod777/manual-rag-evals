@@ -42,6 +42,16 @@ def page_text(page, chunks):
     return " ".join(c["text"] for c in chunks if c["page"] == page)[:3500]
 
 
+def parse_reply(text):
+    """A verdict and a reason, from whatever the model wrapped them in."""
+    found = re.search(r"VERDICT:\s*(SUPPORTED|PARTIAL|UNSUPPORTED)", text)
+    why = re.search(r"WHY:\s*(.+)", text)
+    return (
+        found.group(1) if found else "UNCLEAR",
+        why.group(1).strip() if why else text.strip(),
+    )
+
+
 def judge(question, reply, page, chunks):
     payload = {
         "model": MODEL,
@@ -61,9 +71,7 @@ def judge(question, reply, page, chunks):
         text = httpx.post(OLLAMA, json=payload, timeout=90).json()["message"]["content"]
     except Exception:
         return None, "judge did not answer"
-    found = re.search(r"VERDICT:\s*(SUPPORTED|PARTIAL|UNSUPPORTED)", text)
-    why = re.search(r"WHY:\s*(.+)", text)
-    return (found.group(1) if found else "UNCLEAR"), (why.group(1).strip() if why else text.strip())
+    return parse_reply(text)
 
 
 def main():
