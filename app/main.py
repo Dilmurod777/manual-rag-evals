@@ -340,7 +340,7 @@ async def ask_stream(body: Ask):
                 }
             )
             return
-        emit({"arm": "C", "kind": "status", "text": "reading the top 30"})
+        emit({"arm": "C", "kind": "status", "text": "reading the top 12"})
         run("C", reranked, body.q)
 
     for name, args in (

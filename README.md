@@ -37,7 +37,7 @@ is called: three retriever answers would be three guesses.
 |---|---|---|
 | **A** | vector only, cosine | `qwen3-embedding:0.6b`, 1024-d, local |
 | **B** | BM25 + vectors, reciprocal rank fusion | same |
-| **C** | B's top 30, read again by the model, five kept | same |
+| **C** | B's top 30, the best 12 read again, five kept | same |
 
 Generation is `qwen3.8-27b` through Ollama. If Ollama is down, the app shows the passage and
 its page instead of inventing an answer, and says so in italics.
@@ -56,10 +56,10 @@ its page instead of inventing an answer, and says so in italics.
 
 One question is worth 1.7 points at this size. The 95% intervals are wide enough to swallow
 every gap in that table except the miss itself — hit@5 is 0.91–1.00 for A and 0.94–1.00 for
-B and C; citation is 0.82â€“0.96 for A and B, 0.80â€“0.95 for C. That is why the counts are
+B and C; citation is 0.82–0.96 for A and B, 0.80–0.95 for C. That is why the counts are
 written as counts. These numbers are repeatable: three full runs over the same 60 questions
 gave identical hit@5, identical citations and MRR to three decimals, because decoding runs at
-temperature 0. What that does **not** buy is confidence in the question set â€” the intervals
+temperature 0. What that does **not** buy is confidence in the question set — the intervals
 above are about sampling questions, not about run-to-run noise, which is zero here. C is also
 not a better writer. All three arms use the same model and the same prompt; C only changes the
 order of the five pages it reads, so its edge is in retrieval, not in prose.
@@ -147,7 +147,7 @@ question
    |
    +--> B: BM25 top 30 + cosine top 30 -> reciprocal rank fusion -> top 5
    |
-   +--> C: B's top 30 -> the model reads all 30 -> top 5
+   +--> C: B's top 30 -> the model reads 12 -> top 5
    |
    +--> gate: is the closest paragraph within 0.58? if not, refuse before any model call
    |
@@ -156,7 +156,7 @@ question
    +--> {answer, page, grounded, highlighted sentence, retrieval ms, answer ms}
 ```
 
-- `POST /api/ask {"q": "..."}` returns all three arms at once. `q` is 3â€“400 characters;
+- `POST /api/ask {"q": "..."}` returns all three arms at once. `q` is 3–400 characters;
   anything else is a 422 before a model is touched.
 - `POST /api/ask/stream` is the same question as server-sent events, which is what the page
   uses: `status`, then `meta` (timing, pages, passage), `delta` per token, `done` with the
@@ -225,7 +225,7 @@ The gate was fitted on twenty of those questions and checked on the other twenty
 threshold chosen and scored on the same rows proves nothing. Fitted line: 0.579, set halfway
 between the highest unanswerable score in the fit half and the lowest answerable score over
 all 100 tuned and blind questions. On the twenty it never saw it catches **9 of 20** before
-the model is called â€” the gate skips a three-second generation on the obvious misses, and the
+the model is called — the gate skips a three-second generation on the obvious misses, and the
 model still refuses the rest. False refusals: 0 of the 60 tuned and 0 of the 40 blind
 questions, whose lowest score is 0.584.
 
@@ -257,8 +257,8 @@ rank fusion.
   over A.
 - Result here: 60/60 hit@5, better MRR, and the one page A misses.
 
-**C — hybrid + rerank.** B's top 30, listed to the same local model with the question, which
-returns the five that answer it.
+**C — hybrid + rerank.** B's top 30, narrowed to twelve and listed to the same local model
+with the question, which returns the five that answer it.
 
 - Good: ranking is the job a language model is good at here. It reads meaning, not token
   overlap, and it never returns two slices of one page.
@@ -289,12 +289,12 @@ none of which this has. Adding one would move 2% of the wait and add a service t
 
 | step | time |
 |---|---|
-| retrieval, one pipeline (including the query embedding) | 210â€“250 ms |
-| the cosine or BM25 comparison alone | 20â€“45 ms |
+| retrieval, one pipeline (including the query embedding) | 210–250 ms |
+| the cosine or BM25 comparison alone | 20–45 ms |
 | one answer | 2.9 s |
-| first words of an answer, streamed | 0.5â€“0.8 s |
-| A and B, side by side | 2.5â€“3.6 s |
-| all three arms, C answered after A and B | 6.5â€“7 s |
+| first words of an answer, streamed | 0.5–0.8 s |
+| A and B, side by side | 2.5–3.6 s |
+| all three arms, C answered after A and B | 6.5–7 s |
 | the rerank call alone | 1.7 s warm, up to 3 s cold |
 
 Medians over the 60 gold questions: 252 ms for A, 209 ms for B, 2.9 s per answer. Retrieval
@@ -416,7 +416,7 @@ eval/run_eval.py hit@5, MRR and citation accuracy for the three pipelines
 eval/refusal.py  score distributions and the gate's decisions
 eval/charts.py   the two SVG charts
 public/index.html the page (no build step)
-tests/           three asserts on the parts that would break silently
+tests/           17 tests on the parts that would break silently
 Dockerfile       build, corpus on first start, uvicorn on 8000
 .github/workflows/tests.yml  tests + both gold sets re-proved
 ```
